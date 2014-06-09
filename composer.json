@@ -1,6 +1,6 @@
 {
     "name": "simplesoftwareio/simple-qrcode",
-    "description": "BaconQrCode is a QR code generator for PHP.",
+    "description": "Simple QrCode is a QR code generator made for Laravel.",
     "license" : "MIT",
     "require": {
         "bacon/bacon-qr-code": "dev-master"
