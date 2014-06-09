@@ -11,10 +11,5 @@ namespace simple\qrcode\tests;
 
 class QrCodeGeneratorTest extends \PHPUnit_Framework_TestCase {
 
-    public function testTrue()
-    {
-        $this->assertTrue(true);
-    }
-
 }
  
