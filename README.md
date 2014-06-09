@@ -2,8 +2,8 @@ Simple QrCode
 ========================
 
 - [Introduction](#introduction)
-- [Simple Ideas](#ideas)
 - [Configuration](#configuration)
+- [Simple Ideas](#ideas)
 - [Usage](#usage)
 - [Common QrCode Usage](#common-usage)
 
