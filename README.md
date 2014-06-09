@@ -8,26 +8,26 @@ Simple Laravel QrCode Generator
 
 <a name="introduction"></a>
 ## Introduction
-Simple Laravel QrCode Generator is an easy to use wrapper for the popular Laravel framework based on the great work provided by [Bacon/BaconQrCode](https://github.com/Bacon/BaconQrCode).  We created an interface that is familiar and easy to install for Laravel users.
+Simple QrCode is an easy to use wrapper for the popular Laravel framework based on the great work provided by [Bacon/BaconQrCode](https://github.com/Bacon/BaconQrCode).  We created an interface that is familiar and easy to install for Laravel users.
 
 <a name="configuration"></a>
 ## Configuration
 
 #### Composer
 
-First, add the Simple Laravel QrCode Generator package to your `composer.json` file:
+First, add the Simple QrCode package to your `composer.json` file:
 
-	"simple/simple-laravel-qrcode-generator": "~1.0"
+	"simplesoftwareio/simple-qrcode": "dev-master"
     
 Then run `composer update` command.
 
 #### Service Provider
 
-Next, register the `Simple\QrCode\QrCodeServiceProvider` in your `app` configuration file within the `providers` array.
+Next, register the `SimpleSoftwareIO\QrCode\QrCodeServiceProvider` in your `app` configuration file within the `providers` array.
 
 #### Aliases
 
-Then, register the `Simple\QrCode\Facades\QrCode` in your `app` configuration file within the `aliases` array.
+Then, register the `SimpleSoftwareIO\QrCode\Facades\QrCode` in your `app` configuration file within the `aliases` array.
 
 <a name="usage"></a>
 ## Usage
