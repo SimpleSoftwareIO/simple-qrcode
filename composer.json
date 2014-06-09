@@ -1,0 +1,14 @@
+{
+    "name": "simplesoftwareio/simple-qrcode",
+    "description": "BaconQrCode is a QR code generator for PHP.",
+    "license" : "BSD-2-Clause",
+    "homepage": "https://github.com/Bacon/BaconQrCode",
+    "require": {
+        "bacon/bacon-qr-code": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "SimpleSoftwareIO\\": "src"
+        }
+    }
+}
