@@ -1,4 +1,4 @@
-Simple Laravel QrCode Generator
+Simple QrCode
 ========================
 
 - [Introduction](#introduction)
