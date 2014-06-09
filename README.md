@@ -2,6 +2,7 @@ Simple Laravel QrCode Generator
 ========================
 
 - [Introduction](#introduction)
+- [Simple Ideas](#ideas)
 - [Configuration](#configuration)
 - [Usage](#usage)
 - [Common QrCode Usage](#common-usage)
@@ -27,7 +28,19 @@ Next, register the `SimpleSoftwareIO\QrCode\QrCodeServiceProvider` in your `app`
 
 #### Aliases
 
-Then, register the `SimpleSoftwareIO\QrCode\Facades\QrCode` in your `app` configuration file within the `aliases` array.
+Then, register the `'QrCode' => 'SimpleSoftwareIO\QrCode\Facades\QrCode'` in your `app` configuration file within the `aliases` array.
+
+<a name="usage"></a>
+## Simple Ideas
+
+#### Print View
+
+One of the main items that we use this package for is to have QrCodes in all of our print views.  This allows our customers to return to the visited page after it is printed by simply scanning the code.  We achieve this by adding the following into our footer.blade.php file.
+
+    <div class="visible-print text-center">
+        {{ QrCode::size(100)->generate(Request::url()); }}
+        <p>Scan me to return to the original page.</p>
+    </div>
 
 <a name="usage"></a>
 ## Usage
