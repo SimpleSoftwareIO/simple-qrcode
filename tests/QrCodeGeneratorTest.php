@@ -115,6 +115,7 @@ class QrCodeGeneratorTest extends \PHPUnit_Framework_TestCase {
     public function testGenerate()
     {
         $this->writer->shouldReceive('writeString')
+            ->with('qrCode', m::type('string'), m::type('int'))
             ->once();
 
         $qrCode = new QrCodeGenerator($this->writer, $this->format);
@@ -124,6 +125,7 @@ class QrCodeGeneratorTest extends \PHPUnit_Framework_TestCase {
     public function testGenerateFile()
     {
         $this->writer->shouldReceive('writeFile')
+            ->with('qrCode', 'foo.txt', m::type('string'), m::type('int'))
             ->once();
 
         $qrCode = new QrCodeGenerator($this->writer, $this->format);
