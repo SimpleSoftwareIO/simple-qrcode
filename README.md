@@ -35,7 +35,7 @@ Next, register the `SimpleSoftwareIO\QrCode\QrCodeServiceProvider` in your `app`
 
 Then, register the `'QrCode' => 'SimpleSoftwareIO\QrCode\Facades\QrCode'` in your `app` configuration file within the `aliases` array.
 
-<a name="usage"></a>
+<a name="ideas"></a>
 ## Simple Ideas
 
 #### Print View
@@ -54,15 +54,31 @@ One of the main items that we use this package for is to have QrCodes in all of 
 
 Using the QrCode Generator is very easy.  The most basic syntax is:
 
-    QrCode::generator('Make me into a QrCode!');
+    QrCode::generate('Make me into a QrCode!');
 
 This will make a QrCode that says "Make me into a QrCode!"
+
+#### Generate
+
+`Generate` is used to make the QrCode.
+
+    QrCode::generate('Make me into a QrCode!');
+
+>This method must be called last if using within a chain.
+
+`Generate` by default will return a SVG image string.  You can print this directly into a modern browser within Laravel's Blade system with the following:
+
+    {{ QrCode::generate('Make me into a QrCode!'); }}
+
+The `generate` method has a second parameter that will accept a filename and path to save the QrCode.
+
+    QrCode::generate('Make me into a QrCode!', '../public/qrcodes/qrcode.svg');
 
 #### Format Change
 
 >QrCode Generator is setup to return a SVG image by default.
 
->The `format` method must be called before any other formatting options such as Size, Color, and ColorChange.
+>The `format` method must be called before any other formatting options such as `size`, `color`, `backgroundColor`, and `margin`.
 
 Three formats are currently supported; PNG, EPS, and SVG.  To change the format use the following code:
 
@@ -92,6 +108,12 @@ Background color changes are also supported and be expressed in the same manner.
 
     QrCode::backgroundColor(255,255,255);
 
+#### Margin Change
+
+The ability to change the margin around a QrCode is also supported.  Simply specify the margin desired in pixels using the following syntax:
+
+    QrCode::margin(100);
+
 #### Error Correction
 
 Changing the level of error correction is easy.  Just use the following syntax:
@@ -109,15 +131,9 @@ The following are supported options for the `errorCorrection` method.
 
 >The more error correction used; the bigger the QrCode becomes.  Mobile phones usually can only support QrCode of version 4 or below. Read more about the [format](http://en.wikipedia.org/wiki/QR_code#Storage).
 
-#### Margin Change
-
-The ability to change the margin around a QrCode is also supported.  Simply specify the margin desired in pixels using the following syntax:
-
-    QrCode::margin(100);
-
 #### Advance Usage
 
-All methods support chaining.  The `generate` method must be called last.  For example you could run any of the following:
+All methods support chaining.  The `generate` method must be called last and any `format` change must be called first.  For example you could run any of the following:
 
     QrCode::size(250)->color(150,90,10)->backgroundColor(10,14,244)->generate('Make me a QrCode!');
     QrCode::format('png')->size(399)->color(40,40,40)->generate('Make me a QrCode!');
