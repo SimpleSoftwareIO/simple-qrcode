@@ -11,6 +11,7 @@
 use Illuminate\Support\ServiceProvider;
 use BaconQrCode;
 use BaconQrCode\Writer;
+use BaconQrCode\Renderer\Image\RendererInterface;
 use BaconQrCode\Renderer\Image\Svg;
 use BaconQrCode\Renderer\Image\Eps;
 use BaconQrCode\Renderer\Image\Png;
@@ -37,9 +38,10 @@ class QrCodeGenerator {
     /**
      * Creates a new QrCodeGenerator with a Writer class and with a SVG renderer set as the default.
      */
-    public function __construct()
+    public function __construct(Writer $writer = null, RendererInterface $format = null)
     {
-        $this->writer = new Writer(new Svg);
+        $format = $format ?: new Svg;
+        $this->writer = $writer ?: new Writer($format);
     }
 
     /**
@@ -80,11 +82,11 @@ class QrCodeGenerator {
                 $this->writer->setRenderer(new Png);
                 break;
             case 'eps':
-                 $this->writer->setRenderer(new Eps);
+                $this->writer->setRenderer(new Eps);
                 break;
             case 'svg':
             default:
-                 $this->writer->setRenderer(new Svg);
+                $this->writer->setRenderer(new Svg);
                 break;
         }
         return $this;
