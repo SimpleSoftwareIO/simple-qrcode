@@ -26,22 +26,22 @@ First, add the Simple QrCode package to your `composer.json` file:
 
 	"simplesoftwareio/simple-qrcode": "dev-master"
     
-Then run `composer update` command.
+Next, run `composer update` command.
 
 #### Service Provider
 
-Next, register the `SimpleSoftwareIO\QrCode\QrCodeServiceProvider` in your `app` configuration file within the `providers` array.
+After that, register the `SimpleSoftwareIO\QrCode\QrCodeServiceProvider` in your `app` configuration file within the `providers` array.
 
 #### Aliases
 
-Then, register the `'QrCode' => 'SimpleSoftwareIO\QrCode\Facades\QrCode'` in your `app` configuration file within the `aliases` array.
+Finally, register the `'QrCode' => 'SimpleSoftwareIO\QrCode\Facades\QrCode'` in your `app` configuration file within the `aliases` array.
 
 <a name="ideas"></a>
 ## Simple Ideas
 
 #### Print View
 
-One of the main items that we use this package for is to have QrCodes in all of our print views.  This allows our customers to return to the visited page after it is printed by simply scanning the code.  We achieve this by adding the following into our footer.blade.php file.
+One of the main items that we use this package for is to have QrCodes in all of our print views.  This allows our customers to return to the original page after it is printed by simply scanning the code.  We achieved this by adding the following into our footer.blade.php file.
 
     <div class="visible-print text-center">
         {{ QrCode::size(100)->generate(Request::url()); }}
@@ -65,7 +65,7 @@ This will make a QrCode that says "Make me into a QrCode!"
 
     QrCode::generate('Make me into a QrCode!');
 
->This method must be called last if using within a chain.
+>Heads up! This method must be called last if using within a chain.
 
 `Generate` by default will return a SVG image string.  You can print this directly into a modern browser within Laravel's Blade system with the following:
 
@@ -79,7 +79,7 @@ The `generate` method has a second parameter that will accept a filename and pat
 
 >QrCode Generator is setup to return a SVG image by default.
 
->The `format` method must be called before any other formatting options such as `size`, `color`, `backgroundColor`, and `margin`.
+>Watch out! The `format` method must be called before any other formatting options such as `size`, `color`, `backgroundColor`, and `margin`.
 
 Three formats are currently supported; PNG, EPS, and SVG.  To change the format use the following code:
 
@@ -91,11 +91,9 @@ Three formats are currently supported; PNG, EPS, and SVG.  To change the format 
 
 >QrCode Generator will by default return the smallest size possible in pixels to create the QrCode.
 
-You can change the size of a QrCode by using the `size` method.  Simply use the following code:
+You can change the size of a QrCode by using the `size` method. Simply specify the size desired in pixels using the following syntax:
 
     QrCode::size(100);
-
-The size should be expressed in pixels.
 
 #### Color Change
 
@@ -103,11 +101,11 @@ The size should be expressed in pixels.
 
 All colors must be expressed in RGB (Red Green Blue).  You can change the color of a QrCode by using the following:
 
-    QrCode::color(255,255,255);
+    QrCode::color(255,0,255);
 
 Background color changes are also supported and be expressed in the same manner.
 
-    QrCode::backgroundColor(255,255,255);
+    QrCode::backgroundColor(255,255,0);
 
 #### Margin Change
 
@@ -125,12 +123,12 @@ The following are supported options for the `errorCorrection` method.
 
 | Error Correction | Assurance Provided |
 | --- | --- |
-| L | 7% |
-| M | 15% |
-| Q | 25% |
-| H | 30% |
+| L | 7% of codewords can be restored. |
+| M | 15% of codewords can be restored. |
+| Q | 25% of codewords can be restored. |
+| H | 30% of codewords can be restored. |
 
->The more error correction used; the bigger the QrCode becomes.  Mobile phones usually can only support QrCode of version 4 or below. Read more about the [format](http://en.wikipedia.org/wiki/QR_code#Storage).
+>The more error correction used; the bigger the QrCode becomes and the less data it can store. Read more about [error correction](http://en.wikipedia.org/wiki/QR_code#Error_correction).
 
 #### Advance Usage
 
@@ -143,6 +141,11 @@ All methods support chaining.  The `generate` method must be called last and any
 ##Common QrCode Usage
 
 The following is a table of some common uses of QrCodes.
+
+Just use the prefix within the `generate` section to generate a QrCode with the desired effect:
+
+    QrCode::generate('http://www.simplesoftware.io');
+
 
 | Usage | Prefix | Example |
 | --- | --- | --- |
