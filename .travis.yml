@@ -6,3 +6,6 @@ php:
 
 before_script:
   - composer install --dev
+  - composer update -o
+  
+script: phpunit --bootstrap tests/bootstrap.php --configuration phpunit.xml tests
