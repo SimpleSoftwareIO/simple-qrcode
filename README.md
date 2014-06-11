@@ -26,7 +26,7 @@ First, add the Simple QrCode package to your `composer.json` file:
 
 	"simplesoftwareio/simple-qrcode": "dev-master"
     
-Next, run `composer update` command.
+Next, run the `composer update` command.
 
 #### Service Provider
 
@@ -140,9 +140,7 @@ All methods support chaining.  The `generate` method must be called last and any
 <a name="common-usage"></a>
 ##Common QrCode Usage
 
-The following is a table of some common uses of QrCodes.
-
-Just use the prefix within the `generate` section to generate a QrCode with the desired effect:
+You can use a prefix found in the table below inside the `generate` section to create a QrCode to store more advanced information:
 
     QrCode::generate('http://www.simplesoftware.io');
 
