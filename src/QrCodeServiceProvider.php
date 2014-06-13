@@ -26,7 +26,10 @@ class QrCodeServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		$this->app->bindShared('qrcode', function() { return new QrCodeGenerator; });
+		$this->app->bindShared('qrcode', function()
+        {
+            return new BaconQrCodeGenerator;
+        });
 	}
 
 	/**

@@ -19,7 +19,7 @@ use BaconQrCode\Renderer\Color\Rgb;
 use BaconQrCode\Encoder\Encoder;
 use BaconQrCode\Common\ErrorCorrectionLevel;
 
-class QrCodeGenerator {
+class BaconQrCodeGenerator implements QrCodeInterface {
 
     /**
      * Holds the BaconQrCode Writer Object

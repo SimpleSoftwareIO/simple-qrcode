@@ -1,8 +1,8 @@
 <?php
 use Mockery as m;
-use SimpleSoftwareIO\QrCode\QrCodeGenerator;
+use SimpleSoftwareIO\QrCode\BaconQrCodeGenerator;
 
-class QrCodeGeneratorTest extends \PHPUnit_Framework_TestCase {
+class BaconQrCodeGeneratorTest extends \PHPUnit_Framework_TestCase {
 
     public function tearDown()
     {
@@ -13,6 +13,7 @@ class QrCodeGeneratorTest extends \PHPUnit_Framework_TestCase {
     {
         $this->writer = m::mock('\BaconQrCode\Writer');
         $this->format = m::mock('\BaconQrCode\Renderer\Image\RendererInterface');
+        $this->qrCode = new BaconQrCodeGenerator($this->writer, $this->format);
     }
 
     public function testSetMargin()
@@ -25,7 +26,7 @@ class QrCodeGeneratorTest extends \PHPUnit_Framework_TestCase {
             ->once()
             ->andReturn($this->format);
 
-        $qrCode = new QrCodeGenerator($this->writer, $this->format);
+        $qrCode = new BaconQrCodeGenerator($this->writer, $this->format);
         $qrCode->margin(50);
     }
 
@@ -38,8 +39,7 @@ class QrCodeGeneratorTest extends \PHPUnit_Framework_TestCase {
             ->once()
             ->andReturn($this->format);
 
-        $qrCode = new QrCodeGenerator($this->writer, $this->format);
-        $qrCode->backgroundColor(255,255,255);
+        $this->qrCode->backgroundColor(255,255,255);
     }
 
     public function testSetColor()
@@ -51,8 +51,7 @@ class QrCodeGeneratorTest extends \PHPUnit_Framework_TestCase {
             ->once()
             ->andReturn($this->format);
 
-        $qrCode = new QrCodeGenerator($this->writer, $this->format);
-        $qrCode->color(255,255,255);
+        $this->qrCode->color(255,255,255);
     }
 
     public function testSetSize()
@@ -68,8 +67,7 @@ class QrCodeGeneratorTest extends \PHPUnit_Framework_TestCase {
             ->twice()
             ->andReturn($this->format);
 
-        $qrCode = new QrCodeGenerator($this->writer, $this->format);
-        $qrCode->size(50);
+        $this->qrCode->size(50);
     }
 
     public function testSetFormatPng()
@@ -78,8 +76,7 @@ class QrCodeGeneratorTest extends \PHPUnit_Framework_TestCase {
             ->with('BaconQrCode\Renderer\Image\Png')
             ->once();
 
-        $qrCode = new QrCodeGenerator($this->writer, $this->format);
-        $qrCode->format('png');
+        $this->qrCode->format('png');
     }
 
     public function testSetFormatEps()
@@ -88,8 +85,7 @@ class QrCodeGeneratorTest extends \PHPUnit_Framework_TestCase {
             ->with('BaconQrCode\Renderer\Image\Eps')
             ->once();
 
-        $qrCode = new QrCodeGenerator($this->writer, $this->format);
-        $qrCode->format('eps');
+        $this->qrCode->format('eps');
     }
 
     public function testSetFormatSvg()
@@ -98,8 +94,7 @@ class QrCodeGeneratorTest extends \PHPUnit_Framework_TestCase {
             ->with('BaconQrCode\Renderer\Image\Svg')
             ->once();
 
-        $qrCode = new QrCodeGenerator($this->writer, $this->format);
-        $qrCode->format('svg');
+        $this->qrCode->format('svg');
     }
 
     public function testSetFormatUnknown()
@@ -108,8 +103,7 @@ class QrCodeGeneratorTest extends \PHPUnit_Framework_TestCase {
             ->with('BaconQrCode\Renderer\Image\Svg')
             ->once();
 
-        $qrCode = new QrCodeGenerator($this->writer, $this->format);
-        $qrCode->format('random');
+        $this->qrCode->format('random');
     }
 
     public function testGenerate()
@@ -118,8 +112,7 @@ class QrCodeGeneratorTest extends \PHPUnit_Framework_TestCase {
             ->with('qrCode', m::type('string'), m::type('int'))
             ->once();
 
-        $qrCode = new QrCodeGenerator($this->writer, $this->format);
-        $qrCode->generate('qrCode');
+        $this->qrCode->generate('qrCode');
     }
 
     public function testGenerateFile()
@@ -128,8 +121,7 @@ class QrCodeGeneratorTest extends \PHPUnit_Framework_TestCase {
             ->with('qrCode', 'foo.txt', m::type('string'), m::type('int'))
             ->once();
 
-        $qrCode = new QrCodeGenerator($this->writer, $this->format);
-        $qrCode->generate('qrCode', 'foo.txt');
+        $this->qrCode->generate('qrCode', 'foo.txt');
     }
 }
  
