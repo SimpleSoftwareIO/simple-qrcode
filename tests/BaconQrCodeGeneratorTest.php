@@ -25,9 +25,8 @@ class BaconQrCodeGeneratorTest extends \PHPUnit_Framework_TestCase {
         $this->writer->shouldReceive('getRenderer')
             ->once()
             ->andReturn($this->format);
-
-        $qrCode = new BaconQrCodeGenerator($this->writer, $this->format);
-        $qrCode->margin(50);
+        
+        $this->qrCode->margin(50);
     }
 
     public function testSetBackgroundColor()
