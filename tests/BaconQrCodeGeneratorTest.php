@@ -97,12 +97,11 @@ class BaconQrCodeGeneratorTest extends \PHPUnit_Framework_TestCase {
         $this->qrCode->format('svg');
     }
 
+    /**
+     * @expectedException \InvalidArgumentException
+     */
     public function testSetFormatUnknown()
     {
-        $this->writer->shouldReceive('setRenderer')
-            ->with('BaconQrCode\Renderer\Image\Svg')
-            ->once();
-
         $this->qrCode->format('random');
     }
 

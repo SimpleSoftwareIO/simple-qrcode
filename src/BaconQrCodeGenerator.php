@@ -71,8 +71,9 @@ class BaconQrCodeGenerator implements QrCodeInterface {
     /**
      * Switches the format of the outputted QrCode or defaults to SVG
      *
-     * @param string $format
+     * @param string $format The desired format.
      * @return $this
+     * @throws \InvalidArgumentException
      */
     public function format($format)
     {
@@ -85,9 +86,10 @@ class BaconQrCodeGenerator implements QrCodeInterface {
                 $this->writer->setRenderer(new Eps);
                 break;
             case 'svg':
-            default:
                 $this->writer->setRenderer(new Svg);
                 break;
+            default:
+                throw new \InvalidArgumentException('Invalid format provided.');
         }
         return $this;
     }
