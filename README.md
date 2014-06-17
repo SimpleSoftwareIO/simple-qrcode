@@ -39,11 +39,11 @@ Next, run the `composer update` command.
 
 #### Service Provider
 
-After that, register the `SimpleSoftwareIO\QrCode\QrCodeServiceProvider` in your `app` configuration file within the `providers` array.
+After that, register the `SimpleSoftwareIO\QrCode\QrCodeServiceProvider` in your `app/conifg/app.cphp` configuration file within the `providers` array.
 
 #### Aliases
 
-Finally, register the `'QrCode' => 'SimpleSoftwareIO\QrCode\Facades\QrCode'` in your `app` configuration file within the `aliases` array.
+Finally, register the `'QrCode' => 'SimpleSoftwareIO\QrCode\Facades\QrCode'` in your `app/config/app.php` configuration file within the `aliases` array.
 
 <a name="ideas"></a>
 ## Simple Ideas
