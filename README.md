@@ -27,15 +27,8 @@ First, add the Simple QrCode package to your `require` in your `composer.json` f
 	"require": {
         "simplesoftwareio/simple-qrcode": "0.0.3-beta"
     }
-
->NOTE:  If you are not running `"minimum-stability": "dev"` you will need to add `"bacon/bacon-qr-code": "dev-master"` to your `composer.json` file as well.  This is due to an unstable dependency.  We are currently working with the dependency owner to correct this problem.
-
-    "require": {
-        "simplesoftwareio/simple-qrcode": "0.0.3-beta",
-        "bacon/bacon-qr-code": "dev-master"
-    },
     
-Next, run the `composer update` command.
+Next, run the `composer update -o` command.
 
 #### Service Provider
 
