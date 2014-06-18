@@ -3,7 +3,7 @@
     "description": "Simple QrCode is a QR code generator made for Laravel.",
     "license" : "MIT",
     "require": {
-        "bacon/bacon-qr-code": "dev-master"
+        "bacon/bacon-qr-code": "1.0.0"
     },
     "require-dev": {
         "mockery/mockery": "0.9.*",
