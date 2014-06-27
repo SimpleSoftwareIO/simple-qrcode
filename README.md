@@ -139,9 +139,9 @@ All methods support chaining.  The `generate` method must be called last and any
     QrCode::size(250)->color(150,90,10)->backgroundColor(10,14,244)->generate('Make me a QrCode!');
     QrCode::format('png')->size(399)->color(40,40,40)->generate('Make me a QrCode!');
 
-You can display a PNG image without saving the file by providing a raw string and encoding with `base64_encode`.
+You can display a PNG image without saving the file by providing a raw string and encoding it with `base64_encode`.
 
-    echo '<img src="data:image/png;base64,' . base64_encode(QrCode::format('png')->size(100)->generate('Make me into an QrCode!')) . '" />';
+    <img src="data:image/png;base64, {{ base64_encode(QrCode::format('png')->size(100)->generate('Make me into an QrCode!')); }} ">
 
 <a name="common-usage"></a>
 ##Common QrCode Usage
