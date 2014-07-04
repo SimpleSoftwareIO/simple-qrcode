@@ -7,17 +7,17 @@ Simple QrCode
 [![License](https://poser.pugx.org/simplesoftwareio/simple-qrcode/license.svg)](https://packagist.org/packages/simplesoftwareio/simple-qrcode)
 [![Total Downloads](https://poser.pugx.org/simplesoftwareio/simple-qrcode/downloads.svg)](https://packagist.org/packages/simplesoftwareio/simple-qrcode)
 
-- [Introduction](#introduction)
-- [Configuration](#configuration)
-- [Simple Ideas](#ideas)
-- [Usage](#usage)
-- [Common QrCode Usage](#common-usage)
+- [Introduction](#docs-introduction)
+- [Configuration](#docs-configuration)
+- [Simple Ideas](#docs-ideas)
+- [Usage](#docs-usage)
+- [Common QrCode Usage](#docs-common-usage)
 
-<a name="introduction"></a>
+<a id="docs-introduction"></a>
 ## Introduction
 Simple QrCode is an easy to use wrapper for the popular Laravel framework based on the great work provided by [Bacon/BaconQrCode](https://github.com/Bacon/BaconQrCode).  We created an interface that is familiar and easy to install for Laravel users.
 
-<a name="configuration"></a>
+<a id="docs-configuration"></a>
 ## Configuration
 
 #### Composer
@@ -25,8 +25,8 @@ Simple QrCode is an easy to use wrapper for the popular Laravel framework based 
 First, add the Simple QrCode package to your `require` in your `composer.json` file:
 
 	"require": {
-        "simplesoftwareio/simple-qrcode": "1.0.*"
-    }
+		"simplesoftwareio/simple-qrcode": "1.0.*"
+	}
 
 Next, run the `composer update -o` command.
 
@@ -38,26 +38,26 @@ After that, register the `SimpleSoftwareIO\QrCode\QrCodeServiceProvider` in your
 
 Finally, register the `'QrCode' => 'SimpleSoftwareIO\QrCode\Facades\QrCode'` in your `app/config/app.php` configuration file within the `aliases` array.
 
-<a name="ideas"></a>
+<a id="docs-ideas"></a>
 ## Simple Ideas
 
 #### Print View
 
 One of the main items that we use this package for is to have QrCodes in all of our print views.  This allows our customers to return to the original page after it is printed by simply scanning the code.  We achieved this by adding the following into our footer.blade.php file.
 
-    <div class="visible-print text-center">
-        {{ QrCode::size(100)->generate(Request::url()); }}
-        <p>Scan me to return to the original page.</p>
-    </div>
+	<div class="visible-print text-center">
+		{{ QrCode::size(100)->generate(Request::url()); }}
+		<p>Scan me to return to the original page.</p>
+	</div>
 
-<a name="usage"></a>
+<a id="docs-usage"></a>
 ## Usage
 
 #### Basic Usage
 
 Using the QrCode Generator is very easy.  The most basic syntax is:
 
-    QrCode::generate('Make me into a QrCode!');
+	QrCode::generate('Make me into a QrCode!');
 
 This will make a QrCode that says "Make me into a QrCode!"
 
@@ -65,17 +65,17 @@ This will make a QrCode that says "Make me into a QrCode!"
 
 `Generate` is used to make the QrCode.
 
-    QrCode::generate('Make me into a QrCode!');
+	QrCode::generate('Make me into a QrCode!');
 
 >Heads up! This method must be called last if using within a chain.
 
 `Generate` by default will return a SVG image string.  You can print this directly into a modern browser within Laravel's Blade system with the following:
 
-    {{ QrCode::generate('Make me into a QrCode!'); }}
+	{{ QrCode::generate('Make me into a QrCode!'); }}
 
 The `generate` method has a second parameter that will accept a filename and path to save the QrCode.
 
-    QrCode::generate('Make me into a QrCode!', '../public/qrcodes/qrcode.svg');
+	QrCode::generate('Make me into a QrCode!', '../public/qrcodes/qrcode.svg');
 
 #### Format Change
 
@@ -85,9 +85,9 @@ The `generate` method has a second parameter that will accept a filename and pat
 
 Three formats are currently supported; PNG, EPS, and SVG.  To change the format use the following code:
 
-    QrCode::format('png');  //Will return a PNG image
-    QrCode::format('eps');  //Will return a EPS image
-    QrCode::format('svg');  //Will return a SVG image
+	QrCode::format('png');  //Will return a PNG image
+	QrCode::format('eps');  //Will return a EPS image
+	QrCode::format('svg');  //Will return a SVG image
 
 #### Size Change
 
@@ -103,23 +103,23 @@ You can change the size of a QrCode by using the `size` method. Simply specify t
 
 All colors must be expressed in RGB (Red Green Blue).  You can change the color of a QrCode by using the following:
 
-    QrCode::color(255,0,255);
+	QrCode::color(255,0,255);
 
 Background color changes are also supported and be expressed in the same manner.
 
-    QrCode::backgroundColor(255,255,0);
+	QrCode::backgroundColor(255,255,0);
 
 #### Margin Change
 
 The ability to change the margin around a QrCode is also supported.  Simply specify the margin desired in pixels using the following syntax:
 
-    QrCode::margin(100);
+	QrCode::margin(100);
 
 #### Error Correction
 
 Changing the level of error correction is easy.  Just use the following syntax:
 
-    QrCode::errorCorrection('H');
+	QrCode::errorCorrection('H');
 
 The following are supported options for the `errorCorrection` method.
 
@@ -136,19 +136,19 @@ The following are supported options for the `errorCorrection` method.
 
 All methods support chaining.  The `generate` method must be called last and any `format` change must be called first.  For example you could run any of the following:
 
-    QrCode::size(250)->color(150,90,10)->backgroundColor(10,14,244)->generate('Make me a QrCode!');
-    QrCode::format('png')->size(399)->color(40,40,40)->generate('Make me a QrCode!');
+	QrCode::size(250)->color(150,90,10)->backgroundColor(10,14,244)->generate('Make me a QrCode!');
+	QrCode::format('png')->size(399)->color(40,40,40)->generate('Make me a QrCode!');
 
-You can display a PNG image without saving the file by providing a raw string and encoding it with `base64_encode`.
+You can display a PNG image without saving the file by providing a raw string and encoding with `base64_encode`.
 
-    <img src="data:image/png;base64, {{ base64_encode(QrCode::format('png')->size(100)->generate('Make me into an QrCode!')); }} ">
+	<img src="data:image/png;base64, {{ base64_encode(QrCode::format('png')->size(100)->generate('Make me into an QrCode!')); }} ">
 
-<a name="common-usage"></a>
+<a id="docs-common-usage"></a>
 ##Common QrCode Usage
 
 You can use a prefix found in the table below inside the `generate` section to create a QrCode to store more advanced information:
 
-    QrCode::generate('http://www.simplesoftware.io');
+	QrCode::generate('http://www.simplesoftware.io');
 
 
 | Usage | Prefix | Example |

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Simple Laravel QrCode Generator
  * A simple wrapper for the popular BaconQrCode made for Laravel.

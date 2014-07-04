@@ -2,6 +2,15 @@
 use Mockery as m;
 use SimpleSoftwareIO\QrCode\BaconQrCodeGenerator;
 
+/**
+ * Simple Laravel QrCode Generator
+ * A simple wrapper for the popular BaconQrCode made for Laravel.
+ *
+ * @link http://www.simplesoftware.io
+ * @author SimpleSoftware support@simplesoftware.io
+ *
+ */
+
 class BaconQrCodeGeneratorTest extends \PHPUnit_Framework_TestCase {
 
     public function tearDown()
