@@ -28,7 +28,7 @@ First, add the Simple QrCode package to your `require` in your `composer.json` f
 		"simplesoftwareio/simple-qrcode": "1.0.*"
 	}
 
-Next, run the `composer update -o` command.
+Next, run the `composer update` command.
 
 #### Service Provider
 
