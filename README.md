@@ -111,7 +111,7 @@ Background color changes are also supported and be expressed in the same manner.
 
 #### Margin Change
 
-The ability to change the margin around a QrCode is also supported.  Simply specify the margin desired in pixels using the following syntax:
+The ability to change the margin around a QrCode is also supported.  Simply specify the desired margin using the following syntax:
 
 	QrCode::margin(100);
 
