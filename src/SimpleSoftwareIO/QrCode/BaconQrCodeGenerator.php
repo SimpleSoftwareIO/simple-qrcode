@@ -36,6 +36,14 @@ class BaconQrCodeGenerator implements QrCodeInterface {
     protected $errorCorrection = ErrorCorrectionLevel::L;
 
     /**
+     * Holds the Encoder mode to encode a QrCode.
+     *
+     * @var string
+     *
+     */
+    protected $encoding = Encoder::DEFAULT_BYTE_MODE_ECODING;
+
+    /**
      * Creates a new QrCodeGenerator with a Writer class and with a SVG renderer set as the default.
      */
     public function __construct(Writer $writer = null, RendererInterface $format = null)
@@ -56,14 +64,14 @@ class BaconQrCodeGenerator implements QrCodeInterface {
         if ($filename === null)
         {
             return $this->writer->writeString($text,
-                Encoder::DEFAULT_BYTE_MODE_ECODING,
+                $this->encoding,
                 $this->errorCorrection);
         }
         else
         {
             $this->writer->writeFile($text,
                 $filename,
-                Encoder::DEFAULT_BYTE_MODE_ECODING,
+                $this->encoding,
                 $this->errorCorrection);
         }
     }
@@ -156,6 +164,18 @@ class BaconQrCodeGenerator implements QrCodeInterface {
     public function margin($margin)
     {
         $this->writer->getRenderer()->setMargin($margin);
+        return $this;
+    }
+
+    /**
+     * Sets the Encoding mode.
+     *
+     * @param string $encoding
+     * @return $this
+     */
+    public function encoding($encoding)
+    {
+        $this->encoding = $encoding;
         return $this;
     }
 }

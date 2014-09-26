@@ -132,6 +132,43 @@ The following are supported options for the `errorCorrection` method.
 
 >The more error correction used; the bigger the QrCode becomes and the less data it can store. Read more about [error correction](http://en.wikipedia.org/wiki/QR_code#Error_correction).
 
+#### Encoding
+
+Change the character encoding that is used to build a QrCode.  By default `ISO-8859-1` is selected as the encoder.  Read more about [character encoding](http://en.wikipedia.org/wiki/Character_encoding) You can change this to any of the following:
+
+    QrCode::encoding('UTF-8')->generate('Make me a QrCode with special symbols ♠♥!!');
+
+| Character Encoder |
+| --- |
+| ISO-8859-1 |
+| ISO-8859-2 |
+| ISO-8859-3 |
+| ISO-8859-4 |
+| ISO-8859-5 |
+| ISO-8859-6 |
+| ISO-8859-7 |
+| ISO-8859-8 |
+| ISO-8859-9 |
+| ISO-8859-10 |
+| ISO-8859-11 |
+| ISO-8859-12 |
+| ISO-8859-13 |
+| ISO-8859-14 |
+| ISO-8859-15 |
+| ISO-8859-16 |
+| SHIFT-JIS |
+| WINDOWS-1250 |
+| WINDOWS-1251 |
+| WINDOWS-1252 |
+| WINDOWS-1256 |
+| UTF-16BE |
+| UTF-8 |
+| ASCII |
+| GBK |
+| EUC-KR |
+
+>An error of `Could not encode content to ISO-8859-1` means that the wrong character encoding type is being used.  We recommend `UTF-8` if you are unsure.
+
 #### Advance Usage
 
 All methods support chaining.  The `generate` method must be called last and any `format` change must be called first.  For example you could run any of the following:
