@@ -25,7 +25,7 @@ Simple QrCode is an easy to use wrapper for the popular Laravel framework based 
 First, add the Simple QrCode package to your `require` in your `composer.json` file:
 
 	"require": {
-		"simplesoftwareio/simple-qrcode": "1.*.*"
+		"simplesoftwareio/simple-qrcode": "1.1.*"
 	}
 
 Next, run the `composer update` command.
