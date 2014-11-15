@@ -20,6 +20,16 @@ class QrCodeServiceProvider extends ServiceProvider {
 	 */
 	protected $defer = true;
 
+    /**
+     * Bootstrap the application events.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        $this->package('simplesoftwareio/simple-qrcode');
+    }
+
 	/**
 	 * Register the service provider.
 	 *

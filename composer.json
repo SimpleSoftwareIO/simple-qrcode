@@ -4,18 +4,26 @@
   	"keywords": ["qrcode", "laravel", "simple", "generator", "wrapper"],
   	"homepage": "http://www.simplesoftware.io",
     "license" : "MIT",
+    "authors": [
+        {
+            "name": "Simple Software LLC",
+            "email": "support@simplesoftware.io"
+        }
+    ],
     "require": {
-  			"php": ">=5.3.0",
+        "php": ">=5.3.0",
       	"ext-gd": "*",
-        "bacon/bacon-qr-code": "1.0.*"
+        "bacon/bacon-qr-code": "1.0.*",
+        "illuminate/support": "4.2.*"
     },
     "require-dev": {
         "mockery/mockery": "0.9.*",
-        "phpunit/phpunit": "4.0.*"
+        "phpunit/phpunit": "4.3.*"
     },
     "autoload": {
         "psr-0": {
             "SimpleSoftwareIO\\QrCode\\": "src"
-        }
+        },
+        "minimum-stability": "stable"
     }
 }
