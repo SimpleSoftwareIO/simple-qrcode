@@ -203,11 +203,11 @@ class BaconQrCodeGenerator implements QrCodeInterface {
      */
     private function createClass($method)
     {
-        $method = $this->formatClass($method);
+        $class = $this->formatClass($method);
 
-        if ( ! class_exists($method)) throw new \BadMethodCallException;
+        if ( ! class_exists($class)) throw new \BadMethodCallException;
 
-        return new $method;
+        return new $class;
     }
 
     /**
@@ -220,7 +220,7 @@ class BaconQrCodeGenerator implements QrCodeInterface {
     {
         $method = ucfirst($method);
 
-        $method = "SimpleSoftwareIO\QrCode\DataTypes\\" . $method;
-        return $method;
+        $class = "SimpleSoftwareIO\QrCode\DataTypes\\" . $method;
+        return $class;
     }
 }
