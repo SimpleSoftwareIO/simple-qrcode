@@ -178,4 +178,49 @@ class BaconQrCodeGenerator implements QrCodeInterface {
         $this->encoding = $encoding;
         return $this;
     }
+
+    /**
+     * Creates a new datatype object and then generates a QrCode.
+     *
+     * @param $method
+     * @param $args
+     * @return void
+     */
+    public function __call($method, $args)
+    {
+        $dataType = $this->createClass($method);
+
+        $dataType->create($args);
+
+        $this->generate($dataType);
+    }
+
+    /**
+     * Creates a new DataType class dynamically.
+     *
+     * @param string $method
+     * @return SimpleSoftwareIO\QrCode\DataTypes\DataTypeInterface
+     */
+    private function createClass($method)
+    {
+        $method = $this->formatClass($method);
+
+        if ( ! class_exists($method)) throw new \BadMethodCallException;
+
+        return new $method;
+    }
+
+    /**
+     * Formats the method name correctly.
+     *
+     * @param $method
+     * @return string
+     */
+    private function formatClass($method)
+    {
+        $method = ucfirst($method);
+
+        $method = "SimpleSoftwareIO\QrCode\DataTypes\\" . $method;
+        return $method;
+    }
 }

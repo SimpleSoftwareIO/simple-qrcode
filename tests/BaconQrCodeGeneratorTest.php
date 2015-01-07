@@ -130,5 +130,21 @@ class BaconQrCodeGeneratorTest extends \PHPUnit_Framework_TestCase {
 
         $this->qrCode->generate('qrCode', 'foo.txt');
     }
+
+    public function test_it_calls_a_valid_dynamic_method_and_generates_a_qrcode()
+    {
+        $this->writer->shouldReceive('writeString')
+            ->once();
+
+        $this->qrCode->phoneNumber('555-555-5555');
+    }
+
+    /**
+     * @expectedException \BadMethodCallException
+     */
+    public function test_it_throws_an_exception_if_datatype_is_not_found()
+    {
+        $this->qrCode->notReal('foo');
+    }
 }
  
