@@ -70,4 +70,12 @@ interface QrCodeInterface {
      * @return $this
      */
     public function margin($margin);
+
+    /**
+     * Sets the Encoding mode.
+     *
+     * @param string $encoding
+     * @return $this
+     */
+    public function encoding($encoding);
 }
