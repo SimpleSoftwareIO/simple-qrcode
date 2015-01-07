@@ -16,7 +16,7 @@ interface DataTypeInterface {
      *
      * @return mixed
      */
-    public function create();
+    public function create($args);
 
     /**
      * Converts the datatype to a string.

@@ -15,7 +15,7 @@ class PhoneNumber implements DataTypeInterface{
      *
      * @return mixed
      */
-    public function create()
+    public function create($args)
     {
         //TODO
     }
