@@ -14,12 +14,12 @@ interface DataTypeInterface {
     /**
      * Generates the DataType Object and sets all of its properties.
      *
-     * @return mixed
+     * @return void
      */
-    public function create($args);
+    public function create(Array $arguments);
 
     /**
-     * Converts the datatype to a string.
+     * Returns the correct QrCode format.
      *
      * @return string
      */
