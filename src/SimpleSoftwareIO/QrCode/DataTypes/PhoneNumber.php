@@ -8,26 +8,34 @@
  *
  */
 
-class PhoneNumber implements DataTypeInterface{
+class PhoneNumber implements DataTypeInterface {
+
+    /**
+     * The phone number
+     *
+     * @var
+     */
+    protected $phoneNumber;
 
     /**
      * Generates the DataType Object and sets all of its properties.
      *
-     * @return mixed
+     * @param $arguments
+     * @return void
      */
-    public function create($args)
+    public function create(Array $arguments)
     {
-        //TODO
+        $this->phoneNumber = $arguments[0];
     }
 
     /**
-     * Converts the datatype to a string.
+     * Returns the correct QrCode format.
      *
      * @return string
      */
     public function __toString()
     {
-        return 'string';
+        return "tel:" . $this->phoneNumber;
     }
 
 }
