@@ -81,7 +81,7 @@ class Email implements DataTypeInterface {
      *
      * @param $arguments
      */
-    private function setProperties($arguments)
+    private function setProperties(Array $arguments)
     {
         //If passed as a single variable and not in an array
         if (isset($arguments[0])) $this->setEmail($arguments[0]);
