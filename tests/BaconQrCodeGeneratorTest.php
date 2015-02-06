@@ -25,7 +25,7 @@ class BaconQrCodeGeneratorTest extends \PHPUnit_Framework_TestCase {
         $this->qrCode = new BaconQrCodeGenerator($this->writer, $this->format);
     }
 
-    public function testSetMargin()
+    public function test_it_sets_the_margin()
     {
         $this->format->shouldReceive('setMargin')
             ->with('50')
@@ -38,7 +38,7 @@ class BaconQrCodeGeneratorTest extends \PHPUnit_Framework_TestCase {
         $this->qrCode->margin(50);
     }
 
-    public function testSetBackgroundColor()
+    public function test_it_sets_the_background_color()
     {
         $this->format->shouldReceive('setBackgroundColor')
             ->once();
@@ -50,7 +50,7 @@ class BaconQrCodeGeneratorTest extends \PHPUnit_Framework_TestCase {
         $this->qrCode->backgroundColor(255,255,255);
     }
 
-    public function testSetColor()
+    public function test_it_sets_the_foreground_color()
     {
         $this->format->shouldReceive('setForegroundColor')
             ->once();
@@ -62,7 +62,7 @@ class BaconQrCodeGeneratorTest extends \PHPUnit_Framework_TestCase {
         $this->qrCode->color(255,255,255);
     }
 
-    public function testSetSize()
+    public function test_it_sets_the_size()
     {
         $this->format->shouldReceive('setHeight')
             ->with(50)
@@ -78,7 +78,7 @@ class BaconQrCodeGeneratorTest extends \PHPUnit_Framework_TestCase {
         $this->qrCode->size(50);
     }
 
-    public function testSetFormatPng()
+    public function test_it_sets_a_png_format()
     {
         $this->writer->shouldReceive('setRenderer')
             ->with('BaconQrCode\Renderer\Image\Png')
@@ -87,7 +87,7 @@ class BaconQrCodeGeneratorTest extends \PHPUnit_Framework_TestCase {
         $this->qrCode->format('png');
     }
 
-    public function testSetFormatEps()
+    public function test_it_sets_a_eps_format()
     {
         $this->writer->shouldReceive('setRenderer')
             ->with('BaconQrCode\Renderer\Image\Eps')
@@ -96,7 +96,7 @@ class BaconQrCodeGeneratorTest extends \PHPUnit_Framework_TestCase {
         $this->qrCode->format('eps');
     }
 
-    public function testSetFormatSvg()
+    public function test_it_sets_a_svg_format()
     {
         $this->writer->shouldReceive('setRenderer')
             ->with('BaconQrCode\Renderer\Image\Svg')
@@ -108,12 +108,12 @@ class BaconQrCodeGeneratorTest extends \PHPUnit_Framework_TestCase {
     /**
      * @expectedException \InvalidArgumentException
      */
-    public function testSetFormatUnknown()
+    public function test_it_throws_an_exception_with_an_invalid_format()
     {
         $this->qrCode->format('random');
     }
 
-    public function testGenerate()
+    public function test_it_generates_a_string()
     {
         $this->writer->shouldReceive('writeString')
             ->with('qrCode', m::type('string'), m::type('int'))
@@ -122,7 +122,7 @@ class BaconQrCodeGeneratorTest extends \PHPUnit_Framework_TestCase {
         $this->qrCode->generate('qrCode');
     }
 
-    public function testGenerateFile()
+    public function test_it_generates_a_file()
     {
         $this->writer->shouldReceive('writeFile')
             ->with('qrCode', 'foo.txt', m::type('string'), m::type('int'))
