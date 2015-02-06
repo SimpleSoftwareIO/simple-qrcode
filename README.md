@@ -7,6 +7,8 @@ Simple QrCode
 [![License](https://poser.pugx.org/simplesoftwareio/simple-qrcode/license.svg)](https://packagist.org/packages/simplesoftwareio/simple-qrcode)
 [![Total Downloads](https://poser.pugx.org/simplesoftwareio/simple-qrcode/downloads.svg)](https://packagist.org/packages/simplesoftwareio/simple-qrcode)
 
+## This version of Simple QrCode has not been officially tested to work with Laravel 5. We are working on building the next release with full Laravel 5 support and expect to release in the next few days. We appologize for any inconvenience.
+
 - [Introduction](#docs-introduction)
 - [Configuration](#docs-configuration)
 - [Simple Ideas](#docs-ideas)
