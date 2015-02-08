@@ -13,6 +13,7 @@ Simple QrCode
 - [Configuration](#docs-configuration)
 - [Simple Ideas](#docs-ideas)
 - [Usage](#docs-usage)
+- [Helpers](#docs-helpers)
 - [Common QrCode Usage](#docs-common-usage)
 
 <a id="docs-introduction"></a>
@@ -181,6 +182,78 @@ All methods support chaining.  The `generate` method must be called last and any
 You can display a PNG image without saving the file by providing a raw string and encoding with `base64_encode`.
 
 	<img src="data:image/png;base64, {{ base64_encode(QrCode::format('png')->size(100)->generate('Make me into an QrCode!')); }} ">
+
+<a id="docs-helpers"></a>
+## Helpers
+
+#### What are helpers?
+
+Helpers are an easy way to create QrCodes that cause a reader to perform a certain action when scanned.  
+
+#### E-Mail
+
+This helper generates an e-mail qrcode that is able to fill in the e-mail address, subject, and body.
+
+	QrCode::email($to, $subject, $body);
+	//Fills in the to address
+	QrCode::email('foo@bar.com');
+	//Fills in the to address, subject, and body of an e-mail.
+	QrCode::email('foo@bar.com', 'This is the subject.', 'This is the message body.');
+	//Fills in just the subject and body of an e-mail.
+	QrCode::email(null, 'This is the subject.', 'This is the message body.');
+	
+#### Geo
+
+This helper generates a latitude and longitude that a phone can read and open the location up in Google Maps or similar app.
+
+	QrCode::geo($latitude, $longitude);
+	QrCode::geo(37.822214, -122.481769);
+	
+#### Phone Number
+
+This helper generates a QrCode that can be scanned and then dials a number.
+
+	QrCode::phoneNumber($phoneNumber);
+	QrCode::phoneNumber('555-555-5555');
+	QrCode::phoneNumber('1-800-Laravel');
+	
+#### SMS (Text Messages)
+
+This helper makes SMS messages that can be prefilled with the send to address and body of the message.
+
+	QrCode::SMS($phoneNumber, $message);
+	//Creates a text message with the number filled in.
+	QrCode::SMS('555-555-5555');
+	//Creates a text message with the number and message filled in.
+	QrCode::SMS('555-555-5555', 'Body of the message');
+
+#### WiFi
+
+This helpers makes scannable QrCodes that can connect a phone to a WiFI network.
+
+	QrCode::wiFi([
+		'encryption' => 'WPA/WEP',
+		'ssid' => 'SSID of the network',
+		'password' => 'Password of the network',
+		'hidden' => 'Whether the network is a hidden SSID or not.'
+	]);
+	//Connects to an open WiFi network.
+	QrCode::wiFi([
+		'ssid' => 'Network Name',
+	]);
+	//Connects to an open, hidden WiFi network.
+	QrCode::wiFi([
+		'ssid' => 'Network Name',
+		'hidden' => 'true'
+	]);
+	//Connects to an secured, WiFi network.
+	QrCode::wiFi([
+		'ssid' => 'Network Name',
+		'encryption' => 'WPA',
+		'password' => 'myPassword'
+	]);
+	
+>WiFi scanning is not currently supported on Apple Products.
 
 <a id="docs-common-usage"></a>
 ##Common QrCode Usage
