@@ -11,11 +11,18 @@
 class PhoneNumber implements DataTypeInterface {
 
     /**
+     * The prefix of the QrCode
+     *
+     * @var string
+     */
+    private $prefix = 'tel:';
+
+    /**
      * The phone number
      *
      * @var
      */
-    protected $phoneNumber;
+    private $phoneNumber;
 
     /**
      * Generates the DataType Object and sets all of its properties.
@@ -35,7 +42,7 @@ class PhoneNumber implements DataTypeInterface {
      */
     public function __toString()
     {
-        return "tel:" . $this->phoneNumber;
+        return $this->prefix . $this->phoneNumber;
     }
 
 }
