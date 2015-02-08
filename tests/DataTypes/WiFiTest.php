@@ -1,6 +1,6 @@
 <?php
 
-use SimpleSoftwareIO\QrCode\DataTypes\Wifi;
+use SimpleSoftwareIO\QrCode\DataTypes\WiFi;
 
 /**
  * Simple Laravel QrCode Generator
