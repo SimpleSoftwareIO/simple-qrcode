@@ -13,25 +13,32 @@ use BaconQrCode\Exception\InvalidArgumentException;
 class Email implements DataTypeInterface {
 
     /**
+     * The prefix of the QrCode
+     *
+     * @var string
+     */
+    private $prefix = 'mailto:';
+
+    /**
      * The email address
      *
      * @var string
      */
-    protected $email;
+    private $email;
 
     /**
      * The subject of the email
      *
      * @var string
      */
-    protected $subject;
+    private $subject;
 
     /**
      * The body of an email.
      *
      * @var string
      */
-    protected $body;
+    private $body;
 
     /**
      * Generates the DataType Object and sets all of its properties.
@@ -61,16 +68,15 @@ class Email implements DataTypeInterface {
      */
     private function buildEmailString()
     {
-        $email = 'mailto:' . $this->email;
+        $email = $this->prefix . $this->email;
 
         if (isset($this->subject) || isset($this->body))
         {
-            $email .= '?';
             $data = [
                 'subject' => $this->subject,
                 'body' => $this->body
             ];
-            $email .= http_build_query($data);
+            $email .=  '?' . http_build_query($data);
         }
 
         return $email;
@@ -83,7 +89,6 @@ class Email implements DataTypeInterface {
      */
     private function setProperties(Array $arguments)
     {
-        //If passed as a single variable and not in an array
         if (isset($arguments[0])) $this->setEmail($arguments[0]);
         if (isset($arguments[1])) $this->subject = $arguments[1];
         if (isset($arguments[2])) $this->body = $arguments[2];
