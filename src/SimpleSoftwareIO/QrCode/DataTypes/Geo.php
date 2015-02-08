@@ -18,6 +18,13 @@ class Geo implements DataTypeInterface {
     private $prefix = 'geo:';
 
     /**
+     * The separator between the variables
+     *
+     * @var string
+     */
+    private $separator = ',';
+
+    /**
      * The latitude
      *
      * @var
@@ -50,7 +57,7 @@ class Geo implements DataTypeInterface {
      */
     public function __toString()
     {
-        return $this->prefix . $this->latitude . ',' . $this->longitude;
+        return $this->prefix . $this->latitude . $this->separator . $this->longitude;
     }
 
 }

@@ -18,6 +18,13 @@ class SMS implements DataTypeInterface {
     private $prefix = 'sms:';
 
     /**
+     * The separator between the variables
+     *
+     * @var string
+     */
+    private $separator = ':';
+
+    /**
      * The phone number
      *
      * @var string
@@ -74,7 +81,7 @@ class SMS implements DataTypeInterface {
 
         if (isset($this->message))
         {
-            $sms .= ':' . $this->message;
+            $sms .= $this->separator . $this->message;
         }
 
         return $sms;
