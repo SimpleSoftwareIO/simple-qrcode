@@ -31,7 +31,7 @@ class SMSTest extends \PHPUnit_Framework_TestCase{
     {
         $this->sms->create([null, 'foo']);
 
-        $properFormat = 'smsto::foo';
+        $properFormat = 'sms::foo';
 
         $this->assertEquals($properFormat, strval($this->sms));
     }
@@ -40,7 +40,7 @@ class SMSTest extends \PHPUnit_Framework_TestCase{
     {
         $this->sms->create(['555-555-5555', 'foo']);
 
-        $properFormat = 'smsto:555-555-5555:foo';
+        $properFormat = 'sms:555-555-5555:foo';
 
         $this->assertEquals($properFormat, strval($this->sms));
     }
