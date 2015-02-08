@@ -10,7 +10,6 @@
 
 interface DataTypeInterface {
 
-
     /**
      * Generates the DataType Object and sets all of its properties.
      *
