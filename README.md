@@ -7,8 +7,6 @@ Simple QrCode
 [![License](https://poser.pugx.org/simplesoftwareio/simple-qrcode/license.svg)](https://packagist.org/packages/simplesoftwareio/simple-qrcode)
 [![Total Downloads](https://poser.pugx.org/simplesoftwareio/simple-qrcode/downloads.svg)](https://packagist.org/packages/simplesoftwareio/simple-qrcode)
 
-## This version of Simple QrCode has not been officially tested to work with Laravel 5. We are working on building the next release with full Laravel 5 support and expect to release in the next few days. We appologize for any inconvenience.
-
 - [Introduction](#docs-introduction)
 - [Configuration](#docs-configuration)
 - [Simple Ideas](#docs-ideas)
@@ -195,10 +193,13 @@ Helpers are an easy way to create QrCodes that cause a reader to perform a certa
 This helper generates an e-mail qrcode that is able to fill in the e-mail address, subject, and body.
 
 	QrCode::email($to, $subject, $body);
+	
 	//Fills in the to address
 	QrCode::email('foo@bar.com');
+	
 	//Fills in the to address, subject, and body of an e-mail.
 	QrCode::email('foo@bar.com', 'This is the subject.', 'This is the message body.');
+	
 	//Fills in just the subject and body of an e-mail.
 	QrCode::email(null, 'This is the subject.', 'This is the message body.');
 	
@@ -207,6 +208,7 @@ This helper generates an e-mail qrcode that is able to fill in the e-mail addres
 This helper generates a latitude and longitude that a phone can read and open the location up in Google Maps or similar app.
 
 	QrCode::geo($latitude, $longitude);
+	
 	QrCode::geo(37.822214, -122.481769);
 	
 #### Phone Number
@@ -214,6 +216,7 @@ This helper generates a latitude and longitude that a phone can read and open th
 This helper generates a QrCode that can be scanned and then dials a number.
 
 	QrCode::phoneNumber($phoneNumber);
+	
 	QrCode::phoneNumber('555-555-5555');
 	QrCode::phoneNumber('1-800-Laravel');
 	
@@ -222,8 +225,10 @@ This helper generates a QrCode that can be scanned and then dials a number.
 This helper makes SMS messages that can be prefilled with the send to address and body of the message.
 
 	QrCode::SMS($phoneNumber, $message);
+	
 	//Creates a text message with the number filled in.
 	QrCode::SMS('555-555-5555');
+	
 	//Creates a text message with the number and message filled in.
 	QrCode::SMS('555-555-5555', 'Body of the message');
 
@@ -237,15 +242,18 @@ This helpers makes scannable QrCodes that can connect a phone to a WiFI network.
 		'password' => 'Password of the network',
 		'hidden' => 'Whether the network is a hidden SSID or not.'
 	]);
+	
 	//Connects to an open WiFi network.
 	QrCode::wiFi([
 		'ssid' => 'Network Name',
 	]);
+	
 	//Connects to an open, hidden WiFi network.
 	QrCode::wiFi([
 		'ssid' => 'Network Name',
 		'hidden' => 'true'
 	]);
+	
 	//Connects to an secured, WiFi network.
 	QrCode::wiFi([
 		'ssid' => 'Network Name',
