@@ -26,18 +26,26 @@ Simple QrCode is an easy to use wrapper for the popular Laravel framework based 
 First, add the Simple QrCode package to your `require` in your `composer.json` file:
 
 	"require": {
-		"simplesoftwareio/simple-qrcode": "1.1.*"
+		"simplesoftwareio/simple-qrcode": "1.2.*"
 	}
 
 Next, run the `composer update` command.
 
 #### Service Provider
 
-After that, register the `SimpleSoftwareIO\QrCode\QrCodeServiceProvider` in your `app/conifg/app.php` configuration file within the `providers` array.
+###### Laravel 4
+Register the `SimpleSoftwareIO\QrCode\QrCodeServiceProvider` in your `app/conifg/app.php` within the `providers` array.
+
+###### Laravel 5
+Register the `SimpleSoftwareIO\QrCode\QrCodeServiceProvider` in your `conifg/app.php` within the `providers` array.
 
 #### Aliases
 
+###### Laravel 4
 Finally, register the `'QrCode' => 'SimpleSoftwareIO\QrCode\Facades\QrCode'` in your `app/config/app.php` configuration file within the `aliases` array.
+
+###### Laravel 5
+Finally, register the `'QrCode' => 'SimpleSoftwareIO\QrCode\Facades\QrCode'` in your `config/app.php` configuration file within the `aliases` array.
 
 <a id="docs-ideas"></a>
 ## Simple Ideas
