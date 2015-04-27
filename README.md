@@ -34,10 +34,10 @@ Next, run the `composer update` command.
 #### Service Provider
 
 ###### Laravel 4
-Register the `SimpleSoftwareIO\QrCode\QrCodeServiceProvider` in your `app/conifg/app.php` within the `providers` array.
+Register the `SimpleSoftwareIO\QrCode\QrCodeServiceProvider` in your `app/config/app.php` within the `providers` array.
 
 ###### Laravel 5
-Register the `SimpleSoftwareIO\QrCode\QrCodeServiceProvider` in your `conifg/app.php` within the `providers` array.
+Register the `SimpleSoftwareIO\QrCode\QrCodeServiceProvider` in your `config/app.php` within the `providers` array.
 
 #### Aliases
 
