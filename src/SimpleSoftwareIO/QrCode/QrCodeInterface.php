@@ -78,4 +78,12 @@ interface QrCodeInterface {
      * @return $this
      */
     public function encoding($encoding);
+
+    /**
+     * Merges an image with the center of the QrCode
+     *
+     * @param $image string The filepath to an image
+     * @return $this
+     */
+    public function merge($image);
 }

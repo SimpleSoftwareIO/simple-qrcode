@@ -44,6 +44,13 @@ class BaconQrCodeGenerator implements QrCodeInterface {
     protected $encoding = Encoder::DEFAULT_BYTE_MODE_ECODING;
 
     /**
+     * Holds an image string that will be merged with the QrCode.
+     *
+     * @var null|string
+     */
+    protected $imageMerge = null;
+
+    /**
      * Creates a new QrCodeGenerator with a Writer class and with a SVG renderer set as the default.
      */
     public function __construct(Writer $writer = null, RendererInterface $format = null)
@@ -61,19 +68,35 @@ class BaconQrCodeGenerator implements QrCodeInterface {
      */
     public function generate($text, $filename = null)
     {
+        $qrCode = $this->writer->writeString($text, $this->encoding, $this->errorCorrection);
+
+        if ($this->imageMerge !== null)
+        {
+            $merger = new ImageMerge(new Image($qrCode), new Image($this->imageMerge()));
+            $qrCode = $merger->merge();
+        }
+
         if ($filename === null)
         {
-            return $this->writer->writeString($text,
-                $this->encoding,
-                $this->errorCorrection);
+            return $qrCode;
         }
         else
         {
-            $this->writer->writeFile($text,
-                $filename,
-                $this->encoding,
-                $this->errorCorrection);
+            file_put_contents($filename, $qrCode);
         }
+    }
+
+    /**
+     * Merges an image with the center of the QrCode
+     *
+     * @param $image string The filepath to an image
+     * @return $this
+     */
+    public function merge($image)
+    {
+        $this->imageMerge = file_get_contents($image);
+
+        return $this;
     }
 
     /**

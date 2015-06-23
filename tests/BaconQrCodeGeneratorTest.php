@@ -122,15 +122,6 @@ class BaconQrCodeGeneratorTest extends \PHPUnit_Framework_TestCase {
         $this->qrCode->generate('qrCode');
     }
 
-    public function test_it_generates_a_file()
-    {
-        $this->writer->shouldReceive('writeFile')
-            ->with('qrCode', 'foo.txt', m::type('string'), m::type('int'))
-            ->once();
-
-        $this->qrCode->generate('qrCode', 'foo.txt');
-    }
-
     public function test_it_calls_a_valid_dynamic_method_and_generates_a_qrcode()
     {
         $this->writer->shouldReceive('writeString')
