@@ -23,5 +23,5 @@ interface ImageMergeInterface {
      *
      * @return string
      */
-    public function merge();
+    public function merge($percentage);
 }

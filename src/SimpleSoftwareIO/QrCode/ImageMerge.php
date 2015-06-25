@@ -11,18 +11,74 @@
 class ImageMerge implements ImageMergeInterface {
 
     /**
-     * Holds the QrCode Image
+     * Holds the QrCode image
      *
      * @var Image $sourceImage
      */
-    private $sourceImage;
+    protected $sourceImage;
 
     /**
-     * Holds the Merging Image
+     * Holds the merging image
      *
      * @var Image $mergeImage
      */
-    private $mergeImage;
+    protected $mergeImage;
+
+    /**
+     * The height of the source image
+     *
+     * @var int
+     */
+    protected $sourceHeight;
+
+    /**
+     * The width of the source image
+     *
+     * @var int
+     */
+    protected $sourceWidth;
+
+    /**
+     * The height of the merge image
+     *
+     * @var int
+     */
+    protected $mergeHeight;
+
+    /**
+     * The width of the merge image
+     *
+     * @var int
+     */
+    protected $mergeWidth;
+
+    /**
+     * The height of the merge image after it is merged
+     *
+     * @var int
+     */
+    protected $postMergeHeight;
+
+    /**
+     * The width of the merge image after it is merged
+     *
+     * @var int
+     */
+    protected $postMergeWidth;
+
+    /**
+     * The position that the merge image is placed on top of the source image
+     *
+     * @var int
+     */
+    protected $mergePosHeight;
+
+    /**
+     * The position that the merge image is placed on top of the source image
+     *
+     * @var int
+     */
+    protected $mergePosWidth;
 
     /**
      * Creates a new ImageMerge object.
@@ -37,12 +93,61 @@ class ImageMerge implements ImageMergeInterface {
     }
 
     /**
-     * Returns an QrCode that has been merge with another image.  This is usually used with logos to imprint a logo into a QrCode
+     * Returns an QrCode that has been merge with another image.
+     * This is usually used with logos to imprint a logo into a QrCode
      *
-     * @return resource
+     * @return str
      */
-    public function merge()
+    public function merge($percentage)
     {
-        // TODO: Implement merge() method.
+        $this->setProperties($percentage);
+
+        imagecopyresized($this->sourceImage->getImageResource(),
+            $this->mergeImage->getImageResource(),
+            $this->mergePosWidth,
+            $this->mergePosHeight,
+            0,
+            0,
+            $this->postMergeHeight,
+            $this->postMergeWidth,
+            $this->sourceWidth,
+            $this->sourceHeight
+        );
+
+        return $this->createImage();
+    }
+
+    /**
+     * Creates a PNG Image
+     *
+     * @return string
+     */
+    protected function createImage()
+    {
+        ob_start();
+        imagepng($this->sourceImage->getImageResource());
+        return ob_get_clean();
+    }
+
+    /**
+     * Sets the objects properties
+     *
+     * @param $percentage float The percentage that the merge image should take up.
+     */
+    protected function setProperties($percentage)
+    {
+        if ($percentage > 1)  throw new \InvalidArgumentException('$percentage must be less than 1');
+
+        $this->sourceHeight = $this->sourceImage->getHeight();
+        $this->sourceWidth = $this->sourceImage->getWidth();
+
+        $this->mergeHeight = $this->mergeImage->getHeight();
+        $this->mergeWidth = $this->mergeImage->getWidth();
+
+        $this->postMergeHeight = $this->mergeHeight * $percentage;
+        $this->postMergeWidth = $this->mergeWidth * $percentage;
+
+        $this->mergePosHeight = ($this->sourceHeight / 2) - ($this->postMergeHeight / 2);
+        $this->mergePosWidth = ($this->sourceWidth / 2) - ($this->postMergeHeight / 2);
     }
 }

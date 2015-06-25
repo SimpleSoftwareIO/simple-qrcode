@@ -60,8 +60,11 @@ class ImageTest extends \PHPUnit_Framework_TestCase {
      */
     public function test_it_loads_an_image_string_into_a_resource()
     {
-        $correctImage = imagepng(imagecreatefromstring($this->imagePath), $this->compareTestSaveLocation);
-        $testImage = imagepng($this->image->getImageResource(), $this->testImageSaveLocation);
+        imagepng(imagecreatefromstring($this->imagePath), $this->compareTestSaveLocation);
+        imagepng($this->image->getImageResource(), $this->testImageSaveLocation);
+
+        $correctImage = file_get_contents($this->compareTestSaveLocation);
+        $testImage = file_get_contents($this->testImageSaveLocation);
 
         $this->assertEquals($correctImage, $testImage);
     }

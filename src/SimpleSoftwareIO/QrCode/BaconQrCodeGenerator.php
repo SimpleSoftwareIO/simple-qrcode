@@ -51,6 +51,13 @@ class BaconQrCodeGenerator implements QrCodeInterface {
     protected $imageMerge = null;
 
     /**
+     * The percentage that a merged image should take over the source image.
+     *
+     * @var float
+     */
+    protected $imagePercentage = .2;
+
+    /**
      * Creates a new QrCodeGenerator with a Writer class and with a SVG renderer set as the default.
      */
     public function __construct(Writer $writer = null, RendererInterface $format = null)
@@ -72,8 +79,8 @@ class BaconQrCodeGenerator implements QrCodeInterface {
 
         if ($this->imageMerge !== null)
         {
-            $merger = new ImageMerge(new Image($qrCode), new Image($this->imageMerge()));
-            $qrCode = $merger->merge();
+            $merger = new ImageMerge(new Image($qrCode), new Image($this->imageMerge));
+            $qrCode = $merger->merge($this->imagePercentage);
         }
 
         if ($filename === null)
@@ -92,9 +99,10 @@ class BaconQrCodeGenerator implements QrCodeInterface {
      * @param $image string The filepath to an image
      * @return $this
      */
-    public function merge($image)
+    public function merge($image, $percentage = .2)
     {
-        $this->imageMerge = file_get_contents($image);
+        $this->imageMerge = file_get_contents(base_path() . $image);
+        $this->imagePercentage = $percentage;
 
         return $this;
     }
