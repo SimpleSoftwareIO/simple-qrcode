@@ -192,7 +192,7 @@ The `merge` method merges a image over a QrCode.  This is commonly used to place
     
 >You should use a high level of error correction when using the `merge` method to ensure that QrCode is still readable.  We recommend using `errorCorrection('H')`.
 
-![](https://github.com/SimpleSoftwareIO/simple-qrcode/tree/master/docs/imgs/merged-qrcode.png)
+![Merged Logo](/docs/imgs/merged-qrcode.png?raw=true)
 
 #### Advance Usage
 
