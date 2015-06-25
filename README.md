@@ -178,6 +178,22 @@ Change the character encoding that is used to build a QrCode.  By default `ISO-8
 
 >An error of `Could not encode content to ISO-8859-1` means that the wrong character encoding type is being used.  We recommend `UTF-8` if you are unsure.
 
+#### Merge
+
+The `merge` method merges a image over a QrCode.  This is commonly used to placed logos within a QrCode.
+
+    QrCode::merge($filename, $percentage);
+    
+    //Generates a QrCode with an Image centered in the middle.
+    QrCode::merge('path-to-image.png')->generate();
+    
+    //Generates a QrCode with an image centered in the middle.  The inserted image takes up 30% of the QrCode.
+    QrCode::merge('path-to-image.png')->generate();
+    
+>You should use a high level of error correction when using the `merge` method to ensure that QrCode is still readable.  We recommend using `errorCorrection('H')`.
+
+![](https://github.com/SimpleSoftwareIO/simple-qrcode/tree/master/docs/imgs/merged-qrcode.png)
+
 #### Advance Usage
 
 All methods support chaining.  The `generate` method must be called last and any `format` change must be called first.  For example you could run any of the following:
