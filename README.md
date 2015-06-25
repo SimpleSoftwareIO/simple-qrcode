@@ -5,7 +5,7 @@ Simple QrCode
 [![Latest Stable Version](https://poser.pugx.org/simplesoftwareio/simple-qrcode/v/stable.svg)](https://packagist.org/packages/simplesoftwareio/simple-qrcode)
 [![Latest Unstable Version](https://poser.pugx.org/simplesoftwareio/simple-qrcode/v/unstable.svg)](https://packagist.org/packages/simplesoftwareio/simple-qrcode)
 [![License](https://poser.pugx.org/simplesoftwareio/simple-qrcode/license.svg)](https://packagist.org/packages/simplesoftwareio/simple-qrcode)
-[![Total Downloads](https://poser.pugx.org/simplesoftwareio/simple-qrcode/downloads)](https://packagist.org/packages/simplesoftwareio/simple-qrcode)
+[![Total Downloads](https://poser.pugx.org/simplesoftwareio/simple-qrcode/downloads.svg)](https://packagist.org/packages/simplesoftwareio/simple-qrcode)
 
 - [Introduction](#docs-introduction)
 - [Configuration](#docs-configuration)
@@ -180,11 +180,11 @@ Change the character encoding that is used to build a QrCode.  By default `ISO-8
 
 #### Merge
 
-The `merge` method merges a image over a QrCode.  This is commonly used to placed logos within a QrCode.
+The `merge` method merges an image over a QrCode.  This is commonly used to placed logos within a QrCode.
 
     QrCode::merge($filename, $percentage);
     
-    //Generates a QrCode with an Image centered in the middle.
+    //Generates a QrCode with an image centered in the middle.
     QrCode::format('png')->merge('path-to-image.png')->generate();
     
     //Generates a QrCode with an image centered in the middle.  The inserted image takes up 30% of the QrCode.
@@ -192,7 +192,7 @@ The `merge` method merges a image over a QrCode.  This is commonly used to place
 
 >The `merge` method only supports PNG at this time.
 
->You should use a high level of error correction when using the `merge` method to ensure that QrCode is still readable.  We recommend using `errorCorrection('H')`.
+>You should use a high level of error correction when using the `merge` method to ensure that the QrCode is still readable.  We recommend using `errorCorrection('H')`.
 
 ![Merged Logo](/docs/imgs/merged-qrcode.png?raw=true)
 
