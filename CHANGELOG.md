@@ -3,6 +3,10 @@ Simple QrCode
 
 ##Change Log
 
+#### 1.3.0
+* Added `merge` method.
+* Fixed a typo in the readme.
+
 #### 1.2.0
 * Added full support for Laravel 5
 * Added the following helpers.

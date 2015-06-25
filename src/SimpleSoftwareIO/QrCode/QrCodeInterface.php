@@ -78,4 +78,13 @@ interface QrCodeInterface {
      * @return $this
      */
     public function encoding($encoding);
+
+    /**
+     * Merges an image with the center of the QrCode
+     *
+     * @param $image string The filepath to an image
+     * @param $percentage float The percentage that the merge image should take up.
+     * @return $this
+     */
+    public function merge($image, $percentage = .2);
 }
