@@ -191,6 +191,7 @@ The `merge` method merges a image over a QrCode.  This is commonly used to place
     QrCode::format('png')->merge('path-to-image.png', .3)->generate();
 
 >The `merge` method only supports PNG at this time.
+
 >You should use a high level of error correction when using the `merge` method to ensure that QrCode is still readable.  We recommend using `errorCorrection('H')`.
 
 ![Merged Logo](/docs/imgs/merged-qrcode.png?raw=true)
