@@ -188,7 +188,7 @@ The `merge` method merges a image over a QrCode.  This is commonly used to place
     QrCode::merge('path-to-image.png')->generate();
     
     //Generates a QrCode with an image centered in the middle.  The inserted image takes up 30% of the QrCode.
-    QrCode::merge('path-to-image.png')->generate();
+    QrCode::merge('path-to-image.png', .3)->generate();
     
 >You should use a high level of error correction when using the `merge` method to ensure that QrCode is still readable.  We recommend using `errorCorrection('H')`.
 
