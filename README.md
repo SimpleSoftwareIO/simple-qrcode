@@ -187,7 +187,7 @@ All methods support chaining.  The `generate` method must be called last and any
 
 You can display a PNG image without saving the file by providing a raw string and encoding with `base64_encode`.
 
-	<img src="data:image/png;base64, {{ base64_encode(QrCode::format('png')->size(100)->generate('Make me into an QrCode!')); }} ">
+	<img src="data:image/png;base64, {{ base64_encode(QrCode::format('png')->size(100)->generate('Make me into an QrCode!')) }} ">
 
 <a id="docs-helpers"></a>
 ## Helpers
