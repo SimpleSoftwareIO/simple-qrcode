@@ -39,6 +39,8 @@ Register the `SimpleSoftwareIO\QrCode\QrCodeServiceProvider` in your `app/config
 ###### Laravel 5
 Register the `SimpleSoftwareIO\QrCode\QrCodeServiceProvider` in your `config/app.php` within the `providers` array.
 
+__Important:__ For Laravel 5.1 LTS you have to register the Service Provider with `::class`.
+
 #### Aliases
 
 ###### Laravel 4
@@ -46,6 +48,8 @@ Finally, register the `'QrCode' => 'SimpleSoftwareIO\QrCode\Facades\QrCode'` in 
 
 ###### Laravel 5
 Finally, register the `'QrCode' => 'SimpleSoftwareIO\QrCode\Facades\QrCode'` in your `config/app.php` configuration file within the `aliases` array.
+
+__Important:__ For Laravel 5.1 LTS you have to register the Facade with `::class`.
 
 <a id="docs-ideas"></a>
 ## Simple Ideas
