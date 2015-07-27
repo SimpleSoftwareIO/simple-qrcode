@@ -312,5 +312,5 @@ You can use a prefix found in the table below inside the `generate` section to c
 | Text (SMS) With Pretyped Message and Number | sms: | sms:555-555-5555:I am a pretyped message |
 | Geo Address | geo: | geo:-78.400364,-85.916993 |
 | MeCard | mecard: | MECARD:Simple, Software;Some Address, Somewhere, 20430;TEL:555-555-5555;EMAIL:support@simplesoftware.io; |
-| VCard | BEGIN:VCARD | BEGIN:VCARD \r\n VERSION:3.0 \r\n N:Lastname;Surname \r\n FN:Displayname \r\n ORG:OrgName \r\n URL:http://www.url.com/ \r\n EMAIL:test@url.com \r\n TEL;TYPE=voice,work,pref:+555-555-5555 \r\n ADR;TYPE=intl,work,postal,parcel:;;Street;City;;Zip;Country \r\n END:VCARD |
+| VCard | BEGIN:VCARD | [See Examples](https://en.wikipedia.org/wiki/VCard) |
 | Wifi | wifi: | wifi:WEP/WPA;SSID;PSK;Hidden(True/False) |
