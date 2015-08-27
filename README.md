@@ -85,6 +85,9 @@ This will make a QrCode that says "Make me into a QrCode!"
 `Generate` by default will return a SVG image string.  You can print this directly into a modern browser within Laravel's Blade system with the following:
 
 	{{ QrCode::generate('Make me into a QrCode!'); }}
+	
+__Important:__ Laravel 5 by default will escape the svg when using {{}}. Please use `{!! !!}}` instead.	
+	
 
 The `generate` method has a second parameter that will accept a filename and path to save the QrCode.
 
