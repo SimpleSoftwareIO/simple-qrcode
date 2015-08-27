@@ -86,7 +86,7 @@ This will make a QrCode that says "Make me into a QrCode!"
 
 	{{ QrCode::generate('Make me into a QrCode!'); }}
 	
-__Important:__ Laravel 5 by default will escape the svg when using {{}}. Please use `{!! !!}}` instead.	
+__Important:__ Laravel 5 by default will escape the svg when using {{}}. Please use `{!! !!}` instead.	
 	
 
 The `generate` method has a second parameter that will accept a filename and path to save the QrCode.
