@@ -29,56 +29,56 @@ class ImageMerge implements ImageMergeInterface {
      *
      * @var int
      */
-    protected $sourceHeight;
+    protected $sourceImageHeight;
 
     /**
      * The width of the source image
      *
      * @var int
      */
-    protected $sourceWidth;
+    protected $sourceImageWidth;
 
     /**
      * The height of the merge image
      *
      * @var int
      */
-    protected $mergeHeight;
+    protected $mergeImageHeight;
 
     /**
      * The width of the merge image
      *
      * @var int
      */
-    protected $mergeWidth;
+    protected $mergeImageWidth;
 
     /**
      * The height of the merge image after it is merged
      *
      * @var int
      */
-    protected $postMergeHeight;
+    protected $postMergeImageHeight;
 
     /**
      * The width of the merge image after it is merged
      *
      * @var int
      */
-    protected $postMergeWidth;
+    protected $postMergeImageWidth;
 
     /**
      * The position that the merge image is placed on top of the source image
      *
      * @var int
      */
-    protected $mergePosHeight;
+    protected $centerY;
 
     /**
      * The position that the merge image is placed on top of the source image
      *
      * @var int
      */
-    protected $mergePosWidth;
+    protected $centerX;
 
     /**
      * Creates a new ImageMerge object.
@@ -102,16 +102,17 @@ class ImageMerge implements ImageMergeInterface {
     {
         $this->setProperties($percentage);
 
-        imagecopyresized($this->sourceImage->getImageResource(),
+        imagecopyresized(
+            $this->sourceImage->getImageResource(),
             $this->mergeImage->getImageResource(),
-            $this->mergePosWidth,
-            $this->mergePosHeight,
+            $this->centerX,
+            $this->centerY,
             0,
             0,
-            $this->postMergeHeight,
-            $this->postMergeWidth,
-            $this->sourceWidth,
-            $this->sourceHeight
+            $this->postMergeImageWidth,
+            $this->postMergeImageHeight,
+            $this->mergeImageWidth,
+            $this->mergeImageHeight
         );
 
         return $this->createImage();
@@ -138,16 +139,36 @@ class ImageMerge implements ImageMergeInterface {
     {
         if ($percentage > 1)  throw new \InvalidArgumentException('$percentage must be less than 1');
 
-        $this->sourceHeight = $this->sourceImage->getHeight();
-        $this->sourceWidth = $this->sourceImage->getWidth();
+        $this->sourceImageHeight = $this->sourceImage->getHeight();
+        $this->sourceImageWidth = $this->sourceImage->getWidth();
 
-        $this->mergeHeight = $this->mergeImage->getHeight();
-        $this->mergeWidth = $this->mergeImage->getWidth();
+        $this->mergeImageHeight = $this->mergeImage->getHeight();
+        $this->mergeImageWidth = $this->mergeImage->getWidth();
 
-        $this->postMergeHeight = $this->mergeHeight * $percentage;
-        $this->postMergeWidth = $this->mergeWidth * $percentage;
+        $this->calculateOverlap($percentage);
+        $this->calculateCenter();
+    }
 
-        $this->mergePosHeight = ($this->sourceHeight / 2) - ($this->postMergeHeight / 2);
-        $this->mergePosWidth = ($this->sourceWidth / 2) - ($this->postMergeHeight / 2);
+    /**
+     * Calculates the center of the source Image using the Merge image.
+     *
+     * @return void
+     */
+    private function calculateCenter()
+    {
+        $this->centerY = ($this->sourceImageHeight / 2) - ($this->postMergeImageHeight / 2);
+        $this->centerX = ($this->sourceImageWidth / 2) - ($this->postMergeImageHeight / 2);
+    }
+
+    /**
+     * Calculates the width of the merge image being placed on the source image.
+     *
+     * @param float $percentage
+     * @return void
+     */
+    private function calculateOverlap($percentage)
+    {
+        $this->postMergeImageHeight = $this->sourceImageHeight * $percentage;
+        $this->postMergeImageWidth = $this->sourceImageWidth * $percentage;
     }
 }

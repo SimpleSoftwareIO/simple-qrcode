@@ -91,6 +91,6 @@ class ImageMergeTest extends \PHPUnit_Framework_TestCase {
      */
     public function test_it_throws_an_exception_when_percentage_is_greater_than_1()
     {
-        $testImage = $this->testImage->merge(1.1);
+        $this->testImage->merge(1.1);
     }
 }
