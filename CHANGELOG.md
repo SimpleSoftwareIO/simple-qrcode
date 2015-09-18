@@ -3,6 +3,9 @@ Simple QrCode
 
 ##Change Log
 
+#### 1.3.1
+* Fixed a bug where `merge` did not work as expected when used with `size.`
+
 #### 1.3.0
 * Added `merge` method.
 * Fixed a typo in the readme.
