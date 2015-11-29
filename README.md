@@ -13,6 +13,7 @@ Simple QrCode
 - [Usage](#docs-usage)
 - [Helpers](#docs-helpers)
 - [Common QrCode Usage](#docs-common-usage)
+- [Usage Outside of Laravel](#docs-outside-laravel)
 
 <a id="docs-introduction"></a>
 ## Introduction
@@ -317,3 +318,13 @@ You can use a prefix found in the table below inside the `generate` section to c
 | MeCard | mecard: | MECARD:Simple, Software;Some Address, Somewhere, 20430;TEL:555-555-5555;EMAIL:support@simplesoftware.io; |
 | VCard | BEGIN:VCARD | [See Examples](https://en.wikipedia.org/wiki/VCard) |
 | Wifi | wifi: | wifi:WEP/WPA;SSID;PSK;Hidden(True/False) |
+
+<a id="docs-outside-laravel"></a>
+##Usage Outside of Laravel
+
+You may use this package outside of Laravel by instantiating a new `BaconQrCodeGenerator` class.
+
+    use SimpleSoftwareIO\QrCode\BaconQrCodeGenerator;
+
+    $qrcode = new BaconQrCodeGenerator;
+    $qrcode->size(500)->generate('Make a qrcode without Laravel!');
