@@ -3,6 +3,9 @@ Simple QrCode
 
 ##Change Log
 
+#### 1.3.2
+* Changed `bindShared` to `singleton` to support Laravel 5.2  -Thanks! @lhdev
+
 #### 1.3.1
 * Fixed a bug where `merge` did not work as expected when used with `size.`
 
