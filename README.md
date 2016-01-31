@@ -191,14 +191,14 @@ Change the character encoding that is used to build a QrCode.  By default `ISO-8
 The `merge` method merges an image over a QrCode.  This is commonly used to placed logos within a QrCode.
 
     QrCode::merge($filename, $percentage);
-    
+
     //Generates a QrCode with an image centered in the middle.
     QrCode::format('png')->merge('path-to-image.png')->generate();
-    
+
     //Generates a QrCode with an image centered in the middle.  The inserted image takes up 30% of the QrCode.
     QrCode::format('png')->merge('path-to-image.png', .3)->generate();
 
->The `merge` method only supports PNG at this time. The 'merge' path is relative to app base path.
+>The `merge` method only supports PNG at this time. The 'merge' path is relative to app base path. If you are outside of Laravel pass absolute path.
 
 >You should use a high level of error correction when using the `merge` method to ensure that the QrCode is still readable.  We recommend using `errorCorrection('H')`.
 

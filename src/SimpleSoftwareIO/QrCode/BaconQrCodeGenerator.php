@@ -96,12 +96,21 @@ class BaconQrCodeGenerator implements QrCodeInterface {
     /**
      * Merges an image with the center of the QrCode
      *
-     * @param $image string The filepath to an image
+     * @param string $image The filepath to an image (relative path for Laravel otherwise absolute)
+     * @param float $percentage The inserted image takes up 20% of the QrCode
      * @return $this
      */
     public function merge($image, $percentage = .2)
     {
-        $this->imageMerge = file_get_contents(base_path() . $image);
+        $filename = function_exists('base_path')
+            ? base_path() . $image
+            : $image;
+
+        if (!file_exists($filename)) {
+            throw new \InvalidArgumentException("Invalid image argument. File '$filename' does not exists.");
+        }
+
+        $this->imageMerge = file_get_contents($filename);
         $this->imagePercentage = $percentage;
 
         return $this;
