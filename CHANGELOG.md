@@ -3,6 +3,9 @@ Simple QrCode
 
 ##Change Log
 
+#### 1.3.3
+* Allow absolute paths to be used with the `merge` method.
+
 #### 1.3.2
 * Changed `bindShared` to `singleton` to support Laravel 5.2  -Thanks [lhdev!](https://github.com/lhdev)
 
