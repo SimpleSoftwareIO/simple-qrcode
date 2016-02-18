@@ -8,6 +8,7 @@ Simple QrCode
 [![Total Downloads](https://poser.pugx.org/simplesoftwareio/simple-qrcode/downloads.svg)](https://packagist.org/packages/simplesoftwareio/simple-qrcode)
 
 - [Introduction](#docs-introduction)
+- [Translations](#docs-translations)
 - [Configuration](#docs-configuration)
 - [Simple Ideas](#docs-ideas)
 - [Usage](#docs-usage)
@@ -18,6 +19,10 @@ Simple QrCode
 <a id="docs-introduction"></a>
 ## Introduction
 Simple QrCode is an easy to use wrapper for the popular Laravel framework based on the great work provided by [Bacon/BaconQrCode](https://github.com/Bacon/BaconQrCode).  We created an interface that is familiar and easy to install for Laravel users.
+
+<a id="docs-translations"></a>
+## Translations
+We are looking for users who speak Chinese, Korean or Japanese to help translate this document.  Please create a pull request if you are able to make a translation!
 
 <a id="docs-configuration"></a>
 ## Configuration
