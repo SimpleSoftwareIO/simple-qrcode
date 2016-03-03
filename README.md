@@ -211,6 +211,20 @@ The `merge` method merges an image over a QrCode.  This is commonly used to plac
 
 >You should use a high level of error correction when using the `merge` method to ensure that the QrCode is still readable.  We recommend using `errorCorrection('H')`.
 
+#### Merge binary string
+
+The `mergeString` method can be used to achieve the same as the `merge` call, except it allows you to provide a string representation of the file instead of the filepath. This is usefull when working with the `Storage` facade. It's interface is quite similar to the `merge` call. 
+
+    QrCode::mergeString(Storage::get('path/to/image.png'), $percentage);
+    
+    //Generates a QrCode with an image centered in the middle.
+    QrCode::format('png')->mergeString(Storage::get('path/to/image.png'))->generate();
+    
+    //Generates a QrCode with an image centered in the middle.  The inserted image takes up 30% of the QrCode.
+    QrCode::format('png')->mergeString(Storage::get('path/to/image.png'), .3)->generate();
+
+>As with the normal `merge` call, only PNG is supported at this time. The same applies for error correction, high levels are recommened.
+
 ![Merged Logo](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/merged-qrcode.png?raw=true)
 
 #### Advance Usage

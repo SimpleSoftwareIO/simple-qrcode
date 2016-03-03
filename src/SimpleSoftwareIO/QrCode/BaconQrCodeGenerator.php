@@ -115,6 +115,21 @@ class BaconQrCodeGenerator implements QrCodeInterface {
     }
 
     /**
+     * Merges an image string with the center of the QrCode, does not check for correct format
+     *
+     * @param $image string The string contents of an image
+     * @param $percentage float The amount that the merged image should be placed over the qrcode.
+     * @return $this
+     */
+    public function mergeString($content, $percentage = .2)
+    {
+        $this->imageMerge = $content;
+        $this->imagePercentage = $percentage;
+
+        return $this;
+    }
+
+    /**
      * Switches the format of the outputted QrCode or defaults to SVG
      *
      * @param string $format The desired format.
