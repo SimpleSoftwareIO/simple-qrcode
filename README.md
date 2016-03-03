@@ -32,7 +32,7 @@ We are looking for users who speak Chinese, Korean or Japanese to help translate
 First, add the Simple QrCode package to your `require` in your `composer.json` file:
 
 	"require": {
-		"simplesoftwareio/simple-qrcode": "1.3.*"
+		"simplesoftwareio/simple-qrcode": "~1"
 	}
 
 Next, run the `composer update` command.
