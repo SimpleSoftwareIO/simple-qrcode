@@ -3,6 +3,9 @@ Simple QrCode
 
 ##Change Log
 
+#### 1.4.0
+* Added the `mergeString` method.  This method adds the ability to pass in a binary string to create a QrCode with an image on it.  -Thanks [tuupke!](https://github.com/tuupke)
+
 #### 1.3.3
 * Allow absolute paths to be used with the `merge` method.
 
