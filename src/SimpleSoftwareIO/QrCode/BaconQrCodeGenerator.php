@@ -58,6 +58,13 @@ class BaconQrCodeGenerator implements QrCodeInterface {
     protected $imagePercentage = .2;
 
     /**
+     * Whether the quality of the merge has to of high quality (resampled)
+     *
+     * @var bool
+     */
+    protected $highQuality = false;
+
+    /**
      * Creates a new QrCodeGenerator with a Writer class and with a SVG renderer set as the default.
      */
     public function __construct(Writer $writer = null, RendererInterface $format = null)
@@ -79,7 +86,7 @@ class BaconQrCodeGenerator implements QrCodeInterface {
 
         if ($this->imageMerge !== null)
         {
-            $merger = new ImageMerge(new Image($qrCode), new Image($this->imageMerge));
+            $merger = new ImageMerge(new Image($qrCode), new Image($this->imageMerge), $this->highQuality);
             $qrCode = $merger->merge($this->imagePercentage);
         }
 
@@ -96,16 +103,22 @@ class BaconQrCodeGenerator implements QrCodeInterface {
     /**
      * Merges an image with the center of the QrCode
      *
-     * @param $image string The filepath to an image
+     * @param $filepath string The filepath to an image
      * @param $percentage float The amount that the merged image should be placed over the qrcode.
-     * @param $absolute Whether to use an absolute filepath or not
+     * @param $absolute boolean Whether to use an absolute filepath or not.
+     * @param $hq boolean Whether we want a high merge quality (resampled vs just resized).
      * @return $this
      */
-    public function merge($filepath, $percentage = .2, $absolute = false)
+    public function merge($filepath, $percentage = .2, $absolute = false, $hq = false)
     {
         if (function_exists('base_path') && ! $absolute)
         {
             $filepath = base_path() . $filepath;
+        }
+
+        if(!is_null($hq))
+        {
+            $this->highQuality = true && $hq;
         }
 
         $this->imageMerge = file_get_contents($filepath);
@@ -117,14 +130,34 @@ class BaconQrCodeGenerator implements QrCodeInterface {
     /**
      * Merges an image string with the center of the QrCode, does not check for correct format
      *
-     * @param $image string The string contents of an image
+     * @param $content string The string contents of an image.
      * @param $percentage float The amount that the merged image should be placed over the qrcode.
+     * @param $hq boolean Whether we want a high merge quality (resampled vs just resized).
      * @return $this
      */
-    public function mergeString($content, $percentage = .2)
+    public function mergeString($content, $percentage = .2, $hq = null)
     {
         $this->imageMerge = $content;
         $this->imagePercentage = $percentage;
+
+        if(!is_null($hq))
+        {
+            $this->highQuality = true && $hq;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Sets the quality of the merge, when set to true the merge will use a resampled merge, when set to false will set
+     * the merge to a simple resized merge. The resampled merge will yield a higher quality due to anti-aliassing, but
+     * takes more CPU time to compute
+     *
+     * @param $hq boolean Whether the quality should be high (true) or low (false)
+     * @return $this
+     */
+    public function setMergeQuality($hq){
+        $this->highQuality = true && $hq;
 
         return $this;
     }

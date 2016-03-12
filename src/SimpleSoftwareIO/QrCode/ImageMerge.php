@@ -81,28 +81,38 @@ class ImageMerge implements ImageMergeInterface {
     protected $centerX;
 
     /**
+     * Whether the quality of the merge has to of high quality (resampled)
+     *
+     * @var bool
+     */
+    protected $highQuality;
+
+    /**
      * Creates a new ImageMerge object.
      *
      * @param $sourceImage Image The image that will be merged over.
      * @param $mergeImage Image The image that will be used to merge with $sourceImage
+     * @param $hq boolean Whether the image merge needs to be of high quality (resampled)
      */
-    function __construct(Image $sourceImage, Image $mergeImage)
+    function __construct(Image $sourceImage, Image $mergeImage, $hq = false)
     {
         $this->sourceImage = $sourceImage;
         $this->mergeImage = $mergeImage;
+        $this->highQuality = $hq;
     }
 
     /**
      * Returns an QrCode that has been merge with another image.
      * This is usually used with logos to imprint a logo into a QrCode
      *
+     * @param $percentage float The percentage of size relative to the entire QR of the merged image
      * @return str
      */
     public function merge($percentage)
     {
         $this->setProperties($percentage);
 
-        imagecopyresized(
+        $parameters = [
             $this->sourceImage->getImageResource(),
             $this->mergeImage->getImageResource(),
             $this->centerX,
@@ -113,7 +123,11 @@ class ImageMerge implements ImageMergeInterface {
             $this->postMergeImageHeight,
             $this->mergeImageWidth,
             $this->mergeImageHeight
-        );
+        ];
+
+        $call = $this->highQuality ? 'imagecopyresampled' : 'imagecopyresized';
+
+        call_user_func_array($call, $parameters);
 
         return $this->createImage();
     }

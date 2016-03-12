@@ -69,7 +69,7 @@ One of the main items that we use this package for is to have QrCodes in all of 
 
 You may embed a qrcode inside of an e-mail to allow your users to quickly scan.  The following is an example of how to do this with Laravel.
 
-    //Inside of a blade template.
+	//Inside of a blade template.
 	<img src="{!!$message->embedData(QrCode::format('png')->generate('Embed me into an e-mail!'), 'QrCode.png', 'image/png')!!}">
 
 <a id="docs-usage"></a>
@@ -117,7 +117,7 @@ Three formats are currently supported; PNG, EPS, and SVG.  To change the format 
 
 You can change the size of a QrCode by using the `size` method. Simply specify the size desired in pixels using the following syntax:
 
-    QrCode::size(100);
+	QrCode::size(100);
 
 #### Color Change
 
@@ -158,7 +158,7 @@ The following are supported options for the `errorCorrection` method.
 
 Change the character encoding that is used to build a QrCode.  By default `ISO-8859-1` is selected as the encoder.  Read more about [character encoding](http://en.wikipedia.org/wiki/Character_encoding) You can change this to any of the following:
 
-    QrCode::encoding('UTF-8')->generate('Make me a QrCode with special symbols ♠♥!!');
+	QrCode::encoding('UTF-8')->generate('Make me a QrCode with special symbols ♠♥!!');
 
 | Character Encoder |
 | --- |
@@ -195,35 +195,51 @@ Change the character encoding that is used to build a QrCode.  By default `ISO-8
 
 The `merge` method merges an image over a QrCode.  This is commonly used to placed logos within a QrCode.
 
-    QrCode::merge($filename, $percentage, $absolute);
-    
-    //Generates a QrCode with an image centered in the middle.
-    QrCode::format('png')->merge('path-to-image.png')->generate();
-    
-    //Generates a QrCode with an image centered in the middle.  The inserted image takes up 30% of the QrCode.
-    QrCode::format('png')->merge('path-to-image.png', .3)->generate();
-    
-    //Generates a QrCode with an image centered in the middle.  The inserted image takes up 30% of the QrCode.
-    QrCode::format('png')->merge('http://www.google.com/someimage.png', .3, true)->generate();
+	QrCode::merge($filename, $percentage, $absolute);
+	
+	//Generates a QrCode with an image centered in the middle.
+	QrCode::format('png')->merge('path-to-image.png')->generate();
+	
+	//Generates a QrCode with an image centered in the middle.  The inserted image takes up 30% of the QrCode.
+	QrCode::format('png')->merge('path-to-image.png', .3)->generate();
+	
+	//Generates a QrCode with an image centered in the middle.  The inserted image takes up 30% of the QrCode.
+	QrCode::format('png')->merge('http://www.google.com/someimage.png', .3, true)->generate();
+
+	//Generates a QrCode with an image centered in the middle.  The inserted image takes up 30% of the QrCode.  Image is merged using resampling, to increase merge quality
+	QrCode::format('png')->merge('http://www.google.com/someimage.png', .3, true, true)->generate();
 
 >The `merge` method only supports PNG at this time.
 >The filepath is relative to app base path if `$absolute` is set to `false`.  Change this variable to `true` to use absolute paths.
 
 >You should use a high level of error correction when using the `merge` method to ensure that the QrCode is still readable.  We recommend using `errorCorrection('H')`.
 
+>When using the higher quality of merging, note that this can have an impact on performance when generating many QR codes since the resample algorithm is more complex (and time-consuming) than the simply resize algorithm.
+
 #### Merge binary string
 
 The `mergeString` method can be used to achieve the same as the `merge` call, except it allows you to provide a string representation of the file instead of the filepath. This is usefull when working with the `Storage` facade. It's interface is quite similar to the `merge` call. 
 
-    QrCode::mergeString(Storage::get('path/to/image.png'), $percentage);
-    
-    //Generates a QrCode with an image centered in the middle.
-    QrCode::format('png')->mergeString(Storage::get('path/to/image.png'))->generate();
-    
-    //Generates a QrCode with an image centered in the middle.  The inserted image takes up 30% of the QrCode.
-    QrCode::format('png')->mergeString(Storage::get('path/to/image.png'), .3)->generate();
+	QrCode::mergeString(Storage::get('path/to/image.png'), $percentage);
+	
+	//Generates a QrCode with an image centered in the middle.
+	QrCode::format('png')->mergeString(Storage::get('path/to/image.png'))->generate();
+	
+	//Generates a QrCode with an image centered in the middle.  The inserted image takes up 30% of the QrCode.
+	QrCode::format('png')->mergeString(Storage::get('path/to/image.png'), .3)->generate();
 
->As with the normal `merge` call, only PNG is supported at this time. The same applies for error correction, high levels are recommened.
+	//Generates a QrCode with an image centered in the middle.  The inserted image takes up 30% of the QrCode.  
+	//Image is merged using resampling to increase merge quality
+	QrCode::format('png')->mergeString(Storage::get('path/to/image.png'), .3, true)->generate();
+
+>As with the normal `merge` call, only PNG is supported at this time. The same applies for error correction, high levels are recommened. Also the higher quality can have an impact on performance.
+
+#### Merge quality
+Normally the merging of an image is done using a "simple" merge algorithm. Since this can result in a (slightly) warped image, the option for a higher quality merge is available. This uses a resampler which yields better looking results, but reduces performance of the generator. The quality can be increased using 2 methods. Either by using the parameters in the `merge` and `mergeString` calls; or by using the method: `setMergeQuality` which takes a boolean specifiying whether resample merge needs to be applied.
+
+	//Generates a QrCode with an image centered in the middle and apply the resample algorithm instead of the
+	//resize algorithm
+	QrCode::setMergeQuality(true)->merge('http://www.google.com/someimage.png')->generate();
 
 ![Merged Logo](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/merged-qrcode.png?raw=true)
 
@@ -347,7 +363,7 @@ You can use a prefix found in the table below inside the `generate` section to c
 
 You may use this package outside of Laravel by instantiating a new `BaconQrCodeGenerator` class.
 
-    use SimpleSoftwareIO\QrCode\BaconQrCodeGenerator;
+	use SimpleSoftwareIO\QrCode\BaconQrCodeGenerator;
 
-    $qrcode = new BaconQrCodeGenerator;
-    $qrcode->size(500)->generate('Make a qrcode without Laravel!');
+	$qrcode = new BaconQrCodeGenerator;
+	$qrcode->size(500)->generate('Make a qrcode without Laravel!');
