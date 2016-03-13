@@ -106,19 +106,19 @@ class BaconQrCodeGenerator implements QrCodeInterface {
      * @param $filepath string The filepath to an image
      * @param $percentage float The amount that the merged image should be placed over the qrcode.
      * @param $absolute boolean Whether to use an absolute filepath or not.
-     * @param $hq boolean Whether we want a high merge quality (resampled vs just resized).
+     * @param $highQuality boolean Whether we want a high merge quality (resampled vs just resized).
      * @return $this
      */
-    public function merge($filepath, $percentage = .2, $absolute = false, $hq = false)
+    public function merge($filepath, $percentage = .2, $absolute = false, $highQuality = false)
     {
         if (function_exists('base_path') && ! $absolute)
         {
             $filepath = base_path() . $filepath;
         }
 
-        if(!is_null($hq))
+        if( ! is_null($highQuality))
         {
-            $this->highQuality = true && $hq;
+            $this->highQuality = true && $highQuality;
         }
 
         $this->imageMerge = file_get_contents($filepath);
@@ -132,17 +132,17 @@ class BaconQrCodeGenerator implements QrCodeInterface {
      *
      * @param $content string The string contents of an image.
      * @param $percentage float The amount that the merged image should be placed over the qrcode.
-     * @param $hq boolean Whether we want a high merge quality (resampled vs just resized).
+     * @param $highQuality boolean Whether we want a high merge quality (resampled vs just resized).
      * @return $this
      */
-    public function mergeString($content, $percentage = .2, $hq = null)
+    public function mergeString($content, $percentage = .2, $highQuality = null)
     {
         $this->imageMerge = $content;
         $this->imagePercentage = $percentage;
 
-        if(!is_null($hq))
+        if(!is_null($highQuality))
         {
-            $this->highQuality = true && $hq;
+            $this->highQuality = true && $highQuality;
         }
 
         return $this;
@@ -153,11 +153,11 @@ class BaconQrCodeGenerator implements QrCodeInterface {
      * the merge to a simple resized merge. The resampled merge will yield a higher quality due to anti-aliassing, but
      * takes more CPU time to compute
      *
-     * @param $hq boolean Whether the quality should be high (true) or low (false)
+     * @param $highQuality boolean Whether the quality should be high (true) or low (false)
      * @return $this
      */
-    public function setMergeQuality($hq){
-        $this->highQuality = true && $hq;
+    public function setMergeQuality($highQuality){
+        $this->highQuality = true && $highQuality;
 
         return $this;
     }
