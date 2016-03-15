@@ -67,7 +67,7 @@ class ImageMergeTest extends \PHPUnit_Framework_TestCase {
         $merge = imagecreatefromstring($this->testImagePath);
 
         //Create a PNG and place the image in the middle using 20% of the area.
-        imagecopyresized(
+        imagecopyresampled(
             $source,
             $merge,
             204,
@@ -85,45 +85,6 @@ class ImageMergeTest extends \PHPUnit_Framework_TestCase {
         file_put_contents($this->testImageSaveLocation, $testImage);
 
         $this->assertEquals(file_get_contents($this->compareTestSaveLocation), file_get_contents($this->testImageSaveLocation));
-    }
-
-    public function test_if_increasing_quality_changes_final_image()
-    {
-        //We know the test image is 512x512
-        $source = imagecreatefromstring($this->testImagePath);
-        $merge = imagecreatefromstring($this->testImagePath);
-
-        //Create a PNG and place the image in the middle using 20% of the area.
-        imagecopyresampled(
-            $source,
-            $merge,
-            204,
-            204,
-            0,
-            0,
-            102,
-            102,
-            512,
-            512
-        );
-        imagepng($source, $this->compareTestSaveLocation);
-
-        $localTestImage = new ImageMerge(
-            new Image($this->testImagePath),
-            new Image($this->testImagePath),
-            true
-        );
-
-        $testImage = $localTestImage->merge(.2);
-        file_put_contents($this->testImageSaveLocation.'.resampled', $testImage);
-
-        $testImage = $this->testImage->merge(.2);
-        file_put_contents($this->testImageSaveLocation, $testImage);
-
-        $this->assertEquals(file_get_contents($this->compareTestSaveLocation), file_get_contents($this->testImageSaveLocation.'.resampled'));
-
-        // Verify that the results are actually different
-        $this->assertNotEquals(file_get_contents($this->compareTestSaveLocation), file_get_contents($this->testImageSaveLocation));
     }
 
     /**

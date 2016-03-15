@@ -206,15 +206,10 @@ The `merge` method merges an image over a QrCode.  This is commonly used to plac
 	//Generates a QrCode with an image centered in the middle.  The inserted image takes up 30% of the QrCode.
 	QrCode::format('png')->merge('http://www.google.com/someimage.png', .3, true)->generate();
 
-	//Generates a QrCode with an image centered in the middle.  The inserted image takes up 30% of the QrCode.  Image is merged using resampling, to increase merge quality
-	QrCode::format('png')->merge('http://www.google.com/someimage.png', .3, true, true)->generate();
-
 >The `merge` method only supports PNG at this time.
 >The filepath is relative to app base path if `$absolute` is set to `false`.  Change this variable to `true` to use absolute paths.
 
 >You should use a high level of error correction when using the `merge` method to ensure that the QrCode is still readable.  We recommend using `errorCorrection('H')`.
-
->When using the higher quality of merging, note that this can have an impact on performance when generating many QR codes since the resample algorithm is more complex (and time-consuming) than the simply resize algorithm.
 
 #### Merge binary string
 
@@ -228,18 +223,7 @@ The `mergeString` method can be used to achieve the same as the `merge` call, ex
 	//Generates a QrCode with an image centered in the middle.  The inserted image takes up 30% of the QrCode.
 	QrCode::format('png')->mergeString(Storage::get('path/to/image.png'), .3)->generate();
 
-	//Generates a QrCode with an image centered in the middle.  The inserted image takes up 30% of the QrCode.  
-	//Image is merged using resampling to increase merge quality
-	QrCode::format('png')->mergeString(Storage::get('path/to/image.png'), .3, true)->generate();
-
->As with the normal `merge` call, only PNG is supported at this time. The same applies for error correction, high levels are recommened. Also the higher quality can have an impact on performance.
-
-#### Merge quality
-Normally the merging of an image is done using a "simple" merge algorithm. Since this can result in a (slightly) warped image, the option for a higher quality merge is available. This uses a resampler which yields better looking results, but reduces performance of the generator. The quality can be increased using 2 methods. Either by using the parameters in the `merge` and `mergeString` calls; or by using the method: `setMergeQuality` which takes a boolean specifiying whether resample merge needs to be applied.
-
-	//Generates a QrCode with an image centered in the middle and apply the resample algorithm instead of the
-	//resize algorithm
-	QrCode::setMergeQuality(true)->merge('http://www.google.com/someimage.png')->generate();
+>As with the normal `merge` call, only PNG is supported at this time. The same applies for error correction, high levels are recommened.
 
 ![Merged Logo](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/merged-qrcode.png?raw=true)
 
