@@ -3,6 +3,9 @@ Simple QrCode
 
 ##Change Log
 
+#### 1.4.1
+* Improved the quality of QrCodes with logos merge on them.  -Thanks [tuupke!](https://github.com/tuupke)
+
 #### 1.4.0
 * Added the `mergeString` method.  This method adds the ability to pass in a binary string to create a QrCode with an image on it.  -Thanks [tuupke!](https://github.com/tuupke)
 
