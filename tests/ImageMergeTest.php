@@ -56,6 +56,7 @@ class ImageMergeTest extends \PHPUnit_Framework_TestCase {
     public function tearDown()
     {
         @unlink($this->testImageSaveLocation);
+        @unlink($this->testImageSaveLocation.'.resampled');
         @unlink($this->compareTestSaveLocation);
     }
 
@@ -66,7 +67,7 @@ class ImageMergeTest extends \PHPUnit_Framework_TestCase {
         $merge = imagecreatefromstring($this->testImagePath);
 
         //Create a PNG and place the image in the middle using 20% of the area.
-        imagecopyresized(
+        imagecopyresampled(
             $source,
             $merge,
             204,

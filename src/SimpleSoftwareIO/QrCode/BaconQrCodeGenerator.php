@@ -96,9 +96,9 @@ class BaconQrCodeGenerator implements QrCodeInterface {
     /**
      * Merges an image with the center of the QrCode
      *
-     * @param $image string The filepath to an image
+     * @param $filepath string The filepath to an image
      * @param $percentage float The amount that the merged image should be placed over the qrcode.
-     * @param $absolute Whether to use an absolute filepath or not
+     * @param $absolute boolean Whether to use an absolute filepath or not.
      * @return $this
      */
     public function merge($filepath, $percentage = .2, $absolute = false)
@@ -117,7 +117,7 @@ class BaconQrCodeGenerator implements QrCodeInterface {
     /**
      * Merges an image string with the center of the QrCode, does not check for correct format
      *
-     * @param $image string The string contents of an image
+     * @param $content string The string contents of an image.
      * @param $percentage float The amount that the merged image should be placed over the qrcode.
      * @return $this
      */

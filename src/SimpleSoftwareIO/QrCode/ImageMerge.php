@@ -96,13 +96,14 @@ class ImageMerge implements ImageMergeInterface {
      * Returns an QrCode that has been merge with another image.
      * This is usually used with logos to imprint a logo into a QrCode
      *
+     * @param $percentage float The percentage of size relative to the entire QR of the merged image
      * @return str
      */
     public function merge($percentage)
     {
         $this->setProperties($percentage);
 
-        imagecopyresized(
+        imagecopyresampled(
             $this->sourceImage->getImageResource(),
             $this->mergeImage->getImageResource(),
             $this->centerX,
