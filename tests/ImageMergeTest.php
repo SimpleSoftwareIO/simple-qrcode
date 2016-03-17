@@ -56,7 +56,6 @@ class ImageMergeTest extends \PHPUnit_Framework_TestCase {
     public function tearDown()
     {
         @unlink($this->testImageSaveLocation);
-        @unlink($this->testImageSaveLocation.'.resampled');
         @unlink($this->compareTestSaveLocation);
     }
 
