@@ -24,7 +24,6 @@ Simple QrCode is an easy to use wrapper for the popular Laravel framework based 
 
 <a id="docs-translations"></a>
 ## Translations
-We are looking for users who speak Chinese, Korean or Japanese to help translate this document.  Please create a pull request if you are able to make a translation!
 
 <a id="docs-configuration"></a>
 ## Configuration
