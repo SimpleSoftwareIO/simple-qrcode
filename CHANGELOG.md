@@ -5,7 +5,7 @@ Simple QrCode
 
 #### 1.4.2
 * Added Russian translation.
-* Added Chinese translation. - -Thanks [blusewang!](https://github.com/blusewang)
+* Added Chinese translation. -Thanks [blusewang!](https://github.com/blusewang)
 
 #### 1.4.1
 * Improved the quality of QrCodes with logos merge on them.  -Thanks [tuupke!](https://github.com/tuupke)
