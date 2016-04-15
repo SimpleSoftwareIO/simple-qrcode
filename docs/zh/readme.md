@@ -190,161 +190,161 @@ QrCode 创建二维码时可以使用不同的编码.  默认使用 `ISO-8859-1`
 
 > 若抛出 `Could not encode content to ISO-8859-1` 意味着使用了错误的编码.  我们建议你使用 `UTF-8`.
 
-#### 合并
+#### 加LOGO图
 
-The `merge` method merges an image over a QrCode.  This is commonly used to placed logos within a QrCode.
+ `merge` 方法可以让QrCode为生成结果加上LOGO图片.  下方是常见的为二维码加LOGO图片的使用方式.
 
 	QrCode::merge($filename, $percentage, $absolute);
 
-	//Generates a QrCode with an image centered in the middle.
+	//生成一个中间有LOGO图片的二维码
 	QrCode::format('png')->merge('path-to-image.png')->generate();
 
-	//Generates a QrCode with an image centered in the middle.  The inserted image takes up 30% of the QrCode.
+	//生成一个中间有LOGO图片的二维码,且LOGO图片占整个二维码图片的30%.
 	QrCode::format('png')->merge('path-to-image.png', .3)->generate();
 
-	//Generates a QrCode with an image centered in the middle.  The inserted image takes up 30% of the QrCode.
+	//使用绝对路径的LOGO图片地址创建二维码,LOGO图片占整个二维码图片的30%.
 	QrCode::format('png')->merge('http://www.google.com/someimage.png', .3, true)->generate();
 
->The `merge` method only supports PNG at this time.
->The filepath is relative to app base path if `$absolute` is set to `false`.  Change this variable to `true` to use absolute paths.
+> `merge` 方法当前只支持PNG格式的图片
+> 默认使用相对于应用程序的根路径,把第三个参数设置为 `true` 就能切换到使用绝对路径
 
->You should use a high level of error correction when using the `merge` method to ensure that the QrCode is still readable.  We recommend using `errorCorrection('H')`.
+> 为了让二维码保持高可识别度,建议在使用 `merge` 方法时把二维码的容错级别提高. 我们默认使用: `errorCorrection('H')`.
 
 ![Merged Logo](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/merged-qrcode.png?raw=true)
 
-#### Merge Binary String
+#### 加二进制LOGO图片
 
-The `mergeString` method can be used to achieve the same as the `merge` call, except it allows you to provide a string representation of the file instead of the filepath. This is usefull when working with the `Storage` facade. It's interface is quite similar to the `merge` call.
+ `mergeString` 方法与 `merge` 方法类似, 不同的是它允许你使用一个二进制的String代替LOGO文件路径. 这在使用 `Storage` 存储时,会显得很方便. 它的参数与 `merge` 类似.
 
 	QrCode::mergeString(Storage::get('path/to/image.png'), $percentage);
 
-	//Generates a QrCode with an image centered in the middle.
+	//使用中间件读取的图片数据作为LOGO图片来创建二维码.
 	QrCode::format('png')->mergeString(Storage::get('path/to/image.png'))->generate();
 
-	//Generates a QrCode with an image centered in the middle.  The inserted image takes up 30% of the QrCode.
+	//使用中间件读取的图片数据作为LOGO图片来创建二维码, 且LOGO图片占整个二维码图片的30%.
 	QrCode::format('png')->mergeString(Storage::get('path/to/image.png'), .3)->generate();
 
->As with the normal `merge` call, only PNG is supported at this time. The same applies for error correction, high levels are recommened.
+> 和 `merge` 方法一样,当前只支持PNG格式. 同样建议将二维码的容错级别提高.
 
-#### Advance Usage
+#### 高级用法
 
-All methods support chaining.  The `generate` method must be called last and any `format` change must be called first.  For example you could run any of the following:
+所有的方法都支持连贯操作.  `generate` 方法必须在最后 `format` 必须在第一个.  例如:
 
 	QrCode::size(250)->color(150,90,10)->backgroundColor(10,14,244)->generate('Make me a QrCode!');
 	QrCode::format('png')->size(399)->color(40,40,40)->generate('Make me a QrCode!');
 
-You can display a PNG image without saving the file by providing a raw string and encoding with `base64_encode`.
+你还能不存储图片,而使用 `base64_encode` 来将二进制数据直接显示成二维码图片.
 
 	<img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(100)->generate('Make me into an QrCode!')) !!} ">
 
 <a id="docs-helpers"></a>
 ## 辅助用法
 
-#### What are helpers?
+#### 什么是辅助方法?
 
-Helpers are an easy way to create QrCodes that cause a reader to perform a certain action when scanned.
+辅助方法是为了便于开发者在常见的二维码使用场景中更高效地使用本库.
 
 #### E-Mail
 
-This helper generates an e-mail qrcode that is able to fill in the e-mail address, subject, and body.
+这个辅助方法可以生成一个直接发E-mail的二维码.包含了发邮件的地址,标题,和内容
 
 	QrCode::email($to, $subject, $body);
 
-	//Fills in the to address
+	//加入一个邮件地址
 	QrCode::email('foo@bar.com');
 
-	//Fills in the to address, subject, and body of an e-mail.
+	//加一个邮件地址、标题、内容至二维码.
 	QrCode::email('foo@bar.com', 'This is the subject.', 'This is the message body.');
 
-	//Fills in just the subject and body of an e-mail.
+	//只加标题和内容.
 	QrCode::email(null, 'This is the subject.', 'This is the message body.');
 
-#### Geo
+#### 位置
 
-This helper generates a latitude and longitude that a phone can read and open the location up in Google Maps or similar app.
+这个辅助方法能创建一个包含一个经纬度的位置二维码.
 
 	QrCode::geo($latitude, $longitude);
 
 	QrCode::geo(37.822214, -122.481769);
 
-#### Phone Number
+#### 手机号
 
-This helper generates a QrCode that can be scanned and then dials a number.
+这个辅助方法能创建一个包含自己手机号的二维码.
 
 	QrCode::phoneNumber($phoneNumber);
 
 	QrCode::phoneNumber('555-555-5555');
 	QrCode::phoneNumber('1-800-Laravel');
 
-#### SMS (Text Messages)
+#### 短信
 
-This helper makes SMS messages that can be prefilled with the send to address and body of the message.
+这个辅助方法能创建能创建一个包含发送短信目标手机号和内容的二维码.
 
 	QrCode::SMS($phoneNumber, $message);
 
-	//Creates a text message with the number filled in.
+	//创建一个只有手机号的短信二维码.
 	QrCode::SMS('555-555-5555');
 
-	//Creates a text message with the number and message filled in.
+	//创建一个包含手机号和文字内容的短信二维码.
 	QrCode::SMS('555-555-5555', 'Body of the message');
 
-#### WiFi
+#### WIFI
 
-This helpers makes scannable QrCodes that can connect a phone to a WiFI network.
+这个辅助方法能创建扫一下能连接WIFI的二维码.
 
 	QrCode::wiFi([
 		'encryption' => 'WPA/WEP',
-		'ssid' => 'SSID of the network',
-		'password' => 'Password of the network',
-		'hidden' => 'Whether the network is a hidden SSID or not.'
+		'ssid' => '网络的SSID',
+		'password' => '网络的密码',
+		'hidden' => '是否是一个隐藏SSID的网络'
 	]);
 
-	//Connects to an open WiFi network.
+	//连接一个开放的网络
 	QrCode::wiFi([
-		'ssid' => 'Network Name',
+		'ssid' => '网络名称',
 	]);
 
-	//Connects to an open, hidden WiFi network.
+	//连接一个开放并隐藏的网络.
 	QrCode::wiFi([
-		'ssid' => 'Network Name',
+		'ssid' => '网络名称',
 		'hidden' => 'true'
 	]);
 
-	//Connects to an secured, WiFi network.
+	//连接一个加密的WIFI网络.
 	QrCode::wiFi([
-		'ssid' => 'Network Name',
+		'ssid' => '网络名称',
 		'encryption' => 'WPA',
-		'password' => 'myPassword'
+		'password' => '密码'
 	]);
 
->WiFi scanning is not currently supported on Apple Products.
+> WIFI扫描目前不支持在苹果产品。
 
 <a id="docs-common-usage"></a>
 ##QrCode 常规用法
 
-You can use a prefix found in the table below inside the `generate` section to create a QrCode to store more advanced information:
+你还能通过下面表中的前缀信息创建适合更多场合的二维码
 
 	QrCode::generate('http://www.simplesoftware.io');
 
 
-| Usage | Prefix | Example |
+| 使用场景 | 前缀 | 例子 |
 | --- | --- | --- |
-| Website URL | http:// | http://www.simplesoftware.io |
-| Secured URL | https:// | https://www.simplesoftware.io |
-| E-mail Address | mailto: | mailto:support@simplesoftware.io |
-| Phone Number | tel: | tel:555-555-5555 |
-| Text (SMS) | sms: | sms:555-555-5555 |
-| Text (SMS) With Pretyped Message | sms: | sms::I am a pretyped message |
-| Text (SMS) With Pretyped Message and Number | sms: | sms:555-555-5555:I am a pretyped message |
-| Geo Address | geo: | geo:-78.400364,-85.916993 |
-| MeCard | mecard: | MECARD:Simple, Software;Some Address, Somewhere, 20430;TEL:555-555-5555;EMAIL:support@simplesoftware.io; |
-| VCard | BEGIN:VCARD | [See Examples](https://en.wikipedia.org/wiki/VCard) |
+| 网址 | http:// | http://www.simplesoftware.io |
+| 加密网址 | https:// | https://www.simplesoftware.io |
+| E-mail 地址 | mailto: | mailto:support@simplesoftware.io |
+| 电话号码 | tel: | tel:555-555-5555 |
+| 文字短信 | sms: | sms:555-555-5555 |
+| 文字短信内容 | sms: | sms::I am a pretyped message |
+| 文字短信同时附带手机号和短信内容 | sms: | sms:555-555-5555:I am a pretyped message |
+| 坐标 | geo: | geo:-78.400364,-85.916993 |
+| MeCard名片 | mecard: | MECARD:Simple, Software;Some Address, Somewhere, 20430;TEL:555-555-5555;EMAIL:support@simplesoftware.io; |
+| VCard名片 | BEGIN:VCARD | [See Examples](https://en.wikipedia.org/wiki/VCard) |
 | Wifi | wifi: | wifi:WEP/WPA;SSID;PSK;Hidden(True/False) |
 
 <a id="docs-outside-laravel"></a>
 ##在Laravel外的调用方式
 
-You may use this package outside of Laravel by instantiating a new `BaconQrCodeGenerator` class.
+你还可以在Laravel框架之外调用,只需要实例化 `BaconQrCodeGenerator` 类.
 
 	use SimpleSoftwareIO\QrCode\BaconQrCodeGenerator;
 
