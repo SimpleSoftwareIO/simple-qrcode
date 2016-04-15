@@ -6,6 +6,8 @@ Simple QrCode
 [![Latest Unstable Version](https://poser.pugx.org/simplesoftwareio/simple-qrcode/v/unstable.svg)](https://packagist.org/packages/simplesoftwareio/simple-qrcode)
 [![License](https://poser.pugx.org/simplesoftwareio/simple-qrcode/license.svg)](https://packagist.org/packages/simplesoftwareio/simple-qrcode)
 [![Total Downloads](https://poser.pugx.org/simplesoftwareio/simple-qrcode/downloads.svg)](https://packagist.org/packages/simplesoftwareio/simple-qrcode)
+[Русский](https://github.com/SimpleSoftwareIO/simple-qrcode/blob/master/docs/ru/README.md) | 
+[汉语](https://github.com/SimpleSoftwareIO/simple-qrcode/blob/master/docs/zh/README.md)
 
 - [Introduction](#docs-introduction)
 - [Translations](#docs-translations)
