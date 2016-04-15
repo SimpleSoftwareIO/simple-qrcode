@@ -29,7 +29,7 @@ Simple QrCode 是基于强大的[Bacon/BaconQrCode](https://github.com/Bacon/Bac
 
 #### Composer 设置
 
-首先,添加 QrCode 包到你的 `composer.json` 文件的 `require` 里:
+首先,添加 QrCode 包添加到你的 `composer.json` 文件的 `require` 里:
 
 	"require": {
 		"simplesoftwareio/simple-qrcode": "~1"
