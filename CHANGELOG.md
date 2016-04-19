@@ -4,7 +4,7 @@ Simple QrCode
 ##Change Log
 
 #### 1.4.2
-* Added Russian translation.
+* Added Russian translation. -Thanks Victoria!
 * Added Chinese translation. -Thanks [blusewang!](https://github.com/blusewang)
 
 #### 1.4.1
