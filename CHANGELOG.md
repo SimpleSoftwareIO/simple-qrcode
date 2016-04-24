@@ -3,6 +3,10 @@ Simple QrCode
 
 ##Change Log
 
+#### 1.4.3
+* Updated the docs to our new format.
+* Correct some typos in the Russian translation.
+
 #### 1.4.2
 * Added Russian translation. -Thanks Victoria!
 * Added Chinese translation. -Thanks [blusewang!](https://github.com/blusewang)
