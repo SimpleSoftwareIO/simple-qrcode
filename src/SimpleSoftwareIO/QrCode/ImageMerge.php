@@ -1,80 +1,74 @@
-<?php namespace SimpleSoftwareIO\QrCode;
-/**
- * Simple Laravel QrCode Generator
- * A simple wrapper for the popular BaconQrCode made for Laravel.
- *
- * @link http://www.simplesoftware.io
- * @author SimpleSoftware support@simplesoftware.io
- *
- */
+<?php
 
-class ImageMerge implements ImageMergeInterface {
+namespace SimpleSoftwareIO\QrCode;
 
+class ImageMerge implements ImageMergeInterface
+{
     /**
-     * Holds the QrCode image
+     * Holds the QrCode image.
      *
-     * @var Image $sourceImage
+     * @var Image
      */
     protected $sourceImage;
 
     /**
-     * Holds the merging image
+     * Holds the merging image.
      *
-     * @var Image $mergeImage
+     * @var Image
      */
     protected $mergeImage;
 
     /**
-     * The height of the source image
+     * The height of the source image.
      *
      * @var int
      */
     protected $sourceImageHeight;
 
     /**
-     * The width of the source image
+     * The width of the source image.
      *
      * @var int
      */
     protected $sourceImageWidth;
 
     /**
-     * The height of the merge image
+     * The height of the merge image.
      *
      * @var int
      */
     protected $mergeImageHeight;
 
     /**
-     * The width of the merge image
+     * The width of the merge image.
      *
      * @var int
      */
     protected $mergeImageWidth;
 
     /**
-     * The height of the merge image after it is merged
+     * The height of the merge image after it is merged.
      *
      * @var int
      */
     protected $postMergeImageHeight;
 
     /**
-     * The width of the merge image after it is merged
+     * The width of the merge image after it is merged.
      *
      * @var int
      */
     protected $postMergeImageWidth;
 
     /**
-     * The position that the merge image is placed on top of the source image
+     * The position that the merge image is placed on top of the source image.
      *
      * @var int
      */
     protected $centerY;
 
     /**
-     * The position that the merge image is placed on top of the source image
+     * The position that the merge image is placed on top of the source image.
      *
      * @var int
      */
@@ -86,7 +80,7 @@ class ImageMerge implements ImageMergeInterface {
      * @param $sourceImage Image The image that will be merged over.
      * @param $mergeImage Image The image that will be used to merge with $sourceImage
      */
-    function __construct(Image $sourceImage, Image $mergeImage)
+    public function __construct(Image $sourceImage, Image $mergeImage)
     {
         $this->sourceImage = $sourceImage;
         $this->mergeImage = $mergeImage;
@@ -94,9 +88,10 @@ class ImageMerge implements ImageMergeInterface {
 
     /**
      * Returns an QrCode that has been merge with another image.
-     * This is usually used with logos to imprint a logo into a QrCode
+     * This is usually used with logos to imprint a logo into a QrCode.
      *
      * @param $percentage float The percentage of size relative to the entire QR of the merged image
+     *
      * @return str
      */
     public function merge($percentage)
@@ -120,7 +115,7 @@ class ImageMerge implements ImageMergeInterface {
     }
 
     /**
-     * Creates a PNG Image
+     * Creates a PNG Image.
      *
      * @return string
      */
@@ -128,17 +123,20 @@ class ImageMerge implements ImageMergeInterface {
     {
         ob_start();
         imagepng($this->sourceImage->getImageResource());
+
         return ob_get_clean();
     }
 
     /**
-     * Sets the objects properties
+     * Sets the objects properties.
      *
      * @param $percentage float The percentage that the merge image should take up.
      */
     protected function setProperties($percentage)
     {
-        if ($percentage > 1)  throw new \InvalidArgumentException('$percentage must be less than 1');
+        if ($percentage > 1) {
+            throw new \InvalidArgumentException('$percentage must be less than 1');
+        }
 
         $this->sourceImageHeight = $this->sourceImage->getHeight();
         $this->sourceImageWidth = $this->sourceImage->getWidth();
@@ -152,8 +150,6 @@ class ImageMerge implements ImageMergeInterface {
 
     /**
      * Calculates the center of the source Image using the Merge image.
-     *
-     * @return void
      */
     private function calculateCenter()
     {
@@ -165,7 +161,6 @@ class ImageMerge implements ImageMergeInterface {
      * Calculates the width of the merge image being placed on the source image.
      *
      * @param float $percentage
-     * @return void
      */
     private function calculateOverlap($percentage)
     {

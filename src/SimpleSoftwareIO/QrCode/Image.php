@@ -1,15 +1,9 @@
-<?php namespace SimpleSoftwareIO\QrCode;
-/**
- * Simple Laravel QrCode Generator
- * A simple wrapper for the popular BaconQrCode made for Laravel.
- *
- * @link http://www.simplesoftware.io
- * @author SimpleSoftware support@simplesoftware.io
- *
- */
+<?php
 
-class Image implements ImageInterface {
+namespace SimpleSoftwareIO\QrCode;
 
+class Image implements ImageInterface
+{
     /**
      * Holds the image resource.
      *
@@ -17,11 +11,10 @@ class Image implements ImageInterface {
      */
     protected $image;
     /**
-     * Creates a new Image object
+     * Creates a new Image object.
      *
      * @param $image string An image string
      */
-
     public function __construct($image)
     {
         $this->image = imagecreatefromstring($image);
@@ -48,7 +41,7 @@ class Image implements ImageInterface {
     }
 
     /**
-     * Returns the image string
+     * Returns the image string.
      *
      * @return string
      */

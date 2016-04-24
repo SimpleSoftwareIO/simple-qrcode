@@ -1,18 +1,10 @@
 <?php
+
 use Mockery as m;
 use SimpleSoftwareIO\QrCode\BaconQrCodeGenerator;
 
-/**
- * Simple Laravel QrCode Generator
- * A simple wrapper for the popular BaconQrCode made for Laravel.
- *
- * @link http://www.simplesoftware.io
- * @author SimpleSoftware support@simplesoftware.io
- *
- */
-
-class BaconQrCodeGeneratorTest extends \PHPUnit_Framework_TestCase {
-
+class BaconQrCodeGeneratorTest extends \PHPUnit_Framework_TestCase
+{
     public function tearDown()
     {
         m::close();
@@ -34,7 +26,7 @@ class BaconQrCodeGeneratorTest extends \PHPUnit_Framework_TestCase {
         $this->writer->shouldReceive('getRenderer')
             ->once()
             ->andReturn($this->format);
-        
+
         $this->qrCode->margin(50);
     }
 
@@ -47,7 +39,7 @@ class BaconQrCodeGeneratorTest extends \PHPUnit_Framework_TestCase {
             ->once()
             ->andReturn($this->format);
 
-        $this->qrCode->backgroundColor(255,255,255);
+        $this->qrCode->backgroundColor(255, 255, 255);
     }
 
     public function test_it_sets_the_foreground_color()
@@ -59,7 +51,7 @@ class BaconQrCodeGeneratorTest extends \PHPUnit_Framework_TestCase {
             ->once()
             ->andReturn($this->format);
 
-        $this->qrCode->color(255,255,255);
+        $this->qrCode->color(255, 255, 255);
     }
 
     public function test_it_sets_the_size()
@@ -138,4 +130,3 @@ class BaconQrCodeGeneratorTest extends \PHPUnit_Framework_TestCase {
         $this->qrCode->notReal('foo');
     }
 }
- 

@@ -1,38 +1,32 @@
-<?php namespace SimpleSoftwareIO\QrCode\DataTypes;
-/**
- * Simple Laravel QrCode Generator
- * A simple wrapper for the popular BaconQrCode made for Laravel.
- *
- * @link http://www.simplesoftware.io
- * @author SimpleSoftware support@simplesoftware.io
- *
- */
+<?php
 
-class SMS implements DataTypeInterface {
+namespace SimpleSoftwareIO\QrCode\DataTypes;
 
+class SMS implements DataTypeInterface
+{
     /**
-     * The prefix of the QrCode
+     * The prefix of the QrCode.
      *
      * @var string
      */
     private $prefix = 'sms:';
 
     /**
-     * The separator between the variables
+     * The separator between the variables.
      *
      * @var string
      */
     private $separator = ':';
 
     /**
-     * The phone number
+     * The phone number.
      *
      * @var string
      */
     private $phoneNumber;
 
     /**
-     * The SMS message
+     * The SMS message.
      *
      * @var string
      */
@@ -42,9 +36,8 @@ class SMS implements DataTypeInterface {
      * Generates the DataType Object and sets all of its properties.
      *
      * @param $arguments
-     * @return void
      */
-    public function create(Array $arguments)
+    public function create(array $arguments)
     {
         $this->setProperties($arguments);
     }
@@ -62,12 +55,16 @@ class SMS implements DataTypeInterface {
     /**
      * Sets the phone number and message for a sms message.
      *
-     * @param Array $arguments
+     * @param array $arguments
      */
-    private function setProperties(Array $arguments)
+    private function setProperties(array $arguments)
     {
-        if (isset($arguments[0])) $this->phoneNumber = $arguments[0];
-        if (isset($arguments[1])) $this->message = $arguments[1];
+        if (isset($arguments[0])) {
+            $this->phoneNumber = $arguments[0];
+        }
+        if (isset($arguments[1])) {
+            $this->message = $arguments[1];
+        }
     }
 
     /**
@@ -77,11 +74,10 @@ class SMS implements DataTypeInterface {
      */
     private function buildSMSString()
     {
-        $sms =  $this->prefix . $this->phoneNumber;
+        $sms = $this->prefix.$this->phoneNumber;
 
-        if (isset($this->message))
-        {
-            $sms .= $this->separator . $this->message;
+        if (isset($this->message)) {
+            $sms .= $this->separator.$this->message;
         }
 
         return $sms;

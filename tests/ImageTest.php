@@ -1,40 +1,32 @@
 <?php
+
 use SimpleSoftwareIO\QrCode\Image;
 
-/**
- * Simple Laravel QrCode Generator
- * A simple wrapper for the popular BaconQrCode made for Laravel.
- *
- * @link http://www.simplesoftware.io
- * @author SimpleSoftware support@simplesoftware.io
- *
- */
-
-class ImageTest extends \PHPUnit_Framework_TestCase {
-
+class ImageTest extends \PHPUnit_Framework_TestCase
+{
     /**
-     * The location to save the testing image
+     * The location to save the testing image.
      *
      * @var string
      */
     protected $testImageSaveLocation;
 
     /**
-     * The location to save the compare image
+     * The location to save the compare image.
      *
      * @var string
      */
     protected $compareTestSaveLocation;
 
     /**
-     * The path to the image used to test
+     * The path to the image used to test.
      *
      * @var string
      */
     protected $imagePath;
 
     /**
-     * The Image object
+     * The Image object.
      *
      * @var Image
      */
@@ -42,11 +34,11 @@ class ImageTest extends \PHPUnit_Framework_TestCase {
 
     public function setUp()
     {
-        $this->imagePath = file_get_contents(dirname(__FILE__) . '/Images/simplesoftware-icon-grey-blue.png');
+        $this->imagePath = file_get_contents(dirname(__FILE__).'/Images/simplesoftware-icon-grey-blue.png');
         $this->image = new Image($this->imagePath);
 
-        $this->testImageSaveLocation = dirname(__FILE__) . '/testImage.png';
-        $this->compareTestSaveLocation = dirname(__FILE__) . '/compareImage.png';
+        $this->testImageSaveLocation = dirname(__FILE__).'/testImage.png';
+        $this->compareTestSaveLocation = dirname(__FILE__).'/compareImage.png';
     }
 
     public function tearDown()

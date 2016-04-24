@@ -2,17 +2,8 @@
 
 use SimpleSoftwareIO\QrCode\DataTypes\Email;
 
-/**
- * Simple Laravel QrCode Generator
- * A simple wrapper for the popular BaconQrCode made for Laravel.
- *
- * @link http://www.simplesoftware.io
- * @author SimpleSoftware support@simplesoftware.io
- *
- */
-
-class EmailTest extends \PHPUnit_Framework_TestCase{
-
+class EmailTest extends \PHPUnit_Framework_TestCase
+{
     public function setUp()
     {
         $this->email = new Email();

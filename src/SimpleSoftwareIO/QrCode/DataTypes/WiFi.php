@@ -1,31 +1,25 @@
-<?php namespace SimpleSoftwareIO\QrCode\DataTypes;
-/**
- * Simple Laravel QrCode Generator
- * A simple wrapper for the popular BaconQrCode made for Laravel.
- *
- * @link http://www.simplesoftware.io
- * @author SimpleSoftware support@simplesoftware.io
- *
- */
+<?php
 
-class WiFi implements DataTypeInterface {
+namespace SimpleSoftwareIO\QrCode\DataTypes;
 
+class WiFi implements DataTypeInterface
+{
     /**
-     * The prefix of the QrCode
+     * The prefix of the QrCode.
      *
      * @var string
      */
     private $prefix = 'WIFI:';
 
     /**
-     * The separator between the variables
+     * The separator between the variables.
      *
      * @var string
      */
     private $separator = ';';
 
     /**
-     * The encryption of the network.  WEP or WPA
+     * The encryption of the network.  WEP or WPA.
      *
      * @var string
      */
@@ -39,7 +33,7 @@ class WiFi implements DataTypeInterface {
     private $ssid;
 
     /**
-     * The password of the network
+     * The password of the network.
      *
      * @var string
      */
@@ -48,7 +42,7 @@ class WiFi implements DataTypeInterface {
     /**
      * Whether the network is a hidden SSID or not.
      *
-     * @var boolean
+     * @var bool
      */
     private $hidden;
 
@@ -56,9 +50,8 @@ class WiFi implements DataTypeInterface {
      * Generates the DataType Object and sets all of its properties.
      *
      * @param $arguments
-     * @return void
      */
-    public function create(Array $arguments)
+    public function create(array $arguments)
     {
         $this->setProperties($arguments);
     }
@@ -74,7 +67,7 @@ class WiFi implements DataTypeInterface {
     }
 
     /**
-     * Builds the WiFi string
+     * Builds the WiFi string.
      *
      * @return string
      */
@@ -82,25 +75,41 @@ class WiFi implements DataTypeInterface {
     {
         $wifi = $this->prefix;
 
-        if(isset($this->encryption)) $wifi .= 'T:' . $this->encryption . $this->separator;
-        if(isset($this->ssid)) $wifi .= 'S:' . $this->ssid . $this->separator;
-        if(isset($this->password)) $wifi .= 'P:' . $this->password . $this->separator;
-        if(isset($this->hidden)) $wifi .= 'H:' . $this->hidden . $this->separator;
+        if (isset($this->encryption)) {
+            $wifi .= 'T:'.$this->encryption.$this->separator;
+        }
+        if (isset($this->ssid)) {
+            $wifi .= 'S:'.$this->ssid.$this->separator;
+        }
+        if (isset($this->password)) {
+            $wifi .= 'P:'.$this->password.$this->separator;
+        }
+        if (isset($this->hidden)) {
+            $wifi .= 'H:'.$this->hidden.$this->separator;
+        }
 
         return $wifi;
     }
 
     /**
-     * Sets the WiFi properties
+     * Sets the WiFi properties.
      *
      * @param $arguments
      */
-    private function setProperties(Array $arguments)
+    private function setProperties(array $arguments)
     {
         $arguments = $arguments[0];
-        if (isset($arguments['encryption'])) $this->encryption = $arguments['encryption'];
-        if (isset($arguments['ssid'])) $this->ssid = $arguments['ssid'];
-        if (isset($arguments['password'])) $this->password = $arguments['password'];
-        if (isset($arguments['hidden'])) $this->hidden = $arguments['hidden'];
+        if (isset($arguments['encryption'])) {
+            $this->encryption = $arguments['encryption'];
+        }
+        if (isset($arguments['ssid'])) {
+            $this->ssid = $arguments['ssid'];
+        }
+        if (isset($arguments['password'])) {
+            $this->password = $arguments['password'];
+        }
+        if (isset($arguments['hidden'])) {
+            $this->hidden = $arguments['hidden'];
+        }
     }
 }

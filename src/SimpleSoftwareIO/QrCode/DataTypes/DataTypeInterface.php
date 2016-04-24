@@ -1,21 +1,13 @@
-<?php namespace SimpleSoftwareIO\QrCode\DataTypes;
-/**
- * Simple Laravel QrCode Generator
- * A simple wrapper for the popular BaconQrCode made for Laravel.
- *
- * @link http://www.simplesoftware.io
- * @author SimpleSoftware support@simplesoftware.io
- *
- */
+<?php
 
-interface DataTypeInterface {
+namespace SimpleSoftwareIO\QrCode\DataTypes;
 
+interface DataTypeInterface
+{
     /**
      * Generates the DataType Object and sets all of its properties.
-     *
-     * @return void
      */
-    public function create(Array $arguments);
+    public function create(array $arguments);
 
     /**
      * Returns the correct QrCode format.
@@ -23,5 +15,4 @@ interface DataTypeInterface {
      * @return string
      */
     public function __toString();
-
 }
