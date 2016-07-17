@@ -30,6 +30,6 @@ class QrCodeServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return array('qrcode');
+        return ['qrcode'];
     }
 }

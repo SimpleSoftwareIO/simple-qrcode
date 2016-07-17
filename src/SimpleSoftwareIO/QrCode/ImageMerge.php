@@ -92,7 +92,7 @@ class ImageMerge implements ImageMergeInterface
      *
      * @param $percentage float The percentage of size relative to the entire QR of the merged image
      *
-     * @return str
+     * @return string
      */
     public function merge($percentage)
     {
