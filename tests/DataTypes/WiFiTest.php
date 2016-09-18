@@ -26,7 +26,7 @@ class WiFiTest extends \PHPUnit_Framework_TestCase
     {
         $this->wifi->create([
             0 => [
-                'ssid' => 'foo',
+                'ssid'   => 'foo',
                 'hidden' => 'true',
             ],
         ]);
@@ -40,9 +40,9 @@ class WiFiTest extends \PHPUnit_Framework_TestCase
     {
         $this->wifi->create([
             0 => [
-                'ssid' => 'foo',
+                'ssid'       => 'foo',
                 'encryption' => 'WPA',
-                'password' => 'bar',
+                'password'   => 'bar',
             ],
         ]);
 
@@ -55,10 +55,10 @@ class WiFiTest extends \PHPUnit_Framework_TestCase
     {
         $this->wifi->create([
             0 => [
-                'ssid' => 'foo',
+                'ssid'       => 'foo',
                 'encryption' => 'WPA',
-                'password' => 'bar',
-                'hidden' => 'true',
+                'password'   => 'bar',
+                'hidden'     => 'true',
             ],
         ]);
 

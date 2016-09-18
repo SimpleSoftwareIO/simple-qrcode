@@ -3,14 +3,14 @@
 namespace SimpleSoftwareIO\QrCode;
 
 use BaconQrCode;
-use BaconQrCode\Writer;
+use BaconQrCode\Common\ErrorCorrectionLevel;
 use BaconQrCode\Encoder\Encoder;
-use BaconQrCode\Renderer\Image\Svg;
+use BaconQrCode\Renderer\Color\Rgb;
 use BaconQrCode\Renderer\Image\Eps;
 use BaconQrCode\Renderer\Image\Png;
-use BaconQrCode\Renderer\Color\Rgb;
-use BaconQrCode\Common\ErrorCorrectionLevel;
 use BaconQrCode\Renderer\Image\RendererInterface;
+use BaconQrCode\Renderer\Image\Svg;
+use BaconQrCode\Writer;
 
 class BaconQrCodeGenerator implements QrCodeInterface
 {
@@ -124,9 +124,9 @@ class BaconQrCodeGenerator implements QrCodeInterface
      *
      * @param string $format The desired format.
      *
-     * @return $this
-     *
      * @throws \InvalidArgumentException
+     *
+     * @return $this
      */
     public function format($format)
     {
