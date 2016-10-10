@@ -68,7 +68,7 @@ class Email implements DataTypeInterface
                 'subject' => $this->subject,
                 'body'    => $this->body,
             ];
-            $email .=  '?'.http_build_query($data);
+            $email .= '?' . http_build_query($data);
         }
 
         return $email;
