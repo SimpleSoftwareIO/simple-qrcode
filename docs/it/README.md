@@ -1,4 +1,4 @@
-Simple QrCode
+ï»¿Simple QrCode
 ========================
 
 [![Build Status](https://travis-ci.org/SimpleSoftwareIO/simple-qrcode.svg?branch=master)](https://travis-ci.org/SimpleSoftwareIO/simple-qrcode)
@@ -18,7 +18,7 @@ Simple QrCode
 
 <a id="docs-introduction"></a>
 ## Introduzione
-Simple QrCode è un semplice wrapper per il popolare framework Laravel basato sul bellissimo lavoro [Bacon/BaconQrCode](https://github.com/Bacon/BaconQrCode). Abbiamo creato un'interfaccia familiare e semplice da installare per gli utenti Laravel.
+Simple QrCode Ã¨ un semplice wrapper per il popolare framework Laravel basato sul bellissimo lavoro [Bacon/BaconQrCode](https://github.com/Bacon/BaconQrCode). Abbiamo creato un'interfaccia familiare e semplice da installare per gli utenti Laravel.
 
 <a id="docs-translations"></a>
 ## Traduzioni
@@ -58,7 +58,7 @@ Infine, registrate `'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class` n
 
 #### Print View
 
-Uno degli usi principali di questo pacchetto è la possibilità di avere codici Qr in tutte le nostre print views. Questo permette all'utente di tornare alla pagina originale semplicemente facendo lo scan del codice. Tutto ciò è possibile aggiungendo le seguenti linee nel nostro footer.blade.php.
+Uno degli usi principali di questo pacchetto Ã¨ la possibilitÃ  di avere codici Qr in tutte le nostre print views. Questo permette all'utente di tornare alla pagina originale semplicemente facendo lo scan del codice. Tutto ciÃ² Ã¨ possibile aggiungendo le seguenti linee nel nostro footer.blade.php.
 
 	<div class="visible-print text-center">
 		{!! QrCode::size(100)->generate(Request::url()); !!}
@@ -67,7 +67,7 @@ Uno degli usi principali di questo pacchetto è la possibilità di avere codici Qr
 
 #### Incorporare un QrCode
 
-Potreste incorporare un codice Qr in una e-mail per permettere agli utenti uno scan immediato. Il seguente è un esempio di come potresti fare tutto ciò con Laravel.
+Potreste incorporare un codice Qr in una e-mail per permettere agli utenti uno scan immediato. Il seguente Ã¨ un esempio di come potresti fare tutto ciÃ² con Laravel.
 
 	//Inside of a blade template.
 	<img src="{!!$message->embedData(QrCode::format('png')->generate('Incorporami in una e-mail!'), 'QrCode.png', 'image/png')!!}">
@@ -77,43 +77,43 @@ Potreste incorporare un codice Qr in una e-mail per permettere agli utenti uno s
 
 #### Utilizzo Base
 
-Usare il generatori di codici Qr è molto semplice. La sintassi più semplice è:
+Usare il generatori di codici Qr Ã¨ molto semplice. La sintassi piÃ¹ semplice Ã¨:
 
 	QrCode::generate('Trasformami in un QrCode!');
 
-Questo comando produrrà un codice Qr che dice "Trasformami in un QrCode!"
+Questo comando produrrÃ  un codice Qr che dice "Trasformami in un QrCode!"
 
 #### Generate
 
-`Generate` è usato per creare codici Qr:
+`Generate` Ã¨ usato per creare codici Qr:
 
 	QrCode::generate('Trasformami in un QrCode!');
 
 >Attenzione! Questo metodo deve essere chiamato per ultimo se lo si usa all'interno di una catena (chain).
 
-`Generate` restituirà, di default, una stringa di immagini SVG. Puoi stamparla direttamente in un browser recente dal sistema Blade di Laravel con il seguente codice:
+`Generate` restituirÃ , di default, una stringa di immagini SVG. Puoi stamparla direttamente in un browser recente dal sistema Blade di Laravel con il seguente codice:
 
 	{!! QrCode::generate('Make me into a QrCode!'); !!}
 
-Il metodo `generate` accetta un secondo parametro che indica la directory nella quale verrà salvato il codice Qr.
+Il metodo `generate` accetta un secondo parametro che indica la directory nella quale verrÃ  salvato il codice Qr.
 
 	QrCode::generate('Make me into a QrCode!', '../public/qrcodes/qrcode.svg');
 
 #### Variazione del formato
 
->QrCode Generator è impostato di default per generare immagini SVG.
+>QrCode Generator Ã¨ impostato di default per generare immagini SVG.
 
 >Attenzione! Il metodo `format` deve essere chiamato prima di qualunque altra opzione di formato come `size`, `color`, `backgroundColor`, o `margin`.
 
 Momentaneamente, sono supportati tre formati: PNG, EPS e SVG. Per cambiare il formato usare uno dei seguenti comandi:
 
-	QrCode::format('png');  //Genererà un'immagine PNG
-	QrCode::format('eps');  //Genererà un'immagine EPS
-	QrCode::format('svg');  //Genererà un'immagine SVG
+	QrCode::format('png');  //GenererÃ  un'immagine PNG
+	QrCode::format('eps');  //GenererÃ  un'immagine EPS
+	QrCode::format('svg');  //GenererÃ  un'immagine SVG
 
 #### Variazione della grandezza
 
->QrCode Generator restituirà, di default, la più piccola grandezza possibile per creare il QrCode.
+>QrCode Generator restituirÃ , di default, la piÃ¹ piccola grandezza possibile per creare il QrCode.
 
 Puoi cambiare la grandezza del codice Qr usando il metodo `size`. Basta specificare la grandezza desiderata, in pixel, usando la seguente sintassi:
 
@@ -139,7 +139,7 @@ E' anche possibile variare il margine attorno al codice Qr. Basta infatti specif
 
 #### Correzione dell'errore
 
-Cambiare il livello di correzione dell'errore è facile. Per farlo, usare questa sintassi:
+Cambiare il livello di correzione dell'errore Ã¨ facile. Per farlo, usare questa sintassi:
 
 	QrCode::errorCorrection('H');
 
@@ -152,11 +152,11 @@ Seguono le opzioni supportate dal metodo `errorCorrection`.
 | Q | 25% of codewords can be restored. |
 | H | 30% of codewords can be restored. |
 
->Più error correction viene usata, più sarà grande il QrCode e meno dati sarà in grando di contenere. Leggi di più a riguardo [error correction](http://en.wikipedia.org/wiki/QR_code#Error_correction).
+>PiÃ¹ error correction viene usata, piÃ¹ sarÃ  grande il QrCode e meno dati sarÃ  in grando di contenere. Leggi di piÃ¹ a riguardo [error correction](http://en.wikipedia.org/wiki/QR_code#Error_correction).
 
 #### Encoding
 
-Puoi cambiare l'encoding dei caratteri utilizzato per creare il codice Qr. Di default è selezionato `ISO-8859-1`. Leggi di più a riguardo [character encoding](http://en.wikipedia.org/wiki/Character_encoding)
+Puoi cambiare l'encoding dei caratteri utilizzato per creare il codice Qr. Di default Ã¨ selezionato `ISO-8859-1`. Leggi di piÃ¹ a riguardo [character encoding](http://en.wikipedia.org/wiki/Character_encoding)
 Puoi cambiare l'encoding utilizzando:
 
 	QrCode::encoding('UTF-8')->generate('Trasformami in un QrCode con simboli speciali ??!!');
@@ -190,11 +190,11 @@ Puoi cambiare l'encoding utilizzando:
 | GBK |
 | EUC-KR |
 
->L'errore `Could not encode content to ISO-8859-1` significa che si sta usando l'encoding erraro. E' raccomandato usare `UTF-8` se non si è sicuri.
+>L'errore `Could not encode content to ISO-8859-1` significa che si sta usando l'encoding erraro. E' raccomandato usare `UTF-8` se non si Ã¨ sicuri.
 
 #### Merge
 
-Il metodo `merge` unisce un immagine con un QrCode. Il merge è molto usato per inserire loghi in un codice Qr.
+Il metodo `merge` unisce un immagine con un QrCode. Il merge Ã¨ molto usato per inserire loghi in un codice Qr.
 
 	QrCode::merge($filename, $percentage, $absolute);
 	
@@ -208,7 +208,7 @@ Il metodo `merge` unisce un immagine con un QrCode. Il merge è molto usato per i
 	QrCode::format('png')->merge('http://www.google.com/someimage.png', .3, true)->generate();
 
 >Il metodo `merge` supporta solamente il formato PNG.
->Il percorso specificato è relativo alla base path se `$absolute` è impostata su `false`. Cambiare questa variabile in `true` per utilizzare percorsi assoluti.
+>Il percorso specificato Ã¨ relativo alla base path se `$absolute` Ã¨ impostata su `false`. Cambiare questa variabile in `true` per utilizzare percorsi assoluti.
 
 >Dovresti usare un alto livello di error correction quando usi il metodo `merge` per assicurarti che il Qr sia ancora leggibile. Raccomandiamo di usare `errorCorrection('H')`.
 
@@ -216,7 +216,7 @@ Il metodo `merge` unisce un immagine con un QrCode. Il merge è molto usato per i
 
 #### Merge Binary String
 
-Il metodo `mergeString` può essere usato per ottenere quasi lo stesso risultato di `merge`, con la differenza che permette di inserire una rappresentazione testuale del file al posto del percorso. Questo è utile quando si lavora con la facade `Storage`. La sua interfaccia è molto simile a quella di `merge`. 
+Il metodo `mergeString` puÃ² essere usato per ottenere quasi lo stesso risultato di `merge`, con la differenza che permette di inserire una rappresentazione testuale del file al posto del percorso. Questo Ã¨ utile quando si lavora con la facade `Storage`. La sua interfaccia Ã¨ molto simile a quella di `merge`. 
 
 	QrCode::mergeString(Storage::get('path/to/image.png'), $percentage);
 	
@@ -226,7 +226,7 @@ Il metodo `mergeString` può essere usato per ottenere quasi lo stesso risultato 
 	//Genera un QrCode con una immagine al centro. L'immagine inserita occupa il 30% del codice Qr.
 	QrCode::format('png')->mergeString(Storage::get('path/to/image.png'), .3)->generate();
 
->Come la chiamata a `merge`, anche questa volta è supportato solamente il formato PNG. Lo stesso vale per gli error correction, H è il valore raccomandato.
+>Come la chiamata a `merge`, anche questa volta Ã¨ supportato solamente il formato PNG. Lo stesso vale per gli error correction, H Ã¨ il valore raccomandato.
 
 #### Utilizzo Avanzato
 
@@ -256,14 +256,14 @@ Questo helper genera un QrCode in grado di riempire i campi di una e-mail quali 
 	QrCode::email('foo@bar.com');
 	
 	//Fills in the to address, subject, and body of an e-mail.
-	QrCode::email('foo@bar.com', 'Questo è l'oggetto.', 'Questo è il corpo del messaggio.');
+	QrCode::email('foo@bar.com', 'Questo Ã¨ l'oggetto.', 'Questo Ã¨ il corpo del messaggio.');
 	
 	//Fills in just the subject and body of an e-mail.
-	QrCode::email(null, 'Questo è l'oggetto.', 'Questo è il corpo del messaggio.');
+	QrCode::email(null, 'Questo Ã¨ l'oggetto.', 'Questo Ã¨ il corpo del messaggio.');
 	
 #### Geo
 
-Questo helper genera una latitudine e una longitudine che un telefono può leggere ed aprire con Google Maps o applicazioni simili.
+Questo helper genera una latitudine e una longitudine che un telefono puÃ² leggere ed aprire con Google Maps o applicazioni simili.
 
 	QrCode::geo($latitude, $longitude);
 	
@@ -319,7 +319,7 @@ Questo helper crea codici Qr scansionabili che permettono la connessione del tel
 		'password' => 'miaPassword'
 	]);
 	
->La scansione WiFi non è al momento supportata sui dispositivi Apple.
+>La scansione WiFi non Ã¨ al momento supportata sui dispositivi Apple.
 
 <a id="docs-common-usage"></a>
 ##Uso generico dei QrCode
