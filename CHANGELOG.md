@@ -3,6 +3,9 @@ Simple QrCode
 
 ##Change Log
 
+#### 1.4.5
+* Added Spanish translation. -Thanks [gtarraga!](https://github.com/gtarraga)
+
 #### 1.4.4
 * Added Italian translation. -Thanks [simocosimo!](https://github.com/simocosimo)
 

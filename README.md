@@ -7,7 +7,7 @@ Simple QrCode
 [![License](https://poser.pugx.org/simplesoftwareio/simple-qrcode/license.svg)](https://packagist.org/packages/simplesoftwareio/simple-qrcode)
 [![Total Downloads](https://poser.pugx.org/simplesoftwareio/simple-qrcode/downloads.svg)](https://packagist.org/packages/simplesoftwareio/simple-qrcode)
 
-## [Italiano](https://www.simplesoftware.io/docs/simple-qrcode/it) | [Русский](https://www.simplesoftware.io/docs/simple-qrcode/ru) | [汉语](https://www.simplesoftware.io/docs/simple-qrcode/zh)
+## [Español](https://www.simplesoftware.io/docs/simple-qrcode/es) | [Italiano](https://www.simplesoftware.io/docs/simple-qrcode/it) | [Русский](https://www.simplesoftware.io/docs/simple-qrcode/ru) | [汉语](https://www.simplesoftware.io/docs/simple-qrcode/zh)
 
 ## Introduction
 Simple QrCode is an easy to use wrapper for the popular Laravel framework based on the great work provided by [Bacon/BaconQrCode](https://github.com/Bacon/BaconQrCode).  We created an interface that is familiar and easy to install for Laravel users.
