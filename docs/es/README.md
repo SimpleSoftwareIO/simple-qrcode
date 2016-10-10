@@ -13,7 +13,7 @@ Simple QrCode
 - [Configuración](#docs-configuration)
 - [Ideas Simples](#docs-ideas)
 - [Uso](#docs-usage)
-- [Ayudantes](#docs-helpers)
+- [Helpers](#docs-helpers)
 - [Uso Común de QrCode](#docs-common-usage)
 - [Uso fuera de Laravel](#docs-outside-laravel)
 
