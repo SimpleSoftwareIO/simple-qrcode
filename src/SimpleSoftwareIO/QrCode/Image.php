@@ -10,6 +10,7 @@ class Image implements ImageInterface
      * @var resource
      */
     protected $image;
+
     /**
      * Creates a new Image object.
      *

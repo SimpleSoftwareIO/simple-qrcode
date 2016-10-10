@@ -3,6 +3,9 @@ Simple QrCode
 
 ##Change Log
 
+#### 1.4.4
+* Added Italian translation. -Thanks [simocosimo!](https://github.com/simocosimo)
+
 #### 1.4.3
 * Updated the docs to our new format.
 * Correct some typos in the Russian translation.
