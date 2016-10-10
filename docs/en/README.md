@@ -6,7 +6,7 @@ Simple QrCode
 [![Latest Unstable Version](https://poser.pugx.org/simplesoftwareio/simple-qrcode/v/unstable.svg)](https://packagist.org/packages/simplesoftwareio/simple-qrcode)
 [![License](https://poser.pugx.org/simplesoftwareio/simple-qrcode/license.svg)](https://packagist.org/packages/simplesoftwareio/simple-qrcode)
 [![Total Downloads](https://poser.pugx.org/simplesoftwareio/simple-qrcode/downloads.svg)](https://packagist.org/packages/simplesoftwareio/simple-qrcode)
-[Italiano](https://www.simplesoftware.io/docs/simple-qrcode/it) | [Русский](https://www.simplesoftware.io/docs/simple-qrcode/ru) | [汉语](https://www.simplesoftware.io/docs/simple-qrcode/zh)
+[Español](https://www.simplesoftware.io/docs/simple-qrcode/es) | [Italiano](https://www.simplesoftware.io/docs/simple-qrcode/it) | [Русский](https://www.simplesoftware.io/docs/simple-qrcode/ru) | [汉语](https://www.simplesoftware.io/docs/simple-qrcode/zh)
 
 - [Introduction](#docs-introduction)
 - [Translations](#docs-translations)
