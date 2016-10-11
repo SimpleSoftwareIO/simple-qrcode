@@ -5,6 +5,7 @@ Simple QrCode
 
 #### 1.4.5
 * Added Spanish translation. -Thanks [gtarraga!](https://github.com/gtarraga)
+* Added Hindi translation. -Thanks [himanshu81494!](https://github.com/himanshu81494)
 
 #### 1.4.4
 * Added Italian translation. -Thanks [simocosimo!](https://github.com/simocosimo)
