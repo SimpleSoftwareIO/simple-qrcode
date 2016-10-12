@@ -14,17 +14,17 @@ Simple QrCode
 - [Configuração](#docs-configuration)
 - [Simples ideias](#docs-ideas)
 - [Uso](#docs-usage)
-- [Ajuda](#docs-helpers)
+- [Helpers](#docs-helpers)
 - [Uso comum do QrCode](#docs-common-usage)
 - [Uso sem Laravel](#docs-outside-laravel)
 
 <a id="docs-introduction"></a>
 ## Introdução
-Simple QrCode is an easy to use wrapper for the popular Laravel framework based on the great work provided by [Bacon/BaconQrCode](https://github.com/Bacon/BaconQrCode).  We created an interface that is familiar and easy to install for Laravel users.
+Simple QrCode é wrapper de fácil uso do Framework Laravel, baseado no grande trabalho provide pelo [Bacon/BaconQrCode](https://github.com/Bacon/BaconQrCode). Criamos uma interface que é fácil e familiar de instalar para usuários Laravel.
 
 <a id="docs-translations"></a>
 ## Traduções
-We are looking for users who speak Arabic, Spanish, French, Korean or Japanese to help translate this document.  Please create a pull request if you are able to make a translation!
+ Estamos procurando por usuário que falem Árabe, Espanhol, Francês, Coreano ou Japonês, para nos ajudar a traduzir este documento. Por favor, crie um pull request if você é capar de fazer uma tradução!
 
 <a id="docs-configuration"></a>
 ## Configuração
@@ -60,7 +60,7 @@ Finally, register the `'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class
 
 #### Print View
 
-One of the main items that we use this package for is to have QrCodes in all of our print views.  This allows our customers to return to the original page after it is printed by simply scanning the code.  We achieved this by adding the following into our footer.blade.php file.
+Um dos principais itens que utilizam este pacote para é ter QRCodes em todos os nossos pontos de vista de impressão. Isto permite que nossos clientes para retornar para a página original depois de impresso, basta digitalizar o código. Conseguimos isso adicionando o seguinte em nosso arquivo footer.blade.php.
 
 	<div class="visible-print text-center">
 		{!! QrCode::size(100)->generate(Request::url()); !!}
@@ -156,9 +156,9 @@ As seguintes opções são suportadas para o método `errorCorrection`.
 
 >The more error correction used; the bigger the QrCode becomes and the less data it can store. Read more about [error correction](http://en.wikipedia.org/wiki/QR_code#Error_correction).
 
-#### Encoding
+#### Codificação
 
-Change the character encoding that is used to build a QrCode.  By default `ISO-8859-1` is selected as the encoder.  Read more about [character encoding](http://en.wikipedia.org/wiki/Character_encoding) You can change this to any of the following:
+Alterar a codificação que é usada para criar um QrCode. Por padrão, a encodificação padrão é a `ISO-8859-1`. Leia mais sobre [character encoding](https://pt.wikipedia.org/wiki/Codifica%C3%A7%C3%A3o_de_caracteres) Você pode alterar a codificação usando o seguinte código:
 
 	QrCode::encoding('UTF-8')->generate('Make me a QrCode with special symbols ♠♥!!');
 
@@ -191,65 +191,65 @@ Change the character encoding that is used to build a QrCode.  By default `ISO-8
 | GBK |
 | EUC-KR |
 
->An error of `Could not encode content to ISO-8859-1` means that the wrong character encoding type is being used.  We recommend `UTF-8` if you are unsure.
+>Um erro de `Could not encode content to ISO-8859-1` significa que foi inserido algum caractere inválido. Recomendamos o `UTF-8` se você não tiver certeza.
 
-#### Merge
+#### Mesclar
 
-The `merge` method merges an image over a QrCode.  This is commonly used to placed logos within a QrCode.
+O método `merge` mescla uma imagem sobre um Qrcode. É comumente usado para se colocar logos dentro de um QrCode.
 
 	QrCode::merge($filename, $percentage, $absolute);
 	
-	//Generates a QrCode with an image centered in the middle.
+	//Gera um QrCode com uma imagem centralizada.
 	QrCode::format('png')->merge('path-to-image.png')->generate();
 	
-	//Generates a QrCode with an image centered in the middle.  The inserted image takes up 30% of the QrCode.
+	//Gera um QrCode com uma imagem centralizada. A imagem inserida ocupará 30% do QrCode.
 	QrCode::format('png')->merge('path-to-image.png', .3)->generate();
 	
-	//Generates a QrCode with an image centered in the middle.  The inserted image takes up 30% of the QrCode.
+	//Gera um QrCode com uma imagem centralizada. A imagem inserida ocupará 30% do QrCode.
 	QrCode::format('png')->merge('http://www.google.com/someimage.png', .3, true)->generate();
 
->The `merge` method only supports PNG at this time.
->The filepath is relative to app base path if `$absolute` is set to `false`.  Change this variable to `true` to use absolute paths.
+>O método `merge` suporta somente arquivos do tipo PNG.
+>O filepath é relativo ao caminho base da aplicação, se o `$absolute` estiver setada para `false`. Altere essa variável para `true` para usar caminhos absolutos.
 
->You should use a high level of error correction when using the `merge` method to ensure that the QrCode is still readable.  We recommend using `errorCorrection('H')`.
+>Você deve usar um alto nível de correção de erros quando usado o método `merge`, para garantir que o QrCode será legível. Recomendamos usar `errorCorrection('H')`.
 
 ![Merged Logo](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/merged-qrcode.png?raw=true)
 
 #### Merge Binary String
 
-The `mergeString` method can be used to achieve the same as the `merge` call, except it allows you to provide a string representation of the file instead of the filepath. This is usefull when working with the `Storage` facade. It's interface is quite similar to the `merge` call. 
+O método `mergeString` pode ser usado para alcaçar a mesma chamada do método `merge`, exceto que ele permite que você represente uma string de um arquivo ao invés do filepath. Isso é útil quando é utilizado o padrão `Storage` . A chamada a essa interface é bastante similar ao método `merge`. 
 
 	QrCode::mergeString(Storage::get('path/to/image.png'), $percentage);
 	
-	//Generates a QrCode with an image centered in the middle.
+	//Gera um QrCode com uma imagem centralizada.
 	QrCode::format('png')->mergeString(Storage::get('path/to/image.png'))->generate();
 	
-	//Generates a QrCode with an image centered in the middle.  The inserted image takes up 30% of the QrCode.
+	//Gera um QrCode com uma imagem centralizada. A imagem inserida ocupará 30% do QrCode.
 	QrCode::format('png')->mergeString(Storage::get('path/to/image.png'), .3)->generate();
 
->As with the normal `merge` call, only PNG is supported at this time. The same applies for error correction, high levels are recommened.
+>Assim como o método `merge`, somente arquivos do tipo PNG são suportados. O mesmo aplica-se para correção de erros, altos níveis são recomendados.
 
-#### Advance Usage
+#### Uso Avançado
 
-All methods support chaining.  The `generate` method must be called last and any `format` change must be called first.  For example you could run any of the following:
+Todos os métodos suportam encadeamento. O método `generate` deve ser chamado por ultimo e o método `format` deve ser chamado primeiro. Por exemplo, vocẽ pode executar o código seguinte:
 
 	QrCode::size(250)->color(150,90,10)->backgroundColor(10,14,244)->generate('Make me a QrCode!');
 	QrCode::format('png')->size(399)->color(40,40,40)->generate('Make me a QrCode!');
 
-You can display a PNG image without saving the file by providing a raw string and encoding with `base64_encode`.
+Você pode exibir uma imagem PNG, sem salvar o arquivo e prover uma string encodificada pelo método `base64_encode`.
 
 	<img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(100)->generate('Make me into an QrCode!')) !!} ">
 
 <a id="docs-helpers"></a>
-## Helpers
+## Ajudantes
 
-#### What are helpers?
+#### O que são ajudantes?
 
-Helpers are an easy way to create QrCodes that cause a reader to perform a certain action when scanned.  
+Ajudantes são uma maneira fácil de criar QrCodes que executam uma ação quando escaneados.  
 
 #### E-Mail
 
-This helper generates an e-mail qrcode that is able to fill in the e-mail address, subject, and body.
+Esse helper, gera um qrcode de e-mail que é capaz de ser preenchido no endereço de e-mail, assunto e corpo.
 
 	QrCode::email($to, $subject, $body);
 	
@@ -264,7 +264,7 @@ This helper generates an e-mail qrcode that is able to fill in the e-mail addres
 	
 #### Geo
 
-This helper generates a latitude and longitude that a phone can read and open the location up in Google Maps or similar app.
+Esse helper gera uma latitude e longituded que o pode ser lido por um aparelho celular e abrir a localização no Google maps ou outro aplicativo similar.
 
 	QrCode::geo($latitude, $longitude);
 	
@@ -272,28 +272,28 @@ This helper generates a latitude and longitude that a phone can read and open th
 	
 #### Phone Number
 
-This helper generates a QrCode that can be scanned and then dials a number.
+Esse helper, gera uma QrCode que pode ser escaneado exibido um telefone.
 
 	QrCode::phoneNumber($phoneNumber);
 	
 	QrCode::phoneNumber('555-555-5555');
 	QrCode::phoneNumber('1-800-Laravel');
 	
-#### SMS (Text Messages)
+#### SMS (Mensagens de Texto)
 
-This helper makes SMS messages that can be prefilled with the send to address and body of the message.
+Esse Helper, cria uma mensagem SMS que pode ser This helper makes SMS messages that can be preenchida com o emissoe e o corpo da mensagem.
 
 	QrCode::SMS($phoneNumber, $message);
 	
-	//Creates a text message with the number filled in.
+	//Cria uma mensagem de texto com o telefone preenchido.
 	QrCode::SMS('555-555-5555');
 	
-	//Creates a text message with the number and message filled in.
+	//Cria uma mensagem de text com o numero telefonico e a mensagem preenchida.
 	QrCode::SMS('555-555-5555', 'Body of the message');
 
 #### WiFi
 
-This helpers makes scannable QrCodes that can connect a phone to a WiFI network.
+Esse Helper, faz com que QrCodes escaneaveis, permitam o aparelho celular se conectar a uma rede WI-FI.
 
 	QrCode::wiFi([
 		'encryption' => 'WPA/WEP',
@@ -320,12 +320,12 @@ This helpers makes scannable QrCodes that can connect a phone to a WiFI network.
 		'password' => 'myPassword'
 	]);
 	
->WiFi scanning is not currently supported on Apple Products.
+>Escaneamento WIFI atualmente não são suportados nos produtos Apple.
 
 <a id="docs-common-usage"></a>
-##Common QrCode Usage
+##Uso Comum do QRCode
 
-You can use a prefix found in the table below inside the `generate` section to create a QrCode to store more advanced information:
+Você pode usar um prefixo listado na tabela abaixo dentro da seção `generate` para criar um QrCode para armazenar informações mais avançadas:
 
 	QrCode::generate('http://www.simplesoftware.io');
 
