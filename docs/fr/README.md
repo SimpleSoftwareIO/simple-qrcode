@@ -340,7 +340,7 @@ Vous pouvez utiliser un des pseudos-protocoles du tableau suivant comme paramèt
 | SMS avec message et numéro de téléphone pré-définis | sms: | sms:555-555-5555:I am a pretyped message |
 | Coordonnées géographiques | geo: | geo:-78.400364,-85.916993 |
 | MeCard | mecard: | MECARD:Simple, Software;Some Address, Somewhere, 20430;TEL:555-555-5555;EMAIL:support@simplesoftware.io; |
-| VCard | BEGIN:VCARD | [See Examples](https://en.wikipedia.org/wiki/VCard) |
+| VCard | BEGIN:VCARD | [Voir les exemples](https://fr.wikipedia.org/wiki/Code_QR#Correction_d.27erreur) |
 | Wifi | wifi: | wifi:WEP/WPA;SSID;PSK;Hidden(True/False) |
 
 <a id="docs-outside-laravel"></a>
