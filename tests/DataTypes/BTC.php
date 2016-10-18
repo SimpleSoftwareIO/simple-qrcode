@@ -35,7 +35,7 @@ class BTCTest extends \PHPUnit_Framework_TestCase
             [
                 'label'         => 'label',
                 'message'       => 'message',
-                'returnAddress' => 'https://www.returnaddress.com'
+                'returnAddress' => 'https://www.returnaddress.com',
             ]
         ]);
 
