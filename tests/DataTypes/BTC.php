@@ -36,7 +36,7 @@ class BTCTest extends \PHPUnit_Framework_TestCase
                 'label'         => 'label',
                 'message'       => 'message',
                 'returnAddress' => 'https://www.returnaddress.com',
-            ]
+            ],
         ]);
 
         $properFormat = 'bitcoin:btcaddress?amount=0.0034&label=label&%24message=message&r='.urlencode('https://www.returnaddress.com');
