@@ -5,6 +5,7 @@ Simple QrCode
 
 #### 1.5.0
 * Added Portuguese translation. -Thanks [francisek](https://github.com/francisek) and [Varpie!](https://github.com/Varpie)
+* Added BitCoin helper
 
 #### 1.4.6
 * Added Portuguese translation. -Thanks [felipewmartins!](https://github.com/felipewmartins)
