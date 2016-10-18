@@ -247,6 +247,22 @@ You can display a PNG image without saving the file by providing a raw string an
 
 Helpers are an easy way to create QrCodes that cause a reader to perform a certain action when scanned.  
 
+#### BitCoin
+
+This helpers generates a scannable bitcoin to send payments.  [More information](https://bitco.in/en/developer-guide#plain-text)
+
+	QrCode::BTC($address, $amount);
+	
+	//Sends a 0.334BTC payment to the address
+	QrCode::BTC('bitcoin address', 0.334);
+	
+	//Sends a 0.334BTC payment to the address with some optional arguments
+	QrCode::size(500)->BTC('address', 0.0034, [
+        'label' => 'my label',
+        'message' => 'my message',
+        'returnAddress' => 'https://www.returnaddress.com'
+    ]);
+
 #### E-Mail
 
 This helper generates an e-mail qrcode that is able to fill in the e-mail address, subject, and body.
