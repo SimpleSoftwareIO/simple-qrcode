@@ -33,13 +33,13 @@ class BTCTest extends \PHPUnit_Framework_TestCase
             'btcaddress',
             0.0034,
             [
-                'label' => 'label',
-                'message' => 'message',
+                'label'         => 'label',
+                'message'       => 'message',
                 'returnAddress' => 'https://www.returnaddress.com'
             ]
         ]);
 
-        $properFormat = 'bitcoin:btcaddress?amount=0.0034&label=label&%24message=message&r=' . urlencode('https://www.returnaddress.com');
+        $properFormat = 'bitcoin:btcaddress?amount=0.0034&label=label&%24message=message&r='.urlencode('https://www.returnaddress.com');
 
         $this->assertEquals($properFormat, strval($this->btc));
     }

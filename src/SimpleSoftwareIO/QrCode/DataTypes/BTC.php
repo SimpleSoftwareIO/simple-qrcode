@@ -28,7 +28,7 @@ class BTC implements DataTypeInterface
     /**
      * The amount to send.
      *
-     * @var integer
+     * @var int
      */
     protected $amount;
 
@@ -94,7 +94,7 @@ class BTC implements DataTypeInterface
     }
 
     /**
-     * Sets the optional BitCoin options
+     * Sets the optional BitCoin options.
      *
      * @param array $options
      */
@@ -121,10 +121,10 @@ class BTC implements DataTypeInterface
     protected function buildBitCoinString()
     {
         $query = http_build_query([
-            'amount' => $this->amount,
-            'label' => $this->label,
-            '$message' => $this->message,
-            'r' => $this->returnAddress
+            'amount'    => $this->amount,
+            'label'     => $this->label,
+            '$message'  => $this->message,
+            'r'         => $this->returnAddress
         ]);
 
         $btc = $this->prefix.$this->address.'?'.$query;
