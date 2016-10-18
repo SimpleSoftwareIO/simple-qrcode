@@ -9,14 +9,14 @@ class Geo implements DataTypeInterface
      *
      * @var string
      */
-    private $prefix = 'geo:';
+    protected $prefix = 'geo:';
 
     /**
      * The separator between the variables.
      *
      * @var string
      */
-    private $separator = ',';
+    protected $separator = ',';
 
     /**
      * The latitude.
@@ -30,7 +30,7 @@ class Geo implements DataTypeInterface
      *
      * @var
      */
-    private $longitude;
+    protected $longitude;
 
     /**
      * Generates the DataType Object and sets all of its properties.

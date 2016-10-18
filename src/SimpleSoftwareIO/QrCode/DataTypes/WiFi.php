@@ -9,42 +9,42 @@ class WiFi implements DataTypeInterface
      *
      * @var string
      */
-    private $prefix = 'WIFI:';
+    protected $prefix = 'WIFI:';
 
     /**
      * The separator between the variables.
      *
      * @var string
      */
-    private $separator = ';';
+    protected $separator = ';';
 
     /**
      * The encryption of the network.  WEP or WPA.
      *
      * @var string
      */
-    private $encryption;
+    protected $encryption;
 
     /**
      * The SSID of the WiFi network.
      *
      * @var string
      */
-    private $ssid;
+    protected $ssid;
 
     /**
      * The password of the network.
      *
      * @var string
      */
-    private $password;
+    protected $password;
 
     /**
      * Whether the network is a hidden SSID or not.
      *
      * @var bool
      */
-    private $hidden;
+    protected $hidden;
 
     /**
      * Generates the DataType Object and sets all of its properties.
@@ -71,7 +71,7 @@ class WiFi implements DataTypeInterface
      *
      * @return string
      */
-    private function buildWifiString()
+    protected function buildWifiString()
     {
         $wifi = $this->prefix;
 
@@ -96,7 +96,7 @@ class WiFi implements DataTypeInterface
      *
      * @param $arguments
      */
-    private function setProperties(array $arguments)
+    protected function setProperties(array $arguments)
     {
         $arguments = $arguments[0];
         if (isset($arguments['encryption'])) {

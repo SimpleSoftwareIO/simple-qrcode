@@ -11,28 +11,28 @@ class Email implements DataTypeInterface
      *
      * @var string
      */
-    private $prefix = 'mailto:';
+    protected $prefix = 'mailto:';
 
     /**
      * The email address.
      *
      * @var string
      */
-    private $email;
+    protected $email;
 
     /**
      * The subject of the email.
      *
      * @var string
      */
-    private $subject;
+    protected $subject;
 
     /**
      * The body of an email.
      *
      * @var string
      */
-    private $body;
+    protected $body;
 
     /**
      * Generates the DataType Object and sets all of its properties.
@@ -59,7 +59,7 @@ class Email implements DataTypeInterface
      *
      * @return string
      */
-    private function buildEmailString()
+    protected function buildEmailString()
     {
         $email = $this->prefix.$this->email;
 
@@ -79,7 +79,7 @@ class Email implements DataTypeInterface
      *
      * @param $arguments
      */
-    private function setProperties(array $arguments)
+    protected function setProperties(array $arguments)
     {
         if (isset($arguments[0])) {
             $this->setEmail($arguments[0]);
@@ -97,7 +97,7 @@ class Email implements DataTypeInterface
      *
      * @param $email
      */
-    private function setEmail($email)
+    protected function setEmail($email)
     {
         if ($this->isValidEmail($email)) {
             $this->email = $email;
@@ -111,7 +111,7 @@ class Email implements DataTypeInterface
      *
      * @return bool
      */
-    private function isValidEmail($email)
+    protected function isValidEmail($email)
     {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             throw new InvalidArgumentException('Invalid email provided');

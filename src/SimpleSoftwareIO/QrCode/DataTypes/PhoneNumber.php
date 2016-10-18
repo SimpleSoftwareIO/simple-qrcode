@@ -9,14 +9,14 @@ class PhoneNumber implements DataTypeInterface
      *
      * @var string
      */
-    private $prefix = 'tel:';
+    protected $prefix = 'tel:';
 
     /**
      * The phone number.
      *
      * @var
      */
-    private $phoneNumber;
+    protected $phoneNumber;
 
     /**
      * Generates the DataType Object and sets all of its properties.
