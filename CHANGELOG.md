@@ -3,6 +3,9 @@ Simple QrCode
 
 ##Change Log
 
+#### 1.5.1
+* Fixed a bug where a QrCode used within a loop would not generate correctly.
+
 #### 1.5.0
 * Added Portuguese translation. -Thanks [francisek](https://github.com/francisek) and [Varpie!](https://github.com/Varpie)
 * Added BitCoin helper
