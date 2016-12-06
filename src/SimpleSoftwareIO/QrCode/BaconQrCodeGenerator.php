@@ -50,7 +50,10 @@ class BaconQrCodeGenerator implements QrCodeInterface
     protected $imagePercentage = .2;
 
     /**
-     * Creates a new QrCodeGenerator with a Writer class and with a SVG renderer set as the default.
+     * BaconQrCodeGenerator constructor.
+     *
+     * @param Writer|null $writer
+     * @param RendererInterface|null $format
      */
     public function __construct(Writer $writer = null, RendererInterface $format = null)
     {
