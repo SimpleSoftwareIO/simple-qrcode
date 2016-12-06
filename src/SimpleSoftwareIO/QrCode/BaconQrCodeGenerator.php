@@ -3,14 +3,14 @@
 namespace SimpleSoftwareIO\QrCode;
 
 use BaconQrCode;
-use BaconQrCode\Common\ErrorCorrectionLevel;
+use BaconQrCode\Writer;
 use BaconQrCode\Encoder\Encoder;
 use BaconQrCode\Renderer\Color\Rgb;
 use BaconQrCode\Renderer\Image\Eps;
 use BaconQrCode\Renderer\Image\Png;
-use BaconQrCode\Renderer\Image\RendererInterface;
 use BaconQrCode\Renderer\Image\Svg;
-use BaconQrCode\Writer;
+use BaconQrCode\Common\ErrorCorrectionLevel;
+use BaconQrCode\Renderer\Image\RendererInterface;
 
 class BaconQrCodeGenerator implements QrCodeInterface
 {
@@ -50,7 +50,10 @@ class BaconQrCodeGenerator implements QrCodeInterface
     protected $imagePercentage = .2;
 
     /**
-     * Creates a new QrCodeGenerator with a Writer class and with a SVG renderer set as the default.
+     * BaconQrCodeGenerator constructor.
+     *
+     * @param Writer|null $writer
+     * @param RendererInterface|null $format
      */
     public function __construct(Writer $writer = null, RendererInterface $format = null)
     {
@@ -93,7 +96,7 @@ class BaconQrCodeGenerator implements QrCodeInterface
      */
     public function merge($filepath, $percentage = .2, $absolute = false)
     {
-        if (function_exists('base_path') && !$absolute) {
+        if (function_exists('base_path') && ! $absolute) {
             $filepath = base_path().$filepath;
         }
 
@@ -262,7 +265,7 @@ class BaconQrCodeGenerator implements QrCodeInterface
     {
         $class = $this->formatClass($method);
 
-        if (!class_exists($class)) {
+        if (! class_exists($class)) {
             throw new \BadMethodCallException();
         }
 
