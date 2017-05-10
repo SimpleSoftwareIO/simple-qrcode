@@ -339,7 +339,7 @@ This helpers makes scannable QrCodes that can connect a phone to a WiFI network.
 >WiFi scanning is not currently supported on Apple Products.
 
 <a id="docs-common-usage"></a>
-##Common QrCode Usage
+## Common QrCode Usage
 
 You can use a prefix found in the table below inside the `generate` section to create a QrCode to store more advanced information:
 
@@ -361,7 +361,7 @@ You can use a prefix found in the table below inside the `generate` section to c
 | Wifi | wifi: | wifi:WEP/WPA;SSID;PSK;Hidden(True/False) |
 
 <a id="docs-outside-laravel"></a>
-##Usage Outside of Laravel
+## Usage Outside of Laravel
 
 You may use this package outside of Laravel by instantiating a new `BaconQrCodeGenerator` class.
 
