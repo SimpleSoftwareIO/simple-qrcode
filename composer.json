@@ -25,5 +25,15 @@
             "SimpleSoftwareIO\\QrCode\\": "src"
         }
     },
+        "extra": {
+        "laravel": {
+            "providers": [
+                "SimpleSoftwareIO\\QrCode\\QrCodeServiceProvider"
+            ],
+            "aliases": [
+                "QrCode": "SimpleSoftwareIO\\QrCode\\Facades\\QrCode"
+            ]
+        }
+    },
     "minimum-stability": "stable"
 }
