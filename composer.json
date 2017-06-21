@@ -25,7 +25,7 @@
             "SimpleSoftwareIO\\QrCode\\": "src"
         }
     },
-        "extra": {
+    "extra": {
         "laravel": {
             "providers": [
                 "SimpleSoftwareIO\\QrCode\\QrCodeServiceProvider"
