@@ -3,7 +3,6 @@ sudo: false
 php:
   - 7.0
   - 7.1
-  - hhvm
 
 before_script:
   - composer install --dev
