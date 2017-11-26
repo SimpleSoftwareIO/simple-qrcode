@@ -3,7 +3,7 @@ Simple QrCode
 
 ##Change Log
 
-#### 1.6.0
+#### 2.0.0
 * Fixed a bug where the merge image was not reset correctly. (#93)
 * Added Laravel auto discovery support. (#82) - Thanks [mazedlx](https://github.com/mazedlx)
 
