@@ -32,7 +32,7 @@ Simple QrCode é wrapper de fácil uso do Framework Laravel, baseado no grande t
 Primeiramente, adicione o pacote Simple QrCode ao seu `require` no arquivo `composer.json`:
 
 	"require": {
-		"simplesoftwareio/simple-qrcode": "~1"
+		"simplesoftwareio/simple-qrcode": "~2"
 	}
 
 Próximo, execute o comando `composer update`.

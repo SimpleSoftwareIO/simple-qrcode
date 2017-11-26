@@ -32,7 +32,7 @@ Simple QrCode
 सर्वप्रथं composer.json मे qrcode पॅकेज को अपने require से जोड़ें:
 
 	"require": {
-		"simplesoftwareio/simple-qrcode": "~1"
+		"simplesoftwareio/simple-qrcode": "~2"
 	}
 
 फिर composer update कमॅंड चलाएँ।

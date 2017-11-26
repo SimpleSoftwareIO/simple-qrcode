@@ -32,7 +32,7 @@ Siamo alla ricerca di utenti che ci aiutino a tradurre la documentazione in Arab
 Per prima cosa, aggiungete il pacchetto di Simple QrCode al file `require` in `composer.json`:
 
 	"require": {
-		"simplesoftwareio/simple-qrcode": "~1"
+		"simplesoftwareio/simple-qrcode": "~2"
 	}
 
 Ora lanciate il comando `composer update`.

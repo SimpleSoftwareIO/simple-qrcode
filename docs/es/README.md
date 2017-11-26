@@ -32,7 +32,7 @@ Estamos buscando usuarios que hablen Árabe, Francés, Coreano o Japonés para t
 Primero, añadir el paquete Simple QrCode en su `require` en su archivo `composer.json`:
 
 	"require": {
-		"simplesoftwareio/simple-qrcode": "~1"
+		"simplesoftwareio/simple-qrcode": "~2"
 	}
 
 Luego, ejecutar el comando `composer update`.

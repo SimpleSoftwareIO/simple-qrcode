@@ -32,7 +32,7 @@
 Во-первых, добавьте пакет простого QR-код к `require` в файле `composer.json`:
 
 	"require": {
-		"simplesoftwareio/simple-qrcode": "~1"
+		"simplesoftwareio/simple-qrcode": "~2"
 	}
 
 Затем запустите команду `composer update`.
