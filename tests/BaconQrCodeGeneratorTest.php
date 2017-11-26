@@ -1,12 +1,17 @@
 <?php
 
 use Mockery as m;
+use PHPUnit\Framework\TestCase;
 use SimpleSoftwareIO\QrCode\BaconQrCodeGenerator;
 
-class BaconQrCodeGeneratorTest extends \PHPUnit_Framework_TestCase
+class BaconQrCodeGeneratorTest extends TestCase
 {
     public function tearDown()
     {
+        if ($container = m::getContainer()) {
+            $this->addToAssertionCount($container->mockery_getExpectationCount());
+        }
+
         m::close();
     }
 

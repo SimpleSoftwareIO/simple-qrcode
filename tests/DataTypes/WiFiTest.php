@@ -1,8 +1,9 @@
 <?php
 
+use PHPUnit\Framework\TestCase;
 use SimpleSoftwareIO\QrCode\DataTypes\WiFi;
 
-class WiFiTest extends \PHPUnit_Framework_TestCase
+class WiFiTest extends TestCase
 {
     public function setUp()
     {

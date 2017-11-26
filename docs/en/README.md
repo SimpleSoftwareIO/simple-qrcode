@@ -7,7 +7,7 @@ Simple QrCode
 [![License](https://poser.pugx.org/simplesoftwareio/simple-qrcode/license.svg)](https://packagist.org/packages/simplesoftwareio/simple-qrcode)
 [![Total Downloads](https://poser.pugx.org/simplesoftwareio/simple-qrcode/downloads.svg)](https://packagist.org/packages/simplesoftwareio/simple-qrcode)
 
-####[Español](https://www.simplesoftware.io/docs/simple-qrcode/es) | [Français](https://www.simplesoftware.io/docs/simple-qrcode/fr) | [Italiano](https://www.simplesoftware.io/docs/simple-qrcode/it) | [Português](https://www.simplesoftware.io/docs/simple-qrcode/pt-br) | [Русский](https://www.simplesoftware.io/docs/simple-qrcode/ru) | [हिंदी](https://www.simplesoftware.io/docs/simple-qrcode/hi) | [汉语](https://www.simplesoftware.io/docs/simple-qrcode/zh)
+#### [Español](https://www.simplesoftware.io/docs/simple-qrcode/es) | [Français](https://www.simplesoftware.io/docs/simple-qrcode/fr) | [Italiano](https://www.simplesoftware.io/docs/simple-qrcode/it) | [Português](https://www.simplesoftware.io/docs/simple-qrcode/pt-br) | [Русский](https://www.simplesoftware.io/docs/simple-qrcode/ru) | [हिंदी](https://www.simplesoftware.io/docs/simple-qrcode/hi) | [汉语](https://www.simplesoftware.io/docs/simple-qrcode/zh)
 
 - [Introduction](#docs-introduction)
 - [Translations](#docs-translations)
@@ -34,25 +34,19 @@ We are looking for users who speak Arabic, Spanish, French, Korean or Japanese t
 First, add the Simple QrCode package to your `require` in your `composer.json` file:
 
 	"require": {
-		"simplesoftwareio/simple-qrcode": "~1"
+		"simplesoftwareio/simple-qrcode": "~2"
 	}
 
 Next, run the `composer update` command.
 
 #### Service Provider
 
-###### Laravel 4
-Register the `SimpleSoftwareIO\QrCode\QrCodeServiceProvider` in your `app/config/app.php` within the `providers` array.
-
-###### Laravel 5
+###### Laravel <= 5.4
 Register the `SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class` in your `config/app.php` within the `providers` array.
 
 #### Aliases
 
-###### Laravel 4
-Finally, register the `'QrCode' => 'SimpleSoftwareIO\QrCode\Facades\QrCode'` in your `app/config/app.php` configuration file within the `aliases` array.
-
-###### Laravel 5
+###### Laravel <= 5.4
 Finally, register the `'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class` in your `config/app.php` configuration file within the `aliases` array.
 
 <a id="docs-ideas"></a>
@@ -339,7 +333,7 @@ This helpers makes scannable QrCodes that can connect a phone to a WiFI network.
 >WiFi scanning is not currently supported on Apple Products.
 
 <a id="docs-common-usage"></a>
-##Common QrCode Usage
+## Common QrCode Usage
 
 You can use a prefix found in the table below inside the `generate` section to create a QrCode to store more advanced information:
 
@@ -361,7 +355,7 @@ You can use a prefix found in the table below inside the `generate` section to c
 | Wifi | wifi: | wifi:WEP/WPA;SSID;PSK;Hidden(True/False) |
 
 <a id="docs-outside-laravel"></a>
-##Usage Outside of Laravel
+## Usage Outside of Laravel
 
 You may use this package outside of Laravel by instantiating a new `BaconQrCodeGenerator` class.
 

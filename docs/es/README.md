@@ -32,25 +32,19 @@ Estamos buscando usuarios que hablen Árabe, Francés, Coreano o Japonés para t
 Primero, añadir el paquete Simple QrCode en su `require` en su archivo `composer.json`:
 
 	"require": {
-		"simplesoftwareio/simple-qrcode": "~1"
+		"simplesoftwareio/simple-qrcode": "~2"
 	}
 
 Luego, ejecutar el comando `composer update`.
 
 #### Service Provider
 
-###### Laravel 4
-Registrar `SimpleSoftwareIO\QrCode\QrCodeServiceProvider` en su `app/config/app.php` dentro del array `providers`.
-
-###### Laravel 5
+###### Laravel <= 5.4
 Registrar `SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class` en su `config/app.php` dentro del array `providers`.
 
 #### Aliases
 
-###### Laravel 4
-Finalmente, registrar `'QrCode' => 'SimpleSoftwareIO\QrCode\Facades\QrCode'` en su archivo de configuración `app/config/app.php` dentro del array `aliases`.
-
-###### Laravel 5
+###### Laravel <= 5.4
 Finalmente, registrar `'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class` en su archivo de configuración `config/app.php` dentro del array `aliases`.
 
 <a id="docs-ideas"></a>

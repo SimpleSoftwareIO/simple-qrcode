@@ -9,6 +9,8 @@ Simple QrCode
 
 ## [Español](https://www.simplesoftware.io/docs/simple-qrcode/es) | [Français](https://www.simplesoftware.io/docs/simple-qrcode/fr) | [Italiano](https://www.simplesoftware.io/docs/simple-qrcode/it) | [Português](https://www.simplesoftware.io/docs/simple-qrcode/pt-br) | [Русский](https://www.simplesoftware.io/docs/simple-qrcode/ru) | [हिंदी](https://www.simplesoftware.io/docs/simple-qrcode/hi) | [汉语](https://www.simplesoftware.io/docs/simple-qrcode/zh)
 
+## Try our dead simple, free file transfer service [keep.sh](https://keep.sh)
+
 ## Introduction
 Simple QrCode is an easy to use wrapper for the popular Laravel framework based on the great work provided by [Bacon/BaconQrCode](https://github.com/Bacon/BaconQrCode).  We created an interface that is familiar and easy to install for Laravel users.
 
