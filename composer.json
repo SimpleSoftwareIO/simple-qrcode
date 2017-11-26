@@ -18,7 +18,7 @@
     },
     "require-dev": {
         "mockery/mockery": "0.9.*",
-        "phpunit/phpunit": "~5"
+        "phpunit/phpunit": "~6"
     },
     "autoload": {
         "psr-0": {
@@ -34,6 +34,5 @@
                 "QrCode": "SimpleSoftwareIO\\QrCode\\Facades\\QrCode"
             ]
         }
-    },
-    "minimum-stability": "stable"
+    }
 }
