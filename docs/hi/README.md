@@ -39,18 +39,12 @@ Simple QrCode
 
 #### Service Provider
 
-###### Laravel 4
-app/config/app.php में providers array में SimpleSoftwareIO\QrCode\QrCodeServiceProvider को रजिस्टर करें।
-
-###### Laravel 5
+###### Laravel <= 5.4
 config/app.php में providers array में SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class को रजिस्टर करें।
 
 #### Aliases (उपनाम)
 
-###### Laravel 4
-आखिर में 'QrCode' => 'SimpleSoftwareIO\QrCode\Facades\QrCode' को app/config/app.php विन्यास फ़ाइल में aliases array में रजिस्टर करें।
-
-###### Laravel 5
+###### Laravel <= 5.4
 आखिर में 'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class को config/app.php विन्यास फ़ाइल में aliases array में रजिस्टर करें।
 
 <a id="docs-ideas"></a>

@@ -39,18 +39,12 @@ Simple QrCode 是基于强大的[Bacon/BaconQrCode](https://github.com/Bacon/Bac
 
 #### 添加 Service Provider
 
-###### Laravel 4
-注册 `SimpleSoftwareIO\QrCode\QrCodeServiceProvider` 至 `app/config/app.php` 的 `providers` 数组里.
-
-###### Laravel 5
+###### Laravel <= 5.4
 注册 `SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class` 至 `config/app.php` 的 `providers` 数组里.
 
 #### 添加 Aliases
 
-###### Laravel 4
-最后,注册 `'QrCode' => 'SimpleSoftwareIO\QrCode\Facades\QrCode'` 至 `app/config/app.php` 的 `aliases` 数组里.
-
-###### Laravel 5
+###### Laravel <= 5.4
 最后,注册 `'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class` 至 `config/app.php` 的 `aliases` 数组里.
 
 <a id="docs-ideas"></a>

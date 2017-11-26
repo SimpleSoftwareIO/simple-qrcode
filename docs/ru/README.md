@@ -39,18 +39,12 @@
 
 #### Поставщик Услуг
 
-###### Laravel 4
-Зарегистрируйте `SimpleSoftwareIO\QrCode\QrCodeServiceProvider` в `app/config/app.php` в пределах массива `providers`.
-
-###### Laravel 5
+###### Laravel <= 5.4
 Зарегистрируйте `SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class` в `config/app.php` в пределах массива `providers`.
 
 #### Псевдонимы
 
-###### Laravel 4
-И, наконец, зарегистрируйте `'QrCode' => 'SimpleSoftwareIO\QrCode\Facades\QrCode'` в `app/config/app.php` файл конфигурации в пределах массива `aliases`.
-
-###### Laravel 5
+###### Laravel <= 5.4
 В конце, зарегистрируйте `'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class` в `config/app.php` файл конфигурации в пределах массива `aliases`.
 
 <a id="docs-ideas"></a>

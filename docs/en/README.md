@@ -41,18 +41,12 @@ Next, run the `composer update` command.
 
 #### Service Provider
 
-###### Laravel 4
-Register the `SimpleSoftwareIO\QrCode\QrCodeServiceProvider` in your `app/config/app.php` within the `providers` array.
-
-###### Laravel 5
+###### Laravel <= 5.4
 Register the `SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class` in your `config/app.php` within the `providers` array.
 
 #### Aliases
 
-###### Laravel 4
-Finally, register the `'QrCode' => 'SimpleSoftwareIO\QrCode\Facades\QrCode'` in your `app/config/app.php` configuration file within the `aliases` array.
-
-###### Laravel 5
+###### Laravel <= 5.4
 Finally, register the `'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class` in your `config/app.php` configuration file within the `aliases` array.
 
 <a id="docs-ideas"></a>
