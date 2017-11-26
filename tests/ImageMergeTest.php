@@ -1,9 +1,10 @@
 <?php
 
+use PHPUnit\Framework\TestCase;
 use SimpleSoftwareIO\QrCode\Image;
 use SimpleSoftwareIO\QrCode\ImageMerge;
 
-class ImageMergeTest extends \PHPUnit_Framework_TestCase
+class ImageMergeTest extends TestCase
 {
     /**
      * The location to save the testing image.

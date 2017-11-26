@@ -1,8 +1,9 @@
 <?php
 
+use PHPUnit\Framework\TestCase;
 use SimpleSoftwareIO\QrCode\DataTypes\Email;
 
-class EmailTest extends \PHPUnit_Framework_TestCase
+class EmailTest extends TestCase
 {
     public function setUp()
     {
