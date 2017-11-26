@@ -78,11 +78,9 @@ class BaconQrCodeGenerator implements QrCodeInterface
             $qrCode = $merger->merge($this->imagePercentage);
         }
 
-        if ($filename === null) {
-            return $qrCode;
-        } else {
-            file_put_contents($filename, $qrCode);
-        }
+        if ($filename === null) return $qrCode;
+
+        return file_put_contents($filename, $qrCode);
     }
 
     /**
