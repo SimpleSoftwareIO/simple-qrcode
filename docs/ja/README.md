@@ -19,51 +19,54 @@ Simple QrCode
 - [Usage Outside of Laravel](#docs-outside-laravel)
 
 <a id="docs-introduction"></a>
-## Introduction
+## イントロダクション
+Simple QrCode は [Bacon/BaconQrCode](https://github.com/Bacon/BaconQrCode)を元に作られた 人気のあるLaravelフレームワークで簡単に使う事のできるラッパーです。
+
+
 Simple QrCode is an easy to use wrapper for the popular Laravel framework based on the great work provided by [Bacon/BaconQrCode](https://github.com/Bacon/BaconQrCode).  We created an interface that is familiar and easy to install for Laravel users.
 
 <a id="docs-translations"></a>
-## Translations
+## 翻訳
+この文書の翻訳を手伝ってくれるアラビア語、スペイン語、フランス語、韓国語、日本語を話すユーザーを探しています。 翻訳が可能な場合はプルリクエストを作成してください。
+
 We are looking for users who speak Arabic, Spanish, French, Korean or Japanese to help translate this document.  Please create a pull request if you are able to make a translation!
 
 <a id="docs-configuration"></a>
-## Configuration
+## 設定
 
 #### Composer
-
-First, add the Simple QrCode package to your `require` in your `composer.json` file:
+最初にあなたの `composer.json` に Simple QrCode パッケージを追加する必要があります。
 
 	"require": {
 		"simplesoftwareio/simple-qrcode": "~2"
 	}
+追加したら `composer update` コマンドを実行します。
 
-Next, run the `composer update` command.
-
-#### Service Provider
+#### サービスプロバイダー
 
 ###### Laravel <= 5.4
-Register the `SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class` in your `config/app.php` within the `providers` array.
+(あなたが Simple QrCode を入れる laravelの) `config/app.php` の `providers`配列 に `SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class` を登録します。
 
 #### Aliases
 
 ###### Laravel <= 5.4
-Finally, register the `'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class` in your `config/app.php` configuration file within the `aliases` array.
+最後に `config/app.php` の `aliases`配列に `'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class` を登録します。
 
 <a id="docs-ideas"></a>
-## Simple Ideas
+## かんたんに使う
 
-#### Print View
+#### 画面に表示する
 
-One of the main items that we use this package for is to have QrCodes in all of our print views.  This allows our customers to return to the original page after it is printed by simply scanning the code.  We achieved this by adding the following into our footer.blade.php file.
-
+このパッケージの主なアイテムは 画面に表示する機能です。
+カスタマーはコードをスキャンするだけで 画面に戻ることが出来ます。以下の内容をfooter.blade.php に追加しました。
 	<div class="visible-print text-center">
 		{!! QrCode::size(100)->generate(Request::url()); !!}
 		<p>Scan me to return to the original page.</p>
 	</div>
 
-#### Embed A QrCode
+#### QrCodeを埋め込む
 
-You may embed a qrcode inside of an e-mail to allow your users to quickly scan.  The following is an example of how to do this with Laravel.
+ユーザーがすばやくスキャンできるように、電子メールの中にqrcodeを埋め込むことができます。 以下はLaravelでこれを行う方法の例です。
 
 	//Inside of a blade template.
 	<img src="{!!$message->embedData(QrCode::format('png')->generate('Embed me into an e-mail!'), 'QrCode.png', 'image/png')!!}">
@@ -71,66 +74,67 @@ You may embed a qrcode inside of an e-mail to allow your users to quickly scan. 
 <a id="docs-usage"></a>
 ## Usage
 
-#### Basic Usage
+#### 基本的な使い方
 
-Using the QrCode Generator is very easy.  The most basic syntax is:
-
-	QrCode::generate('Make me into a QrCode!');
-
-This will make a QrCode that says "Make me into a QrCode!"
-
-#### Generate
-
-`Generate` is used to make the QrCode.
+QrCode Generatorを使うのはとても簡単です。 最も基本的な構文は次のとおりです。
 
 	QrCode::generate('Make me into a QrCode!');
 
->Heads up! This method must be called last if using within a chain.
+これで「Make me into a QrCode!」というQrCodeが作成されます。
 
-`Generate` by default will return a SVG image string.  You can print this directly into a modern browser within Laravel's Blade system with the following:
+#### 生成する
+
+`Generate`はQrCodeを作るのに使われます。
+
+	QrCode::generate('Make me into a QrCode!');
+
+>要注意： チェーン内で使用する場合は、このメソッドを最後に呼び出す必要があります。
+
+`Generate`はデフォルトで SVG イメージ文字列を返します。
+Laravel Bladeに以下の様に書くことで モダンなブラウザに表示することができます。
 
 	{!! QrCode::generate('Make me into a QrCode!'); !!}
 
-The `generate` method has a second parameter that will accept a filename and path to save the QrCode.
+`generate`メソッドの第二引数はQrCodeを保存するパスとファイルネームです。
 
 	QrCode::generate('Make me into a QrCode!', '../public/qrcodes/qrcode.svg');
 
-#### Format Change
+#### フォーマットを変える
 
->QrCode Generator is setup to return a SVG image by default.
+>QrCode Generator のデフォルトフォーマットはSVGイメージです。
 
->Watch out! The `format` method must be called before any other formatting options such as `size`, `color`, `backgroundColor`, and `margin`.
+>要注意: `format`メソッドは` size`、 `color`、` backgroundColor`、 `margin`のような他のフォーマットオプションの前に呼ばれなければなりません。
 
-Three formats are currently supported; PNG, EPS, and SVG.  To change the format use the following code:
+現在PNG、EPS、およびSVGの 3つのフォーマットがサポートされています。
+フォーマットを変更するには、次のコードを使用します。
 
 	QrCode::format('png');  //Will return a PNG image
 	QrCode::format('eps');  //Will return a EPS image
 	QrCode::format('svg');  //Will return a SVG image
 
-#### Size Change
+#### サイズの変更
 
->QrCode Generator will by default return the smallest size possible in pixels to create the QrCode.
+>QrCode GeneratorはデフォルトでQrCodeを作成するためにピクセルで可能な最小サイズを返します。
 
-You can change the size of a QrCode by using the `size` method. Simply specify the size desired in pixels using the following syntax:
+`size`メソッドを使うことでQrCodeのサイズを変えることができます。 次の構文を使用して、必要なサイズをピクセル単位で指定します。
 
 	QrCode::size(100);
 
-#### Color Change
+#### 色の変更
 
->Be careful when changing the color of a QrCode.  Some readers have a very difficult time reading QrCodes in color.
+>要注意 色を変えるときには注意してください。QrCodeの読み込みが難しくなる 色が有ります。
 
-All colors must be expressed in RGB (Red Green Blue).  You can change the color of a QrCode by using the following:
+すべての色はRGB (Red Green Blue)で表現する必要があります。 次のようにしてQrCodeの色を変更できます:
 
 	QrCode::color(255,0,255);
 
-Background color changes are also supported and be expressed in the same manner.
+背景色の変更もサポートされており、同じ方法で表現できます。
 
 	QrCode::backgroundColor(255,255,0);
 
-#### Margin Change
+#### マージンの変更
 
-The ability to change the margin around a QrCode is also supported.  Simply specify the desired margin using the following syntax:
-
+QrCode周辺のマージンを変更する機能もサポートされています。 次の構文を使用してマージンを指定します:
 	QrCode::margin(100);
 
 #### Error Correction
@@ -192,13 +196,13 @@ Change the character encoding that is used to build a QrCode.  By default `ISO-8
 The `merge` method merges an image over a QrCode.  This is commonly used to placed logos within a QrCode.
 
 	QrCode::merge($filename, $percentage, $absolute);
-	
+
 	//Generates a QrCode with an image centered in the middle.
 	QrCode::format('png')->merge('path-to-image.png')->generate();
-	
+
 	//Generates a QrCode with an image centered in the middle.  The inserted image takes up 30% of the QrCode.
 	QrCode::format('png')->merge('path-to-image.png', .3)->generate();
-	
+
 	//Generates a QrCode with an image centered in the middle.  The inserted image takes up 30% of the QrCode.
 	QrCode::format('png')->merge('http://www.google.com/someimage.png', .3, true)->generate();
 
@@ -211,13 +215,13 @@ The `merge` method merges an image over a QrCode.  This is commonly used to plac
 
 #### Merge Binary String
 
-The `mergeString` method can be used to achieve the same as the `merge` call, except it allows you to provide a string representation of the file instead of the filepath. This is usefull when working with the `Storage` facade. It's interface is quite similar to the `merge` call. 
+The `mergeString` method can be used to achieve the same as the `merge` call, except it allows you to provide a string representation of the file instead of the filepath. This is usefull when working with the `Storage` facade. It's interface is quite similar to the `merge` call.
 
 	QrCode::mergeString(Storage::get('path/to/image.png'), $percentage);
-	
+
 	//Generates a QrCode with an image centered in the middle.
 	QrCode::format('png')->mergeString(Storage::get('path/to/image.png'))->generate();
-	
+
 	//Generates a QrCode with an image centered in the middle.  The inserted image takes up 30% of the QrCode.
 	QrCode::format('png')->mergeString(Storage::get('path/to/image.png'), .3)->generate();
 
@@ -246,10 +250,10 @@ Helpers are an easy way to create QrCodes that cause a reader to perform a certa
 This helpers generates a scannable bitcoin to send payments.  [More information](https://bitco.in/en/developer-guide#plain-text)
 
 	QrCode::BTC($address, $amount);
-	
+
 	//Sends a 0.334BTC payment to the address
 	QrCode::BTC('bitcoin address', 0.334);
-	
+
 	//Sends a 0.334BTC payment to the address with some optional arguments
 	QrCode::size(500)->BTC('address', 0.0034, [
         'label' => 'my label',
@@ -262,42 +266,42 @@ This helpers generates a scannable bitcoin to send payments.  [More information]
 This helper generates an e-mail qrcode that is able to fill in the e-mail address, subject, and body.
 
 	QrCode::email($to, $subject, $body);
-	
+
 	//Fills in the to address
 	QrCode::email('foo@bar.com');
-	
+
 	//Fills in the to address, subject, and body of an e-mail.
 	QrCode::email('foo@bar.com', 'This is the subject.', 'This is the message body.');
-	
+
 	//Fills in just the subject and body of an e-mail.
 	QrCode::email(null, 'This is the subject.', 'This is the message body.');
-	
+
 #### Geo
 
 This helper generates a latitude and longitude that a phone can read and open the location up in Google Maps or similar app.
 
 	QrCode::geo($latitude, $longitude);
-	
+
 	QrCode::geo(37.822214, -122.481769);
-	
+
 #### Phone Number
 
 This helper generates a QrCode that can be scanned and then dials a number.
 
 	QrCode::phoneNumber($phoneNumber);
-	
+
 	QrCode::phoneNumber('555-555-5555');
 	QrCode::phoneNumber('1-800-Laravel');
-	
+
 #### SMS (Text Messages)
 
 This helper makes SMS messages that can be prefilled with the send to address and body of the message.
 
 	QrCode::SMS($phoneNumber, $message);
-	
+
 	//Creates a text message with the number filled in.
 	QrCode::SMS('555-555-5555');
-	
+
 	//Creates a text message with the number and message filled in.
 	QrCode::SMS('555-555-5555', 'Body of the message');
 
@@ -311,25 +315,25 @@ This helpers makes scannable QrCodes that can connect a phone to a WiFI network.
 		'password' => 'Password of the network',
 		'hidden' => 'Whether the network is a hidden SSID or not.'
 	]);
-	
+
 	//Connects to an open WiFi network.
 	QrCode::wiFi([
 		'ssid' => 'Network Name',
 	]);
-	
+
 	//Connects to an open, hidden WiFi network.
 	QrCode::wiFi([
 		'ssid' => 'Network Name',
 		'hidden' => 'true'
 	]);
-	
+
 	//Connects to an secured, WiFi network.
 	QrCode::wiFi([
 		'ssid' => 'Network Name',
 		'encryption' => 'WPA',
 		'password' => 'myPassword'
 	]);
-	
+
 >WiFi scanning is not currently supported on Apple Products.
 
 <a id="docs-common-usage"></a>
