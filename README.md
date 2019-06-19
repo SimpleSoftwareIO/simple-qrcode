@@ -11,6 +11,10 @@ Simple QrCode
 
 ## Try our dead simple, free file transfer service [keep.sh](https://keep.sh)
 
+![keep.sh](https://user-images.githubusercontent.com/624784/59808382-06676800-92ca-11e9-87b7-70020b6aef5f.gif)
+
+Upload files with a single curl command from your terminal! `curl --upload-file file.txt https://keep.sh`
+
 ## Introduction
 Simple QrCode is an easy to use wrapper for the popular Laravel framework based on the great work provided by [Bacon/BaconQrCode](https://github.com/Bacon/BaconQrCode).  We created an interface that is familiar and easy to install for Laravel users.
 
