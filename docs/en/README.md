@@ -7,7 +7,8 @@ Simple QrCode
 [![License](https://poser.pugx.org/simplesoftwareio/simple-qrcode/license.svg)](https://packagist.org/packages/simplesoftwareio/simple-qrcode)
 [![Total Downloads](https://poser.pugx.org/simplesoftwareio/simple-qrcode/downloads.svg)](https://packagist.org/packages/simplesoftwareio/simple-qrcode)
 
-#### [Español](https://www.simplesoftware.io/simple-qrcode/es) | [Français](https://www.simplesoftware.io/simple-qrcode/fr) | [Italiano](https://www.simplesoftware.io/simple-qrcode/it) | [Português](https://www.simplesoftware.io/simple-qrcode/pt-br) | [Русский](https://www.simplesoftware.io/simple-qrcode/ru) | [हिंदी](https://www.simplesoftware.io/simple-qrcode/hi) | [汉语](https://www.simplesoftware.io/simple-qrcode/zh)
+#### [Español](https://www.simplesoftware.io/docs/simple-qrcode/es) | [Français](https://www.simplesoftware.io/docs/simple-qrcode/fr) | [Italiano](https://www.simplesoftware.io/docs/simple-qrcode/it) | [Português](https://www.simplesoftware.io/docs/simple-qrcode/pt-br) | [Русский](https://www.simplesoftware.io/docs/simple-qrcode/ru) | [日本人](https://www.simplesoftware.io/docs/simple-qrcode/ja) | [한국어](https://www.simplesoftware.io/docs/simple-qrcode/kr) | [हिंदी](https://www.simplesoftware.io/docs/simple-qrcode/hi) | [汉语](https://www.simplesoftware.io/docs/simple-qrcode/zh)
+
 
 - [Introduction](#docs-introduction)
 - [Translations](#docs-translations)
@@ -17,6 +18,12 @@ Simple QrCode
 - [Helpers](#docs-helpers)
 - [Common QrCode Usage](#docs-common-usage)
 - [Usage Outside of Laravel](#docs-outside-laravel)
+
+## Try our dead simple, free file transfer service [keep.sh](https://keep.sh)
+
+![keep.sh](https://user-images.githubusercontent.com/624784/59808382-06676800-92ca-11e9-87b7-70020b6aef5f.gif)
+
+Upload files with a single curl command from your terminal! `curl --upload-file file.txt https://keep.sh`
 
 <a id="docs-introduction"></a>
 ## Introduction
