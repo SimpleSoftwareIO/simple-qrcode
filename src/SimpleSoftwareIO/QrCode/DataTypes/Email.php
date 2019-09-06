@@ -69,7 +69,6 @@ class Email implements DataTypeInterface
                 'body'    => $this->body,
             ];
             $email =  $email.'?subject='.$data['subject'].'&body='.$data['body'];
-        };
         }
 
         return $email;
