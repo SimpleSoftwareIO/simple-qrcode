@@ -13,7 +13,7 @@
     "require": {
         "php": ">=7.0",
       	"ext-gd": "*",
-        "bacon/bacon-qr-code": "1.0.*",
+        "bacon/bacon-qr-code": "2.0.*",
         "illuminate/support": ">=5.0.0"
     },
     "require-dev": {
