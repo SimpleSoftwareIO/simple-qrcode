@@ -5,6 +5,7 @@ namespace SimpleSoftwareIO\QrCode;
 use BaconQrCode;
 use BaconQrCode\Common\ErrorCorrectionLevel;
 use BaconQrCode\Encoder\Encoder;
+use BaconQrCode\Renderer\Color\Alpha;
 use BaconQrCode\Renderer\Color\Rgb;
 use BaconQrCode\Renderer\Image\Eps;
 use BaconQrCode\Renderer\Image\Png;
@@ -193,6 +194,34 @@ class BaconQrCodeGenerator implements QrCodeInterface
     public function backgroundColor($red, $green, $blue)
     {
         $this->writer->getRenderer()->setBackgroundColor(new Rgb($red, $green, $blue));
+
+        return $this;
+    }
+    
+    /**
+     * Changes the alpha of a QrCode.
+     *
+     * @param int $alpha
+     *
+     * @return $this
+     */
+    public function transparent()
+    {
+        $this->alpha(0);
+
+        return $this;
+    }
+
+    /**
+     * Changes the alpha of a QrCode.
+     *
+     * @param int $alpha
+     *
+     * @return $this
+     */
+    public function alpha($alpha)
+    {
+        $this->writer->getRenderer()->setBackgroundColor(new Alpha($alpha));
 
         return $this;
     }
