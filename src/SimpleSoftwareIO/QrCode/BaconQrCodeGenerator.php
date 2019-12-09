@@ -27,7 +27,7 @@ class BaconQrCodeGenerator implements QrCodeInterface
      *
      * @var \BaconQrCode\Common\ErrorCorrectionLevel
      */
-    protected $errorCorrection = ErrorCorrectionLevel::forBits(1);
+    protected $errorCorrection;
 
     /**
      * Holds the Encoder mode to encode a QrCode.
@@ -60,6 +60,7 @@ class BaconQrCodeGenerator implements QrCodeInterface
     {
         $format = $format ?: new Svg();
         $this->writer = $writer ?: new Writer($format);
+        $this->errorCorrection = ErrorCorrectionLevel::forBits(1)
     }
 
     /**
