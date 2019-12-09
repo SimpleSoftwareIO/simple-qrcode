@@ -60,7 +60,7 @@ class BaconQrCodeGenerator implements QrCodeInterface
     {
         $format = $format ?: new Svg();
         $this->writer = $writer ?: new Writer($format);
-        $this->errorCorrection = ErrorCorrectionLevel::forBits(1)
+        $this->errorCorrection = ErrorCorrectionLevel::forBits(1);
     }
 
     /**
