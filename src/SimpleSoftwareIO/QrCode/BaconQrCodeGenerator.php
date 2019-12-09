@@ -4,26 +4,21 @@ namespace SimpleSoftwareIO\QrCode;
 
 use BaconQrCode;
 use BaconQrCode\Renderer\ImageRenderer;
+use BaconQrCode\Renderer\RendererInterface;
 use BaconQrCode\Common\ErrorCorrectionLevel;
 use BaconQrCode\Encoder\Encoder;
 use BaconQrCode\Renderer\Color\Alpha;
 use BaconQrCode\Renderer\Color\Rgb;
+use BaconQrCode\Renderer\RendererStyle\Fill;
 use BaconQrCode\Renderer\Image\EpsImageBackEnd;
-use BaconQrCode\Renderer\Image\PngImageBackEnd;
-use BaconQrCode\Renderer\Image\RendererInterface;
+use BaconQrCode\Renderer\RendererStyle\EyeFill;
+use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
 use BaconQrCode\Renderer\Image\SvgImageBackEnd;
 use BaconQrCode\Writer;
 use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 
 class BaconQrCodeGenerator implements QrCodeInterface
 {
-    /**
-     * Holds the BaconQrCode Writer Object.
-     *
-     * @var \BaconQrCode\Writer
-     */
-    protected $writer;
-
     /**
      * Holds the QrCode error correction levels.  This is stored by using the BaconQrCode ErrorCorrectionLevel class constants.
      *
@@ -52,34 +47,55 @@ class BaconQrCodeGenerator implements QrCodeInterface
      */
     protected $imagePercentage = .2;
 
+    protected $format;
+
+    protected $alpha = null;
+
+    protected $color;
+
+    protected $backgroundColor;
+
+    protected $margin = 4;
+
+    protected $size = 400;
+
     /**
      * BaconQrCodeGenerator constructor.
      *
-     * @param Writer|null            $writer
+     * @param Writer|null $writer
      * @param RendererInterface|null $format
      */
-    public function __construct(Writer $writer = null, RendererInterface $format = null)
+    public function __construct($writer = null, $format = null)
     {
-        $format = $format ?: new SvgImageBackEnd();
-        $renderer = new ImageRenderer(
-            new RendererStyle(400),
-            $format
-        );
-        $this->writer = $writer ?: new Writer($renderer);
+        $this->format = $format ?: new SvgImageBackEnd;
+//        $this->renderer = new ImageRenderer($this->rendererStyle, $this->format);
+//        $this->writer = $writer ?: new Writer($this->renderer);
+        $this->color = new BaconQrCode\Renderer\Color\Gray(0);
+        $this->backgroundColor = new BaconQrCode\Renderer\Color\Gray(100);
         $this->errorCorrection = ErrorCorrectionLevel::forBits(1);
     }
 
     /**
      * Generates a QrCode.
      *
-     * @param string      $text     The text to be converted into a QrCode
+     * @param string $text The text to be converted into a QrCode
      * @param null|string $filename The filename and path to save the QrCode file
      *
      * @return string|void Returns a QrCode string depending on the format, or saves to a file.
      */
     public function generate($text, $filename = null)
     {
-        $qrCode = $this->writer->writeString($text, $this->encoding, $this->errorCorrection);
+        if ($this->alpha !== null) {
+            $this->backgroundColor = new Alpha($this->alpha, $this->backgroundColor);
+        }
+
+        $fill = Fill::withForegroundColor($this->backgroundColor, $this->color, EyeFill::inherit(), EyeFill::inherit(), EyeFill::inherit());
+
+        $this->format->new($this->size, $this->backgroundColor);
+        $rendererStyle = new RendererStyle($this->size, $this->margin, null, null, $fill);
+        $renderer = new ImageRenderer($rendererStyle, $this->format);
+        $writer = new Writer($renderer);
+        $qrCode = $writer->writeString($text, $this->encoding, $this->errorCorrection);
 
         if ($this->imageMerge !== null) {
             $merger = new ImageMerge(new Image($qrCode), new Image($this->imageMerge));
@@ -105,7 +121,7 @@ class BaconQrCodeGenerator implements QrCodeInterface
     public function merge($filepath, $percentage = .2, $absolute = false)
     {
         if (function_exists('base_path') && !$absolute) {
-            $filepath = base_path().$filepath;
+            $filepath = base_path() . $filepath;
         }
 
         $this->imageMerge = file_get_contents($filepath);
@@ -135,21 +151,21 @@ class BaconQrCodeGenerator implements QrCodeInterface
      *
      * @param string $format The desired format.
      *
+     * @return $this
      * @throws \InvalidArgumentException
      *
-     * @return $this
      */
     public function format($format)
     {
         switch ($format) {
             case 'png':
-                $this->writer->setRenderer(new PngImageBackEnd());
+                $this->format = new ImagickImageBackEnd;
                 break;
             case 'eps':
-                $this->writer->setRenderer(new EpsImageBackEnd());
+                $this->format = new EpsImageBackEnd;
                 break;
             case 'svg':
-                $this->writer->setRenderer(new SvgImageBackEnd());
+                $this->format = new SvgImageBackEnd;
                 break;
             default:
                 throw new \InvalidArgumentException('Invalid format provided.');
@@ -167,8 +183,7 @@ class BaconQrCodeGenerator implements QrCodeInterface
      */
     public function size($pixels)
     {
-        $this->writer->getRenderer()->setHeight($pixels);
-        $this->writer->getRenderer()->setWidth($pixels);
+        $this->size = $pixels;
 
         return $this;
     }
@@ -184,7 +199,7 @@ class BaconQrCodeGenerator implements QrCodeInterface
      */
     public function color($red, $green, $blue)
     {
-        $this->writer->getRenderer()->setForegroundColor(new Rgb($red, $green, $blue));
+        $this->color = new Rgb($red, $green, $blue);
 
         return $this;
     }
@@ -200,11 +215,12 @@ class BaconQrCodeGenerator implements QrCodeInterface
      */
     public function backgroundColor($red, $green, $blue)
     {
-        $this->writer->getRenderer()->setBackgroundColor(new Rgb($red, $green, $blue));
+        $this->backgroundColor = new Rgb($red, $green, $blue);
+//        $this->writer->getRenderer()->setBackgroundColor(new Rgb($red, $green, $blue));
 
         return $this;
     }
-    
+
     /**
      * Changes the alpha of a QrCode.
      *
@@ -228,7 +244,7 @@ class BaconQrCodeGenerator implements QrCodeInterface
      */
     public function alpha($alpha)
     {
-        $this->writer->getRenderer()->setBackgroundColor(new Alpha($alpha));
+        $this->alpha = $alpha;
 
         return $this;
     }
@@ -242,7 +258,7 @@ class BaconQrCodeGenerator implements QrCodeInterface
      */
     public function errorCorrection($level)
     {
-        $this->errorCorrection = constant("BaconQrCode\Common\ErrorCorrectionLevel::$level");
+        $this->errorCorrection = ErrorCorrectionLevel::$level();
 
         return $this;
     }
@@ -256,7 +272,7 @@ class BaconQrCodeGenerator implements QrCodeInterface
      */
     public function margin($margin)
     {
-        $this->writer->getRenderer()->setMargin($margin);
+        $this->margin = $margin;
 
         return $this;
     }
@@ -280,6 +296,7 @@ class BaconQrCodeGenerator implements QrCodeInterface
      *
      * @param $method
      * @param $arguments
+     * @return string|void
      */
     public function __call($method, $arguments)
     {
@@ -319,7 +336,7 @@ class BaconQrCodeGenerator implements QrCodeInterface
     {
         $method = ucfirst($method);
 
-        $class = "SimpleSoftwareIO\QrCode\DataTypes\\".$method;
+        $class = "SimpleSoftwareIO\QrCode\DataTypes\\" . $method;
 
         return $class;
     }
