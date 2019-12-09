@@ -7,10 +7,10 @@ use BaconQrCode\Common\ErrorCorrectionLevel;
 use BaconQrCode\Encoder\Encoder;
 use BaconQrCode\Renderer\Color\Alpha;
 use BaconQrCode\Renderer\Color\Rgb;
-use BaconQrCode\Renderer\Image\Eps;
-use BaconQrCode\Renderer\Image\Png;
+use BaconQrCode\Renderer\Image\EpsImageBackEnd;
+use BaconQrCode\Renderer\Image\PngImageBackEnd;
 use BaconQrCode\Renderer\Image\RendererInterface;
-use BaconQrCode\Renderer\Image\Svg;
+use BaconQrCode\Renderer\Image\SvgImageBackEnd;
 use BaconQrCode\Writer;
 
 class BaconQrCodeGenerator implements QrCodeInterface
@@ -58,7 +58,7 @@ class BaconQrCodeGenerator implements QrCodeInterface
      */
     public function __construct(Writer $writer = null, RendererInterface $format = null)
     {
-        $format = $format ?: new Svg();
+        $format = $format ?: new SvgImageBackEnd();
         $this->writer = $writer ?: new Writer($format);
         $this->errorCorrection = ErrorCorrectionLevel::forBits(1);
     }
@@ -137,13 +137,13 @@ class BaconQrCodeGenerator implements QrCodeInterface
     {
         switch ($format) {
             case 'png':
-                $this->writer->setRenderer(new Png());
+                $this->writer->setRenderer(new PngImageBackEnd());
                 break;
             case 'eps':
-                $this->writer->setRenderer(new Eps());
+                $this->writer->setRenderer(new EpsImageBackEnd());
                 break;
             case 'svg':
-                $this->writer->setRenderer(new Svg());
+                $this->writer->setRenderer(new SvgImageBackEnd());
                 break;
             default:
                 throw new \InvalidArgumentException('Invalid format provided.');
