@@ -3,6 +3,7 @@
 namespace SimpleSoftwareIO\QrCode;
 
 use BaconQrCode;
+use BaconQrCode\Renderer\ImageRenderer;
 use BaconQrCode\Common\ErrorCorrectionLevel;
 use BaconQrCode\Encoder\Encoder;
 use BaconQrCode\Renderer\Color\Alpha;
@@ -12,6 +13,7 @@ use BaconQrCode\Renderer\Image\PngImageBackEnd;
 use BaconQrCode\Renderer\Image\RendererInterface;
 use BaconQrCode\Renderer\Image\SvgImageBackEnd;
 use BaconQrCode\Writer;
+use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 
 class BaconQrCodeGenerator implements QrCodeInterface
 {
