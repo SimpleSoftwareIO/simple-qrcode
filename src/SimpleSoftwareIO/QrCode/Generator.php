@@ -12,7 +12,7 @@ use BaconQrCode\Renderer\Image\RendererInterface;
 use BaconQrCode\Renderer\Image\Svg;
 use BaconQrCode\Writer;
 
-class BaconQrCodeGenerator implements QrCodeInterface
+class Generator
 {
     /**
      * Holds the BaconQrCode Writer Object.

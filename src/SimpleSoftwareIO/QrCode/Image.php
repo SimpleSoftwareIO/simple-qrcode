@@ -2,7 +2,7 @@
 
 namespace SimpleSoftwareIO\QrCode;
 
-class Image implements ImageInterface
+class Image
 {
     /**
      * Holds the image resource.

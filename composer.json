@@ -30,10 +30,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "SimpleSoftwareIO\\QrCode\\QrCodeServiceProvider"
+                "SimpleSoftwareIO\\QrCode\\ServiceProvider"
             ],
             "aliases": {
-                "QrCode": "SimpleSoftwareIO\\QrCode\\Facades\\QrCode"
+                "QrCode": "SimpleSoftwareIO\\QrCode\\Facade"
             }
         }
     }

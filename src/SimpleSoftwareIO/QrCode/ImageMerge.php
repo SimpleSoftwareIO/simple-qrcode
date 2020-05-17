@@ -2,7 +2,7 @@
 
 namespace SimpleSoftwareIO\QrCode;
 
-class ImageMerge implements ImageMergeInterface
+class ImageMerge
 {
     /**
      * Holds the QrCode image.
