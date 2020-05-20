@@ -49,6 +49,11 @@ class Generator
      */
     protected $imagePercentage = .2;
 
+    protected $size = [
+        'height' => 250,
+        'width' => 250,
+    ];
+
     /**
      * BaconQrCodeGenerator constructor.
      *
@@ -71,7 +76,11 @@ class Generator
      */
     public function generate($text, $filename = null)
     {
-        $qrCode = $this->writer->writeString($text, $this->encoding, $this->errorCorrection);
+        $writer = $this->writer;
+        $writer->getRenderer()->setHeight($this->size['height']);
+        $writer->getRenderer()->setWidth($this->size['width']);
+
+        $qrCode = $writer->writeString($text, $this->encoding, $this->errorCorrection);
 
         if ($this->imageMerge !== null) {
             $merger = new ImageMerge(new Image($qrCode), new Image($this->imageMerge));
@@ -157,10 +166,12 @@ class Generator
      *
      * @return $this
      */
-    public function size($pixels)
+    public function size($width = 250, $height = null)
     {
-        $this->writer->getRenderer()->setHeight($pixels);
-        $this->writer->getRenderer()->setWidth($pixels);
+        $this->size = [
+            'height' => $height ?? $width,
+            'width' => $width,
+        ];
 
         return $this;
     }
