@@ -56,11 +56,86 @@ class Generator
 
     protected $gradient;
 
+    /**
+     * Holds an image string that will be merged with the QrCode.
+     *
+     * @var null|string
+     */
+    protected $imageMerge = null;
+
+    /**
+     * The percentage that a merged image should take over the source image.
+     *
+     * @var float
+     */
+    protected $imagePercentage = .2;
+
+    /**
+     * Creates a new datatype object and then generates a QrCode.
+     *
+     * @param $method
+     * @param $arguments
+     */
+    public function __call($method, $arguments)
+    {
+        $dataType = $this->createClass($method);
+        $dataType->create($arguments);
+
+        return $this->generate(strval($dataType));
+    }
+
     public function generate(string $text, string $filename = null)
     {
-        $render = $this->getRenderer();
+        $qrCode =  $this->getWriter($this->getRenderer())->writeString($text, $this->encoding, $this->errorCorrection);
 
-        return $this->getWriter($render)->writeString($text, $this->encoding, $this->errorCorrection);
+        if ($this->imageMerge !== null && $this->format === 'png') {
+            $merger = new ImageMerge(new Image($qrCode), new Image($this->imageMerge));
+            $qrCode = $merger->merge($this->imagePercentage);
+        }
+
+        if ($filename) {
+            file_put_contents($filename, $qrCode);
+            return;
+        }
+
+        return $qrCode;
+    }
+
+    /**
+     * Merges an image with the center of the QrCode.
+     *
+     * @param $filepath string The filepath to an image
+     * @param $percentage float The amount that the merged image should be placed over the qrcode.
+     * @param $absolute boolean Whether to use an absolute filepath or not.
+     *
+     * @return $this
+     */
+    public function merge($filepath, $percentage = .2, $absolute = false)
+    {
+        if (function_exists('base_path') && !$absolute) {
+            $filepath = base_path().$filepath;
+        }
+
+        $this->imageMerge = file_get_contents($filepath);
+        $this->imagePercentage = $percentage;
+
+        return $this;
+    }
+
+    /**
+     * Merges an image string with the center of the QrCode, does not check for correct format.
+     *
+     * @param $content string The string contents of an image.
+     * @param $percentage float The amount that the merged image should be placed over the qrcode.
+     *
+     * @return $this
+     */
+    public function mergeString($content, $percentage = .2)
+    {
+        $this->imageMerge = $content;
+        $this->imagePercentage = $percentage;
+
+        return $this;
     }
 
     public function size(int $pixels): self
@@ -239,5 +314,39 @@ class Generator
         }
         
         return new Alpha($alpha, new Rgb($red, $green, $blue));
+    }
+
+    /**
+     * Creates a new DataType class dynamically.
+     *
+     * @param string $method
+     *
+     * @return SimpleSoftwareIO\QrCode\DataTypes\DataTypeInterface
+     */
+    protected function createClass($method)
+    {
+        $class = $this->formatClass($method);
+
+        if (!class_exists($class)) {
+            throw new \BadMethodCallException();
+        }
+
+        return new $class();
+    }
+
+    /**
+     * Formats the method name correctly.
+     *
+     * @param $method
+     *
+     * @return string
+     */
+    protected function formatClass($method)
+    {
+        $method = ucfirst($method);
+
+        $class = "SimpleSoftwareIO\QrCode\DataTypes\\".$method;
+
+        return $class;
     }
 }

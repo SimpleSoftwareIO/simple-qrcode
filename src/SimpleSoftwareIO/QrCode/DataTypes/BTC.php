@@ -12,13 +12,6 @@ class BTC implements DataTypeInterface
     protected $prefix = 'bitcoin:';
 
     /**
-     * The separator between the variables.
-     *
-     * @var string
-     */
-    protected $separator = '&';
-
-    /**
      * The BitCoin address.
      *
      * @var string
@@ -123,7 +116,7 @@ class BTC implements DataTypeInterface
         $query = http_build_query([
             'amount'    => $this->amount,
             'label'     => $this->label,
-            '$message'  => $this->message,
+            'message'  => $this->message,
             'r'         => $this->returnAddress,
         ]);
 

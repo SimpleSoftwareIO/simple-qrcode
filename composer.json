@@ -27,6 +27,9 @@
             "SimpleSoftwareIO\\QrCode\\": "src"
         }
     },
+    "scripts": {
+        "test": "phpunit"
+    },
     "extra": {
         "laravel": {
             "providers": [

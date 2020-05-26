@@ -33,7 +33,7 @@ class ImageTest extends TestCase
      */
     protected $image;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->imagePath = file_get_contents(dirname(__FILE__).'/Images/simplesoftware-icon-grey-blue.png');
         $this->image = new Image($this->imagePath);
@@ -42,7 +42,7 @@ class ImageTest extends TestCase
         $this->compareTestSaveLocation = dirname(__FILE__).'/compareImage.png';
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         @unlink($this->testImageSaveLocation);
         @unlink($this->compareTestSaveLocation);
