@@ -23,12 +23,17 @@ use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use BaconQrCode\Writer;
 use InvalidArgumentException;
 use BaconQrCode\Renderer\Color\Gray;
+use BaconQrCode\Renderer\Image\EpsImageBackEnd;
+use BaconQrCode\Renderer\Image\ImageBackEndInterface;
+use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
 use BaconQrCode\Renderer\RendererStyle\EyeFill;
 use BaconQrCode\Renderer\RendererStyle\Gradient;
 use BaconQrCode\Renderer\RendererStyle\GradientType;
 
 class Generator
 {
+    protected $format = 'svg';
+
     protected $pixels = 100;
 
     protected $margin = 0;
@@ -65,9 +70,15 @@ class Generator
         return $this;
     }
 
-    public function format(): self
+    public function format(string $format): self
     {
-        //png, eps, svg, jpg
+        if (! in_array($format, ['svg', 'eps', 'png'])) {
+            throw new InvalidArgumentException("\$format must be svg, eps, or png. {$format} is not a valid.");
+        }
+
+        $this->format = $format;
+
+        return $this;
     }
 
     public function color(int $red, int $green, int $blue, ?int $alpha = null): self
@@ -161,10 +172,23 @@ class Generator
     {
         $renderer = new ImageRenderer(
             new RendererStyle($this->pixels, $this->margin, $this->getModule(), $this->getEye(), $this->getFill()),
-            new SvgImageBackEnd
+            $this->getFormatter()
         );
 
         return $renderer;
+    }
+
+    protected function getFormatter(): ImageBackEndInterface
+    {
+        if ($this->format === 'png') {
+            return new ImagickImageBackEnd('png');
+        }
+
+        if ($this->format === 'eps') {
+            return new EpsImageBackEnd;
+        }
+
+        return new SvgImageBackEnd;
     }
 
     protected function getModule(): ModuleInterface
