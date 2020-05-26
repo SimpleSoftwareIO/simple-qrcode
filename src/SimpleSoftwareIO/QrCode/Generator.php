@@ -2,289 +2,162 @@
 
 namespace SimpleSoftwareIO\QrCode;
 
-use BaconQrCode;
 use BaconQrCode\Common\ErrorCorrectionLevel;
 use BaconQrCode\Encoder\Encoder;
-use BaconQrCode\Renderer\Color\Rgb;
-use BaconQrCode\Renderer\Image\Eps;
-use BaconQrCode\Renderer\Image\Png;
-use BaconQrCode\Renderer\Image\RendererInterface;
-use BaconQrCode\Renderer\Image\Svg;
+use BaconQrCode\Renderer\Eye\EyeInterface;
+use BaconQrCode\Renderer\Eye\ModuleEye;
+use BaconQrCode\Renderer\Eye\SimpleCircleEye;
+use BaconQrCode\Renderer\Eye\SquareEye;
+use BaconQrCode\Renderer\Image\SvgImageBackEnd;
+use BaconQrCode\Renderer\ImageRenderer;
+use BaconQrCode\Renderer\Module\DotsModule;
+use BaconQrCode\Renderer\Module\ModuleInterface;
+use BaconQrCode\Renderer\Module\RoundnessModule;
+use BaconQrCode\Renderer\Module\SquareModule;
+use BaconQrCode\Renderer\RendererInterface;
+use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use BaconQrCode\Writer;
+use InvalidArgumentException;
 
 class Generator
 {
-    /**
-     * Holds the BaconQrCode Writer Object.
-     *
-     * @var \BaconQrCode\Writer
-     */
-    protected $writer;
+    protected $pixels = 100;
 
-    /**
-     * Holds the QrCode error correction levels.  This is stored by using the BaconQrCode ErrorCorrectionLevel class constants.
-     *
-     * @var \BaconQrCode\Common\ErrorCorrectionLevel
-     */
-    protected $errorCorrection = ErrorCorrectionLevel::L;
+    protected $margin = 0;
 
-    /**
-     * Holds the Encoder mode to encode a QrCode.
-     *
-     * @var string
-     */
+    protected $errorCorrection = null;
+
     protected $encoding = Encoder::DEFAULT_BYTE_MODE_ECODING;
 
-    /**
-     * Holds an image string that will be merged with the QrCode.
-     *
-     * @var null|string
-     */
-    protected $imageMerge = null;
+    protected $style = 'square';
 
-    /**
-     * The percentage that a merged image should take over the source image.
-     *
-     * @var float
-     */
-    protected $imagePercentage = .2;
+    protected $styleSize = null;
 
-    /**
-     * BaconQrCodeGenerator constructor.
-     *
-     * @param Writer|null            $writer
-     * @param RendererInterface|null $format
-     */
-    public function __construct(Writer $writer = null, RendererInterface $format = null)
+    protected $eyeStyle = null;
+
+    public function generate(string $text, string $filename = null)
     {
-        $format = $format ?: new Svg();
-        $this->writer = $writer ?: new Writer($format);
+        $render = $this->getRenderer();
+
+        return $this->getWriter($render)->writeString($text, $this->encoding, $this->errorCorrection);
     }
 
-    /**
-     * Generates a QrCode.
-     *
-     * @param string      $text     The text to be converted into a QrCode
-     * @param null|string $filename The filename and path to save the QrCode file
-     *
-     * @return string|void Returns a QrCode string depending on the format, or saves to a file.
-     */
-    public function generate($text, $filename = null)
+    public function size(int $pixels): self
     {
-        $qrCode = $this->writer->writeString($text, $this->encoding, $this->errorCorrection);
+        $this->pixels = $pixels;
 
-        if ($this->imageMerge !== null) {
-            $merger = new ImageMerge(new Image($qrCode), new Image($this->imageMerge));
-            $qrCode = $merger->merge($this->imagePercentage);
+        return $this;
+    }
+
+    public function format(): self
+    {
+        //png, eps, svg, jpg
+        //
+    }
+
+    public function color($red, $green, $blue, $alpha): self
+    {
+    }
+
+    public function backgroundColor($red, $green, $blue, $alpha): self
+    {
+    }
+
+    public function eyeColor(array $eye1, array $eye2, array $eye3): self
+    {
+    }
+
+    public function gradient(): self
+    {
+    }
+
+    public function eye(string $style): self
+    {
+        if (! in_array($style, ['square', 'circle'])) {
+            throw new InvalidArgumentException("\$style must be square or circle. {$style} is not a valid eye style.");
         }
 
-        if ($filename === null) {
-            return $qrCode;
+        $this->eyeStyle = $style;
+
+        return $this;
+    }
+
+    public function style(string $style, float $size = 0.5): self
+    {
+        if (! in_array($style, ['square', 'dot', 'round'])) {
+            throw new InvalidArgumentException("\$style must be square, dot, or round. {$style} is not a valid  QrCode style.");
         }
 
-        return file_put_contents($filename, $qrCode);
-    }
-
-    /**
-     * Merges an image with the center of the QrCode.
-     *
-     * @param $filepath string The filepath to an image
-     * @param $percentage float The amount that the merged image should be placed over the qrcode.
-     * @param $absolute boolean Whether to use an absolute filepath or not.
-     *
-     * @return $this
-     */
-    public function merge($filepath, $percentage = .2, $absolute = false)
-    {
-        if (function_exists('base_path') && !$absolute) {
-            $filepath = base_path().$filepath;
+        if ($size < 0 || $size >= 1) {
+            throw new InvalidArgumentException("\$size must be between 0 and 1.  {$size} is not valid.");
         }
 
-        $this->imageMerge = file_get_contents($filepath);
-        $this->imagePercentage = $percentage;
+        $this->style = $style;
+        $this->styleSize = $size;
 
         return $this;
     }
 
-    /**
-     * Merges an image string with the center of the QrCode, does not check for correct format.
-     *
-     * @param $content string The string contents of an image.
-     * @param $percentage float The amount that the merged image should be placed over the qrcode.
-     *
-     * @return $this
-     */
-    public function mergeString($content, $percentage = .2)
+    public function encoding(string $encoding): self
     {
-        $this->imageMerge = $content;
-        $this->imagePercentage = $percentage;
+        $this->encoding = strtoupper($encoding);
 
         return $this;
     }
 
-    /**
-     * Switches the format of the outputted QrCode or defaults to SVG.
-     *
-     * @param string $format The desired format.
-     *
-     * @throws \InvalidArgumentException
-     *
-     * @return $this
-     */
-    public function format($format)
+    public function errorCorrection(string $errorCorrection): self
     {
-        switch ($format) {
-            case 'png':
-                $this->writer->setRenderer(new Png());
-                break;
-            case 'eps':
-                $this->writer->setRenderer(new Eps());
-                break;
-            case 'svg':
-                $this->writer->setRenderer(new Svg());
-                break;
-            default:
-                throw new \InvalidArgumentException('Invalid format provided.');
+        $errorCorrection = strtoupper($errorCorrection);
+        $this->errorCorrection = ErrorCorrectionLevel::$errorCorrection();
+
+        return $this;
+    }
+
+    public function margin(int $margin): self
+    {
+        $this->margin = $margin;
+
+        return $this;
+    }
+
+    protected function getWriter(ImageRenderer $renderer): Writer
+    {
+        return (new Writer($renderer));
+    }
+
+    protected function getRenderer(): ImageRenderer
+    {
+        $renderer = new ImageRenderer(
+            new RendererStyle($this->pixels, $this->margin, $this->getModule(), $this->getEye()),
+            new SvgImageBackEnd
+        );
+
+        return $renderer;
+    }
+
+    protected function getModule(): ModuleInterface
+    {
+        if ($this->style === 'dot') {
+            return (new DotsModule($this->styleSize));
         }
 
-        return $this;
-    }
-
-    /**
-     * Changes the size of the QrCode.
-     *
-     * @param int $pixels The size of the QrCode in pixels
-     *
-     * @return $this
-     */
-    public function size($pixels)
-    {
-        $this->writer->getRenderer()->setHeight($pixels);
-        $this->writer->getRenderer()->setWidth($pixels);
-
-        return $this;
-    }
-
-    /**
-     * Changes the foreground color of a QrCode.
-     *
-     * @param int $red
-     * @param int $green
-     * @param int $blue
-     *
-     * @return $this
-     */
-    public function color($red, $green, $blue)
-    {
-        $this->writer->getRenderer()->setForegroundColor(new Rgb($red, $green, $blue));
-
-        return $this;
-    }
-
-    /**
-     * Changes the background color of a QrCode.
-     *
-     * @param int $red
-     * @param int $green
-     * @param int $blue
-     *
-     * @return $this
-     */
-    public function backgroundColor($red, $green, $blue)
-    {
-        $this->writer->getRenderer()->setBackgroundColor(new Rgb($red, $green, $blue));
-
-        return $this;
-    }
-
-    /**
-     * Changes the error correction level of a QrCode.
-     *
-     * @param string $level Desired error correction level.  L = 7% M = 15% Q = 25% H = 30%
-     *
-     * @return $this
-     */
-    public function errorCorrection($level)
-    {
-        $this->errorCorrection = constant("BaconQrCode\Common\ErrorCorrectionLevel::$level");
-
-        return $this;
-    }
-
-    /**
-     * Creates a margin around the QrCode.
-     *
-     * @param int $margin The desired margin in pixels around the QrCode
-     *
-     * @return $this
-     */
-    public function margin($margin)
-    {
-        $this->writer->getRenderer()->setMargin($margin);
-
-        return $this;
-    }
-
-    /**
-     * Sets the Encoding mode.
-     *
-     * @param string $encoding
-     *
-     * @return $this
-     */
-    public function encoding($encoding)
-    {
-        $this->encoding = $encoding;
-
-        return $this;
-    }
-
-    /**
-     * Creates a new datatype object and then generates a QrCode.
-     *
-     * @param $method
-     * @param $arguments
-     */
-    public function __call($method, $arguments)
-    {
-        $dataType = $this->createClass($method);
-
-        $dataType->create($arguments);
-
-        return $this->generate(strval($dataType));
-    }
-
-    /**
-     * Creates a new DataType class dynamically.
-     *
-     * @param string $method
-     *
-     * @return SimpleSoftwareIO\QrCode\DataTypes\DataTypeInterface
-     */
-    private function createClass($method)
-    {
-        $class = $this->formatClass($method);
-
-        if (!class_exists($class)) {
-            throw new \BadMethodCallException();
+        if ($this->style === 'round') {
+            return (new RoundnessModule($this->styleSize));
         }
 
-        return new $class();
+        return SquareModule::instance();
     }
 
-    /**
-     * Formats the method name correctly.
-     *
-     * @param $method
-     *
-     * @return string
-     */
-    private function formatClass($method)
+    protected function getEye(): EyeInterface
     {
-        $method = ucfirst($method);
+        if ($this->eyeStyle === 'square') {
+            return SquareEye::instance();
+        }
 
-        $class = "SimpleSoftwareIO\QrCode\DataTypes\\".$method;
+        if ($this->eyeStyle === 'circle') {
+            return SimpleCircleEye::instance();
+        }
 
-        return $class;
+        return (new ModuleEye($this->getModule()));
     }
 }
