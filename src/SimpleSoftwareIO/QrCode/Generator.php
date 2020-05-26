@@ -4,6 +4,9 @@ namespace SimpleSoftwareIO\QrCode;
 
 use BaconQrCode\Common\ErrorCorrectionLevel;
 use BaconQrCode\Encoder\Encoder;
+use BaconQrCode\Renderer\Color\Alpha;
+use BaconQrCode\Renderer\Color\ColorInterface;
+use BaconQrCode\Renderer\Color\Rgb;
 use BaconQrCode\Renderer\Eye\EyeInterface;
 use BaconQrCode\Renderer\Eye\ModuleEye;
 use BaconQrCode\Renderer\Eye\SimpleCircleEye;
@@ -15,9 +18,14 @@ use BaconQrCode\Renderer\Module\ModuleInterface;
 use BaconQrCode\Renderer\Module\RoundnessModule;
 use BaconQrCode\Renderer\Module\SquareModule;
 use BaconQrCode\Renderer\RendererInterface;
+use BaconQrCode\Renderer\RendererStyle\Fill;
 use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use BaconQrCode\Writer;
 use InvalidArgumentException;
+use BaconQrCode\Renderer\Color\Gray;
+use BaconQrCode\Renderer\RendererStyle\EyeFill;
+use BaconQrCode\Renderer\RendererStyle\Gradient;
+use BaconQrCode\Renderer\RendererStyle\GradientType;
 
 class Generator
 {
@@ -34,6 +42,14 @@ class Generator
     protected $styleSize = null;
 
     protected $eyeStyle = null;
+
+    protected $color = null;
+
+    protected $backgroundColor = null;
+
+    protected $eyeColors = [];
+
+    protected $gradient;
 
     public function generate(string $text, string $filename = null)
     {
@@ -52,28 +68,44 @@ class Generator
     public function format(): self
     {
         //png, eps, svg, jpg
-        //
     }
 
-    public function color($red, $green, $blue, $alpha): self
+    public function color(int $red, int $green, int $blue, ?int $alpha = null): self
     {
+        $this->color = $this->createColor($red, $green, $blue, $alpha);
+
+        return $this;
     }
 
-    public function backgroundColor($red, $green, $blue, $alpha): self
+    public function backgroundColor($red, $green, $blue, ?int $alpha = null): self
     {
+        $this->backgroundColor = $this->createColor($red, $green, $blue, $alpha);
+
+        return $this;
     }
 
-    public function eyeColor(array $eye1, array $eye2, array $eye3): self
+    public function eyeColor($eyeNumber, array $innerColor, array $outterColor = null): self
     {
+        if ($eyeNumber < 0 || $eyeNumber > 2) {
+            throw new InvalidArgumentException("\$eyeNumber must be 0, 1, or 2.  {$eyeNumber} is not valid.");
+        }
+
+        $this->eyeColors[$eyeNumber] = new EyeFill(new Rgb(...$innerColor), new Rgb(...$outterColor));
+
+        return $this;
     }
 
-    public function gradient(): self
+    public function gradient(array $startColor, array $endColor, string $type): self
     {
+        $type = strtoupper($type);
+        $this->gradient = new Gradient($this->createColor(...$startColor), $this->createColor(...$endColor), GradientType::$type());
+
+        return $this;
     }
 
     public function eye(string $style): self
     {
-        if (! in_array($style, ['square', 'circle'])) {
+        if (! in_array($style, ['sqaure', 'circle'])) {
             throw new InvalidArgumentException("\$style must be square or circle. {$style} is not a valid eye style.");
         }
 
@@ -85,7 +117,7 @@ class Generator
     public function style(string $style, float $size = 0.5): self
     {
         if (! in_array($style, ['square', 'dot', 'round'])) {
-            throw new InvalidArgumentException("\$style must be square, dot, or round. {$style} is not a valid  QrCode style.");
+            throw new InvalidArgumentException("\$style must be square, dot, or round. {$style} is not a valid.");
         }
 
         if ($size < 0 || $size >= 1) {
@@ -128,7 +160,7 @@ class Generator
     protected function getRenderer(): ImageRenderer
     {
         $renderer = new ImageRenderer(
-            new RendererStyle($this->pixels, $this->margin, $this->getModule(), $this->getEye()),
+            new RendererStyle($this->pixels, $this->margin, $this->getModule(), $this->getEye(), $this->getFill()),
             new SvgImageBackEnd
         );
 
@@ -159,5 +191,29 @@ class Generator
         }
 
         return (new ModuleEye($this->getModule()));
+    }
+
+    protected function getFill(): Fill
+    {
+        $foregroundColor = $this->color ?? new Gray(100);
+        $backgroundColor = $this->backgroundColor ?? new Gray(0);
+        $eye1 = $this->eyeColors[0] ?? EyeFill::uniform(new Gray(0));
+        $eye2 = $this->eyeColors[1] ?? EyeFill::uniform(new Gray(0));
+        $eye3 = $this->eyeColors[2] ?? EyeFill::uniform(new Gray(0));
+
+        if ($this->gradient) {
+            return Fill::withForegroundGradient($foregroundColor, $this->gradient, $eye1, $eye2, $eye3);
+        }
+        
+        return Fill::withForegroundColor($foregroundColor, $backgroundColor, $eye1, $eye2, $eye3);
+    }
+
+    protected function createColor(int $red, int $green, int $blue, ?int $alpha = null): ColorInterface
+    {
+        if (! $alpha) {
+            return new Rgb($red, $green, $blue);
+        }
+        
+        return new Alpha($alpha, new Rgb($red, $green, $blue));
     }
 }
