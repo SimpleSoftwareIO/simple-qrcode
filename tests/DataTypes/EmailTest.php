@@ -49,7 +49,7 @@ class EmailTest extends TestCase
     public function test_it_throws_an_exception_when_an_invalid_email_is_given()
     {
         $this->expectException(InvalidArgumentException::class);
-        
+
         $this->email->create(['foo']);
     }
 }

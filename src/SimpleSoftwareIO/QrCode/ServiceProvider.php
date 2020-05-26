@@ -4,7 +4,7 @@ namespace SimpleSoftwareIO\QrCode;
 
 use Illuminate\Support\ServiceProvider;
 
-class QrCodeServiceProvider extends ServiceProvider
+class ServiceProvider extends ServiceProvider
 {
     /**
      * Indicates if loading of the provider is deferred.
