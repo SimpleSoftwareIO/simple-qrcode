@@ -5,7 +5,7 @@ use SimpleSoftwareIO\QrCode\DataTypes\BTC;
 
 class BTCTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         $this->btc = new BTC();
     }
@@ -40,7 +40,7 @@ class BTCTest extends TestCase
             ],
         ]);
 
-        $properFormat = 'bitcoin:btcaddress?amount=0.0034&label=label&%24message=message&r='.urlencode('https://www.returnaddress.com');
+        $properFormat = 'bitcoin:btcaddress?amount=0.0034&label=label&message=message&r='.urlencode('https://www.returnaddress.com');
 
         $this->assertEquals($properFormat, strval($this->btc));
     }

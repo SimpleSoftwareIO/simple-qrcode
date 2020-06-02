@@ -34,7 +34,7 @@ class ImageMergeTest extends TestCase
      */
     protected $testImagePath;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->testImagePath = file_get_contents(dirname(__FILE__).'/Images/simplesoftware-icon-grey-blue.png');
         $this->testImage = new ImageMerge(
@@ -46,7 +46,7 @@ class ImageMergeTest extends TestCase
         $this->compareTestSaveLocation = dirname(__FILE__).'/compareImage.png';
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         @unlink($this->testImageSaveLocation);
         @unlink($this->compareTestSaveLocation);
@@ -79,11 +79,9 @@ class ImageMergeTest extends TestCase
         $this->assertEquals(file_get_contents($this->compareTestSaveLocation), file_get_contents($this->testImageSaveLocation));
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     */
     public function test_it_throws_an_exception_when_percentage_is_greater_than_1()
     {
+        $this->expectException(InvalidArgumentException::class);
         $this->testImage->merge(1.1);
     }
 }

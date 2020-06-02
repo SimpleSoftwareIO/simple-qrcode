@@ -5,7 +5,7 @@ use SimpleSoftwareIO\QrCode\DataTypes\Email;
 
 class EmailTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         $this->email = new Email();
     }
@@ -46,11 +46,10 @@ class EmailTest extends TestCase
         $this->assertEquals($properFormat, strval($this->email));
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function test_it_throws_an_exception_when_an_invalid_email_is_given()
     {
+        $this->expectException(InvalidArgumentException::class);
+
         $this->email->create(['foo']);
     }
 }

@@ -5,7 +5,7 @@ use SimpleSoftwareIO\QrCode\DataTypes\SMS;
 
 class SMSTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         $this->sms = new SMS();
     }

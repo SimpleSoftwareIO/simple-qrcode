@@ -11,27 +11,33 @@
         }
     ],
     "require": {
-        "php": ">=7.0",
+        "php": ">=7.2",
       	"ext-gd": "*",
-        "bacon/bacon-qr-code": "1.0.*",
-        "illuminate/support": ">=5.0.0"
+        "bacon/bacon-qr-code": "2.0.0"
     },
     "require-dev": {
-        "mockery/mockery": "0.9.*",
-        "phpunit/phpunit": "~6"
+        "mockery/mockery": "~1",
+        "phpunit/phpunit": "~9"
+    },
+    "suggest": {
+        "ext-imagick": "Allows the generation of PNG QrCodes.",
+        "illuminate/support": "Allows for use within Laravel."
     },
     "autoload": {
-        "psr-0": {
+        "psr-4": {
             "SimpleSoftwareIO\\QrCode\\": "src"
         }
+    },
+    "scripts": {
+        "test": "phpunit"
     },
     "extra": {
         "laravel": {
             "providers": [
-                "SimpleSoftwareIO\\QrCode\\QrCodeServiceProvider"
+                "SimpleSoftwareIO\\QrCode\\ServiceProvider"
             ],
             "aliases": {
-                "QrCode": "SimpleSoftwareIO\\QrCode\\Facades\\QrCode"
+                "QrCode": "SimpleSoftwareIO\\QrCode\\Facade"
             }
         }
     }

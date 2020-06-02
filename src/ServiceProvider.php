@@ -2,24 +2,18 @@
 
 namespace SimpleSoftwareIO\QrCode;
 
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Contracts\Support\DeferrableProvider;
+use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
 
-class QrCodeServiceProvider extends ServiceProvider
+class ServiceProvider extends IlluminateServiceProvider implements DeferrableProvider
 {
-    /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected $defer = true;
-
     /**
      * Register the service provider.
      */
     public function register()
     {
         $this->app->bind('qrcode', function () {
-            return new BaconQrCodeGenerator();
+            return new Generator();
         });
     }
 
@@ -30,6 +24,6 @@ class QrCodeServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['qrcode'];
+        return [Generator::class];
     }
 }
