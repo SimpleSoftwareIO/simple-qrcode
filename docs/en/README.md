@@ -29,7 +29,7 @@ Upload files with a single curl command from your terminal! `curl --upload-file 
 ## Introduction
 Simple QrCode is an easy to use wrapper for the popular Laravel framework based on the great work provided by [Bacon/BaconQrCode](https://github.com/Bacon/BaconQrCode).  We created an interface that is familiar and easy to install for Laravel users.
 
-![Example 1](../imgs/example-1.png) ![Example 2](../imgs/example-2.png)
+![Example 1](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/example-1.png?raw=true) ![Example 2](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/example-2.png?raw=true)
 
 <a id="docs-upgrade"></a>
 ## Upgrade Guide
@@ -77,7 +77,7 @@ Using the QrCode Generator is very easy.  The most basic syntax is:
 
 This will make a QrCode that says "Make me into a QrCode!"
 
-![Example QrCode](../imgs/make-me-into-a-qrcode.png)
+![Example QrCode](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/make-me-into-a-qrcode.png?raw=true)
 
 #### Generate `(string $data, string $filename = null)`
 
@@ -109,7 +109,7 @@ You can change the size of a QrCode by using the `size` method. Simply specify t
 
 	QrCode::size(100);
 
-![200 Pixels](../imgs/200-pixels.png) ![250 Pixels](../imgs/250-pixels.png) 
+![200 Pixels](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/200-pixels.png?raw=true) ![250 Pixels](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/250-pixels.png?raw=true) 
 
 #### Color `(int $red, int $green, int $blue, int $alpha = null)`
 
@@ -120,7 +120,7 @@ All colors must be expressed in RGBA (Red Green Blue Alpha).  You can change the
 	QrCode::color(255, 0, 0); // Red QrCode
 	QrCode::color(255, 0, 0, 25); //Red QrCode with 25% transparency 
 
-![Red QrCode](../imgs/red-qrcode.png) ![Red Transparent QrCode](../imgs/red-25-transparent.png)
+![Red QrCode](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/red-qrcode.png?raw=true) ![Red Transparent QrCode](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/red-25-transparent.png?raw=true)
 
 #### Background Color `(int $red, int $green, int $blue, int $alpha = null)`
 
@@ -129,7 +129,7 @@ You can change the background color of a QrCode by calling the `backgroundColor`
 	QrCode::backgroundColor(255, 0, 0); // Red background QrCode
 	QrCode::backgroundColor(255, 0, 0, 25); //Red background QrCode with 25% transparency 
 
-![Red Background QrCode](../imgs/red-background.png) ![Red Transparent Background QrCode](../imgs/red-25-transparent-background.png)
+![Red Background QrCode](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/red-background.png?raw=true) ![Red Transparent Background QrCode](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/red-25-transparent-background.png?raw=true)
 
 #### Gradient `$startRed, $startGreen, $startBlue, $endRed, $endGreen, $endBlue, string $type)`
 
@@ -139,11 +139,11 @@ The following gradient types are supported:
 
 | Type | Example |
 | --- | --- |
-| `vertical` | ![Veritcal](../imgs/vertical.png) |
-| `horizontal` | ![Horizontal](../imgs/horizontal.png) |
-| `diagonal` | ![Diagonal](../imgs/diagonal.png) |
-| `inverse_diagonal` | ![Invrse Diagonal](../imgs/inverse_diagonal.png) |
-| `radial` | ![Radial](../imgs/radial.png) |
+| `vertical` | ![Veritcal](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/vertical.png?raw=true) |
+| `horizontal` | ![Horizontal](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/horizontal.png?raw=true) |
+| `diagonal` | ![Diagonal](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/diagonal.png?raw=true) |
+| `inverse_diagonal` | ![Invrse Diagonal](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/inverse_diagonal.png?raw=true) |
+| `radial` | ![Radial](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/radial.png?raw=true) |
 
 #### EyeColor `(int $eyeNumber, int $innerRed, int $innerGreen, int $innerBlue, int $outterRed = 0, int $outterGreen = 0, int $outterBlue = 0)`
 
@@ -151,9 +151,9 @@ You may change the eye colors by using the `eyeColor` method.
 
 | Eye Number | Example |
 | --- | --- |
-| `0` | ![Eye 0](../imgs/eye-0.png) |
-| `1` | ![Eye 1](../imgs/eye-1.png)|
-| `2` | ![Eye  2](../imgs/eye-2.png) |
+| `0` | ![Eye 0](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/eye-0.png?raw=true) |
+| `1` | ![Eye 1](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/eye-1.png?raw=true)|
+| `2` | ![Eye  2](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/eye-2.png?raw=true) |
 
 
 #### Style `(string $style, float $size = 0.5)`
@@ -162,9 +162,9 @@ The style can be easily swapped out with `square.` `dot,` or `round.`  This will
 
 | Style | Example |
 | --- | --- |
-| `sqaure` | ![Sqaure](../imgs/200-pixels.png) |
-| `dot` | ![Dot](../imgs/dot.png)|
-| `round` | ![Round](../imgs/round.png) |
+| `sqaure` | ![Sqaure](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/200-pixels.png?raw=true) |
+| `dot` | ![Dot](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/dot.png)|
+| `round` | ![Round](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/round.png?raw=true) |
 
 #### Eye Style `(string $style)`
 
@@ -172,8 +172,8 @@ The eye within the QrCode supports two different styles, `sqaure` and `circle.`
 
 | Style | Example |
 | --- | --- |
-| `sqaure` | ![Sqaure](../imgs/200-pixels.png) |
-| `circle` | ![Circle](../imgs/circle-eye.png)|
+| `sqaure` | ![Sqaure](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/200-pixels.png?raw=true) |
+| `circle` | ![Circle](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/circle-eye.png?raw=true)|
 
 #### Margin `(int $margin)`
 
