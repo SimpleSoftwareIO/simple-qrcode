@@ -7,6 +7,7 @@ use BaconQrCode\Encoder\Encoder;
 use BaconQrCode\Exception\WriterException;
 use BaconQrCode\Renderer\Color\Alpha;
 use BaconQrCode\Renderer\Color\ColorInterface;
+use BaconQrCode\Renderer\Color\Gray;
 use BaconQrCode\Renderer\Color\Rgb;
 use BaconQrCode\Renderer\Eye\EyeInterface;
 use BaconQrCode\Renderer\Eye\ModuleEye;
@@ -18,17 +19,17 @@ use BaconQrCode\Renderer\Module\DotsModule;
 use BaconQrCode\Renderer\Module\ModuleInterface;
 use BaconQrCode\Renderer\Module\RoundnessModule;
 use BaconQrCode\Renderer\Module\SquareModule;
-use BaconQrCode\Renderer\RendererStyle\Fill;
-use BaconQrCode\Renderer\RendererStyle\RendererStyle;
-use BaconQrCode\Writer;
-use InvalidArgumentException;
 use BaconQrCode\Renderer\Image\EpsImageBackEnd;
 use BaconQrCode\Renderer\Image\ImageBackEndInterface;
 use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
 use BaconQrCode\Renderer\RendererStyle\EyeFill;
+use BaconQrCode\Renderer\RendererStyle\Fill;
 use BaconQrCode\Renderer\RendererStyle\Gradient;
 use BaconQrCode\Renderer\RendererStyle\GradientType;
+use BaconQrCode\Renderer\RendererStyle\RendererStyle;
+use BaconQrCode\Writer;
 use BadMethodCallException;
+use InvalidArgumentException;
 use SimpleSoftwareIO\QrCode\DataTypes\DataTypeInterface;
 
 class Generator
@@ -71,7 +72,7 @@ class Generator
      * ISO-8859-7, ISO-8859-8, ISO-8859-9, ISO-8859-10, ISO-8859-11,
      * ISO-8859-12, ISO-8859-13, ISO-8859-14, ISO-8859-15, ISO-8859-16,
      * SHIFT-JIS, WINDOWS-1250, WINDOWS-1251, WINDOWS-1252, WINDOWS-1256,
-     * UTF-16BE, UTF-8, ASCII, GBK, EUC-KR
+     * UTF-16BE, UTF-8, ASCII, GBK, EUC-KR.
      *
      * @var string
      */
@@ -168,7 +169,7 @@ class Generator
      */
     public function generate(string $text, string $filename = null)
     {
-        $qrCode =  $this->getWriter($this->getRenderer())->writeString($text, $this->encoding, $this->errorCorrection);
+        $qrCode = $this->getWriter($this->getRenderer())->writeString($text, $this->encoding, $this->errorCorrection);
 
         if ($this->imageMerge !== null && $this->format === 'png') {
             $merger = new ImageMerge(new Image($qrCode), new Image($this->imageMerge));
@@ -177,6 +178,7 @@ class Generator
 
         if ($filename) {
             file_put_contents($filename, $qrCode);
+
             return;
         }
 
@@ -193,7 +195,7 @@ class Generator
      */
     public function merge(string $filepath, float $percentage = .2, bool $absolute = false): self
     {
-        if (function_exists('base_path') && !$absolute) {
+        if (function_exists('base_path') && ! $absolute) {
             $filepath = base_path().$filepath;
         }
 
@@ -204,7 +206,7 @@ class Generator
     }
 
     /**
-     * Merges an image string with the center of the QrCode
+     * Merges an image string with the center of the QrCode.
      *
      * @param string  $content
      * @param float $percentage
@@ -370,7 +372,7 @@ class Generator
      * ISO-8859-7, ISO-8859-8, ISO-8859-9, ISO-8859-10, ISO-8859-11,
      * ISO-8859-12, ISO-8859-13, ISO-8859-14, ISO-8859-15, ISO-8859-16,
      * SHIFT-JIS, WINDOWS-1250, WINDOWS-1251, WINDOWS-1252, WINDOWS-1256,
-     * UTF-16BE, UTF-8, ASCII, GBK, EUC-KR
+     * UTF-16BE, UTF-8, ASCII, GBK, EUC-KR.
      *
      * @param string $encoding
      * @return Generator
@@ -421,7 +423,7 @@ class Generator
      */
     public function getWriter(ImageRenderer $renderer): Writer
     {
-        return (new Writer($renderer));
+        return new Writer($renderer);
     }
 
     /**
@@ -475,11 +477,11 @@ class Generator
     public function getModule(): ModuleInterface
     {
         if ($this->style === 'dot') {
-            return (new DotsModule($this->styleSize));
+            return new DotsModule($this->styleSize);
         }
 
         if ($this->style === 'round') {
-            return (new RoundnessModule($this->styleSize));
+            return new RoundnessModule($this->styleSize);
         }
 
         return SquareModule::instance();
@@ -500,7 +502,7 @@ class Generator
             return SimpleCircleEye::instance();
         }
 
-        return (new ModuleEye($this->getModule()));
+        return new ModuleEye($this->getModule());
     }
 
     /**
@@ -536,7 +538,7 @@ class Generator
         if (! $alpha) {
             return new Rgb($red, $green, $blue);
         }
-        
+
         return new Alpha($alpha, new Rgb($red, $green, $blue));
     }
 
@@ -550,7 +552,7 @@ class Generator
     {
         $class = $this->formatClass($method);
 
-        if (!class_exists($class)) {
+        if (! class_exists($class)) {
             throw new BadMethodCallException();
         }
 

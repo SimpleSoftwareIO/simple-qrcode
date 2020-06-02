@@ -11,7 +11,6 @@ use BaconQrCode\Renderer\Module\SquareModule;
 use BaconQrCode\Renderer\RendererStyle\Gradient;
 use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use PHPUnit\Framework\TestCase;
-use SimpleSoftwareIO\QrCode\Generator;
 
 class GeneratorTest extends TestCase
 {
