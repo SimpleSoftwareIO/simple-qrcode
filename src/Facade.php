@@ -2,9 +2,10 @@
 
 namespace SimpleSoftwareIO\QrCode\Facades;
 
-use Illuminate\Support\Facades\Facade;
+use Illuminate\Support\Facades\Facade as IlluminateFacade;
+use SimpleSoftwareIO\QrCode\Generator;
 
-class Facade extends Facade
+class Facade extends IlluminateFacade
 {
     /**
      * Get the registered name of the component.
@@ -13,8 +14,8 @@ class Facade extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        self::clearResolvedInstance('qrcode');
+        self::clearResolvedInstance(Generator::class);
 
-        return 'qrcode';
+        return Generator::class;
     }
 }
