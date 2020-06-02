@@ -1,5 +1,6 @@
 <?php
 
+use SimpleSoftwareIO\QrCode\Generator;
 use BaconQrCode\Renderer\Eye\SimpleCircleEye;
 use BaconQrCode\Renderer\Eye\SquareEye;
 use BaconQrCode\Renderer\Image\EpsImageBackEnd;
