@@ -1,6 +1,6 @@
 <?php
 
-namespace SimpleSoftwareIO\QrCode\Facades;
+namespace SimpleSoftwareIO\QrCode;
 
 use Illuminate\Support\Facades\Facade as IlluminateFacade;
 use SimpleSoftwareIO\QrCode\Generator;
