@@ -7,21 +7,20 @@ use BaconQrCode\Encoder\Encoder;
 use BaconQrCode\Exception\WriterException;
 use BaconQrCode\Renderer\Color\Alpha;
 use BaconQrCode\Renderer\Color\ColorInterface;
-use BaconQrCode\Renderer\Color\Gray;
 use BaconQrCode\Renderer\Color\Rgb;
 use BaconQrCode\Renderer\Eye\EyeInterface;
 use BaconQrCode\Renderer\Eye\ModuleEye;
 use BaconQrCode\Renderer\Eye\SimpleCircleEye;
 use BaconQrCode\Renderer\Eye\SquareEye;
+use BaconQrCode\Renderer\Image\EpsImageBackEnd;
+use BaconQrCode\Renderer\Image\ImageBackEndInterface;
+use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
 use BaconQrCode\Renderer\Image\SvgImageBackEnd;
 use BaconQrCode\Renderer\ImageRenderer;
 use BaconQrCode\Renderer\Module\DotsModule;
 use BaconQrCode\Renderer\Module\ModuleInterface;
 use BaconQrCode\Renderer\Module\RoundnessModule;
 use BaconQrCode\Renderer\Module\SquareModule;
-use BaconQrCode\Renderer\Image\EpsImageBackEnd;
-use BaconQrCode\Renderer\Image\ImageBackEndInterface;
-use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
 use BaconQrCode\Renderer\RendererStyle\EyeFill;
 use BaconQrCode\Renderer\RendererStyle\Fill;
 use BaconQrCode\Renderer\RendererStyle\Gradient;
@@ -310,7 +309,6 @@ class Generator
         return $this;
     }
 
-
     public function gradient($startRed, $startGreen, $startBlue, $endRed, $endGreen, $endBlue, string $type): self
     {
         $type = strtoupper($type);
@@ -442,7 +440,7 @@ class Generator
     }
 
     /**
-     * Returns the Renderer Style
+     * Returns the Renderer Style.
      *
      * @return RendererStyle
      */

@@ -1,6 +1,5 @@
 <?php
 
-use SimpleSoftwareIO\QrCode\Generator;
 use BaconQrCode\Renderer\Eye\SimpleCircleEye;
 use BaconQrCode\Renderer\Eye\SquareEye;
 use BaconQrCode\Renderer\Image\EpsImageBackEnd;
@@ -12,6 +11,7 @@ use BaconQrCode\Renderer\Module\SquareModule;
 use BaconQrCode\Renderer\RendererStyle\Gradient;
 use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use PHPUnit\Framework\TestCase;
+use SimpleSoftwareIO\QrCode\Generator;
 
 class GeneratorTest extends TestCase
 {
@@ -151,7 +151,7 @@ class GeneratorTest extends TestCase
     {
         $generator = (new Generator)->style('square');
         $this->assertInstanceOf(SquareModule::class, $generator->getModule());
-        
+
         $generator = (new Generator)->style('dot', .1);
         $this->assertInstanceOf(DotsModule::class, $generator->getModule());
 
