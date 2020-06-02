@@ -52,7 +52,7 @@ Laravel will automiatcally pick up and install the package.
 
 #### Print View
 
-One of the main items that we use this package for is to have QrCodes in all of our print views.  This allows our customers to return to the original page after it is printed by simply scanning the code.  We achieved this by adding the following into our footer.blade.php file.
+One of the main items that we use this package for is to have QrCodes in all of our print views.  This allows our customers to return to the original page after it is printed by simply scanning the code.  We achieved this by adding the following into our footer.blade.php file:
 
 	<div class="visible-print text-center">
 		{!! QrCode::size(100)->generate(Request::url()); !!}
@@ -61,7 +61,7 @@ One of the main items that we use this package for is to have QrCodes in all of 
 
 #### Embed A QrCode
 
-You may embed a qrcode inside of an e-mail to allow your users to quickly scan.  The following is an example of how to do this with Laravel.
+You may embed a qrcode inside of an e-mail to allow your users to quickly scan.  The following is an example of how to do this with Laravel:
 
 	//Inside of a blade template.
 	<img src="{!!$message->embedData(QrCode::format('png')->generate('Embed me into an e-mail!'), 'QrCode.png', 'image/png')!!}">
@@ -113,7 +113,7 @@ You can change the size of a QrCode by using the `size` method. Simply specify t
 
 #### Color `(int $red, int $green, int $blue, int $alpha = null)`
 
->Be careful when changing the color of a QrCode.  Some readers have a very difficult time reading QrCodes in color.
+>Be careful when changing the color of a QrCode, as some readers have a very difficult time reading QrCodes in color.
 
 All colors must be expressed in RGBA (Red Green Blue Alpha).  You can change the color of a QrCode by using the following:
 
@@ -135,7 +135,7 @@ You can change the background color of a QrCode by calling the `backgroundColor`
 
 You can apply a gradient to the QrCode by calling the `gradient` method.
 
-The following gradient types are supported.
+The following gradient types are supported:
 
 | Type | Example |
 | --- | --- |
@@ -147,7 +147,7 @@ The following gradient types are supported.
 
 #### EyeColor `(int $eyeNumber, int $innerRed, int $innerGreen, int $innerBlue, int $outterRed = 0, int $outterGreen = 0, int $outterBlue = 0)`
 
-You may change the eye colors by using the `eyeColor` method.
+You may change the eye colors by using the `eyeColor` method. Example:
 
 | Eye Number | Example |
 | --- | --- |
@@ -158,7 +158,7 @@ You may change the eye colors by using the `eyeColor` method.
 
 #### Style `(string $style, float $size = 0.5)`
 
-The style can be easily swapped out with `square.` `dot,` or `round.`  This will change the blocks within the QrCode.  The second parameter will affect the size of the dots or roundness.
+The style can be easily swapped out with `square.` `dot,` or `round.`  This will change the blocks within the QrCode.  The second parameter will affect the size of the dots or roundness. Example:
 
 | Style | Example |
 | --- | --- |
@@ -168,14 +168,14 @@ The style can be easily swapped out with `square.` `dot,` or `round.`  This will
 
 #### Eye Style `(string $style)`
 
-The eye within the QrCode supports two different styles, `dot` and `circle.`
+The eye within the QrCode supports two different styles, `dot` and `circle.` Example:
 
 | Style | Example |
 | --- | --- |
 | `sqaure` | ![Sqaure](../imgs/200-pixels.png) |
 | `circle` | ![Circle](../imgs/circle-eye.png)|
 
-#### Margin Change
+#### Margin 
 
 The ability to change the margin around a QrCode is also supported.  Simply specify the desired margin using the following syntax:
 
@@ -187,7 +187,7 @@ Changing the level of error correction is easy.  Just use the following syntax:
 
 	QrCode::errorCorrection('H');
 
-The following are supported options for the `errorCorrection` method.
+The following are supported options for the `errorCorrection` method:
 
 | Error Correction | Assurance Provided |
 | --- | --- |
@@ -196,7 +196,7 @@ The following are supported options for the `errorCorrection` method.
 | Q | 25% of codewords can be restored. |
 | H | 30% of codewords can be restored. |
 
->The more error correction used; the bigger the QrCode becomes and the less data it can store. Read more about [error correction](http://en.wikipedia.org/wiki/QR_code#Error_correction).
+>The more error corrections used; the bigger the QrCode becomes and the less data it can store. Read more about [error correction](http://en.wikipedia.org/wiki/QR_code#Error_correction).
 
 #### Encoding
 
@@ -289,7 +289,7 @@ Helpers are an easy way to create QrCodes that cause a reader to perform a certa
 
 #### BitCoin
 
-This helpers generates a scannable bitcoin to send payments.  [More information](https://bitco.in/en/developer-guide#plain-text)
+This helper generates a scannable bitcoin to send payments.  [More information](https://bitco.in/en/developer-guide#plain-text)
 
 	QrCode::BTC($address, $amount);
 	
@@ -305,7 +305,7 @@ This helpers generates a scannable bitcoin to send payments.  [More information]
 
 #### E-Mail
 
-This helper generates an e-mail qrcode that is able to fill in the e-mail address, subject, and body.
+This helper generates an e-mail qrcode that is able to fill in the e-mail address, subject, and body:
 
 	QrCode::email($to, $subject, $body);
 	
@@ -320,7 +320,7 @@ This helper generates an e-mail qrcode that is able to fill in the e-mail addres
 	
 #### Geo
 
-This helper generates a latitude and longitude that a phone can read and open the location up in Google Maps or similar app.
+This helper generates a latitude and longitude that a phone can read and opens the location in Google Maps or similar app.
 
 	QrCode::geo($latitude, $longitude);
 	
@@ -337,7 +337,7 @@ This helper generates a QrCode that can be scanned and then dials a number.
 	
 #### SMS (Text Messages)
 
-This helper makes SMS messages that can be prefilled with the send to address and body of the message.
+This helper makes SMS messages that can be prefilled with the send to address and body of the message:
 
 	QrCode::SMS($phoneNumber, $message);
 	
@@ -349,7 +349,7 @@ This helper makes SMS messages that can be prefilled with the send to address an
 
 #### WiFi
 
-This helpers makes scannable QrCodes that can connect a phone to a WiFI network.
+This helpers makes scannable QrCodes that can connect a phone to a WiFI network:
 
 	QrCode::wiFi([
 		'encryption' => 'WPA/WEP',
