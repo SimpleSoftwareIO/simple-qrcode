@@ -147,7 +147,7 @@ The following gradient types are supported:
 
 #### EyeColor `(int $eyeNumber, int $innerRed, int $innerGreen, int $innerBlue, int $outterRed = 0, int $outterGreen = 0, int $outterBlue = 0)`
 
-You may change the eye colors by using the `eyeColor` method. Example:
+You may change the eye colors by using the `eyeColor` method.
 
 | Eye Number | Example |
 | --- | --- |
@@ -158,7 +158,7 @@ You may change the eye colors by using the `eyeColor` method. Example:
 
 #### Style `(string $style, float $size = 0.5)`
 
-The style can be easily swapped out with `square.` `dot,` or `round.`  This will change the blocks within the QrCode.  The second parameter will affect the size of the dots or roundness. Example:
+The style can be easily swapped out with `square.` `dot,` or `round.`  This will change the blocks within the QrCode.  The second parameter will affect the size of the dots or roundness.
 
 | Style | Example |
 | --- | --- |
@@ -168,20 +168,20 @@ The style can be easily swapped out with `square.` `dot,` or `round.`  This will
 
 #### Eye Style `(string $style)`
 
-The eye within the QrCode supports two different styles, `dot` and `circle.` Example:
+The eye within the QrCode supports two different styles, `sqaure` and `circle.`
 
 | Style | Example |
 | --- | --- |
 | `sqaure` | ![Sqaure](../imgs/200-pixels.png) |
 | `circle` | ![Circle](../imgs/circle-eye.png)|
 
-#### Margin 
+#### Margin `(int $margin)`
 
 The ability to change the margin around a QrCode is also supported.  Simply specify the desired margin using the following syntax:
 
 	QrCode::margin(100);
 
-#### Error Correction
+#### Error Correction `(string $errorCorrection)`
 
 Changing the level of error correction is easy.  Just use the following syntax:
 
@@ -196,9 +196,9 @@ The following are supported options for the `errorCorrection` method:
 | Q | 25% of codewords can be restored. |
 | H | 30% of codewords can be restored. |
 
->The more error corrections used; the bigger the QrCode becomes and the less data it can store. Read more about [error correction](http://en.wikipedia.org/wiki/QR_code#Error_correction).
+>The more error correction used; the bigger the QrCode becomes and the less data it can store. Read more about [error correction](http://en.wikipedia.org/wiki/QR_code#Error_correction).
 
-#### Encoding
+#### Encoding `(string $encoding)`
 
 Change the character encoding that is used to build a QrCode.  By default `ISO-8859-1` is selected as the encoder.  Read more about [character encoding](http://en.wikipedia.org/wiki/Character_encoding) You can change this to any of the following:
 
@@ -233,12 +233,10 @@ Change the character encoding that is used to build a QrCode.  By default `ISO-8
 | GBK |
 | EUC-KR |
 
-#### Merge
+#### Merge `(string $filepath, float $percentage = .2, bool $absolute = false)`
 
 The `merge` method merges an image over a QrCode.  This is commonly used to placed logos within a QrCode.
 
-	QrCode::merge($filename, $percentage, $absolute);
-	
 	//Generates a QrCode with an image centered in the middle.
 	QrCode::format('png')->merge('path-to-image.png')->generate();
 	
@@ -255,12 +253,10 @@ The `merge` method merges an image over a QrCode.  This is commonly used to plac
 
 ![Merged Logo](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/merged-qrcode.png?raw=true)
 
-#### Merge Binary String
+#### Merge Binary String `(string $content, float $percentage = .2)`
 
 The `mergeString` method can be used to achieve the same as the `merge` call, except it allows you to provide a string representation of the file instead of the filepath. This is usefull when working with the `Storage` facade. It's interface is quite similar to the `merge` call. 
 
-	QrCode::mergeString(Storage::get('path/to/image.png'), $percentage);
-	
 	//Generates a QrCode with an image centered in the middle.
 	QrCode::format('png')->mergeString(Storage::get('path/to/image.png'))->generate();
 	
