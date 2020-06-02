@@ -22,7 +22,6 @@ use BaconQrCode\Renderer\RendererStyle\Fill;
 use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use BaconQrCode\Writer;
 use InvalidArgumentException;
-use BaconQrCode\Renderer\Color\Gray;
 use BaconQrCode\Renderer\Image\EpsImageBackEnd;
 use BaconQrCode\Renderer\Image\ImageBackEndInterface;
 use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
@@ -283,37 +282,41 @@ class Generator
     }
 
     /**
-     * Sets the eye color for the selected eye.
+     * Sets the eye color for the provided eye index.
      *
      * @param int $eyeNumber
-     * @param array $innerColor
-     * @param array|null $outterColor
+     * @param int $innerRed
+     * @param int $innerGreen
+     * @param int $innerBlue
+     * @param int $outterRed
+     * @param int $outterGreen
+     * @param int $outterBlue
      * @return Generator
      * @throws InvalidArgumentException
      */
-    public function eyeColor(int $eyeNumber, array $innerColor, array $outterColor = null): self
+    public function eyeColor(int $eyeNumber, int $innerRed, int $innerGreen, int $innerBlue, int $outterRed = 0, int $outterGreen = 0, int $outterBlue = 0): self
     {
         if ($eyeNumber < 0 || $eyeNumber > 2) {
             throw new InvalidArgumentException("\$eyeNumber must be 0, 1, or 2.  {$eyeNumber} is not valid.");
         }
 
-        $this->eyeColors[$eyeNumber] = new EyeFill(new Rgb(...$innerColor), new Rgb(...$outterColor));
+        $this->eyeColors[$eyeNumber] = new EyeFill(
+            $this->createColor($innerRed, $innerGreen, $innerBlue),
+            $this->createColor($outterRed, $outterGreen, $outterBlue)
+        );
 
         return $this;
     }
 
-    /**
-     * Sets the gradient for the QrCode.
-     *
-     * @param array $startColor
-     * @param array $endColor
-     * @param string $type
-     * @return Generator
-     */
-    public function gradient(array $startColor, array $endColor, string $type): self
+
+    public function gradient($startRed, $startGreen, $startBlue, $endRed, $endGreen, $endBlue, string $type): self
     {
         $type = strtoupper($type);
-        $this->gradient = new Gradient($this->createColor(...$startColor), $this->createColor(...$endColor), GradientType::$type());
+        $this->gradient = new Gradient(
+            $this->createColor($startRed, $startGreen, $startBlue),
+            $this->createColor($endRed, $endGreen, $endBlue),
+            GradientType::$type()
+        );
 
         return $this;
     }
@@ -327,7 +330,7 @@ class Generator
      */
     public function eye(string $style): self
     {
-        if (! in_array($style, ['sqaure', 'circle'])) {
+        if (! in_array($style, ['square', 'circle'])) {
             throw new InvalidArgumentException("\$style must be square or circle. {$style} is not a valid eye style.");
         }
 
@@ -416,7 +419,7 @@ class Generator
      * @param ImageRenderer $renderer
      * @return Writer
      */
-    protected function getWriter(ImageRenderer $renderer): Writer
+    public function getWriter(ImageRenderer $renderer): Writer
     {
         return (new Writer($renderer));
     }
@@ -426,10 +429,10 @@ class Generator
      *
      * @return ImageRenderer
      */
-    protected function getRenderer(): ImageRenderer
+    public function getRenderer(): ImageRenderer
     {
         $renderer = new ImageRenderer(
-            new RendererStyle($this->pixels, $this->margin, $this->getModule(), $this->getEye(), $this->getFill()),
+            $this->getRendererStyle(),
             $this->getFormatter()
         );
 
@@ -437,11 +440,21 @@ class Generator
     }
 
     /**
+     * Returns the Renderer Style
+     *
+     * @return RendererStyle
+     */
+    public function getRendererStyle(): RendererStyle
+    {
+        return new RendererStyle($this->pixels, $this->margin, $this->getModule(), $this->getEye(), $this->getFill());
+    }
+
+    /**
      * Fetches the formatter.
      *
      * @return ImageBackEndInterface
      */
-    protected function getFormatter(): ImageBackEndInterface
+    public function getFormatter(): ImageBackEndInterface
     {
         if ($this->format === 'png') {
             return new ImagickImageBackEnd('png');
@@ -459,7 +472,7 @@ class Generator
      *
      * @return ModuleInterface
      */
-    protected function getModule(): ModuleInterface
+    public function getModule(): ModuleInterface
     {
         if ($this->style === 'dot') {
             return (new DotsModule($this->styleSize));
@@ -477,7 +490,7 @@ class Generator
      *
      * @return EyeInterface
      */
-    protected function getEye(): EyeInterface
+    public function getEye(): EyeInterface
     {
         if ($this->eyeStyle === 'square') {
             return SquareEye::instance();
@@ -495,19 +508,19 @@ class Generator
      *
      * @return Fill
      */
-    protected function getFill(): Fill
+    public function getFill(): Fill
     {
-        $foregroundColor = $this->color ?? new Gray(100);
-        $backgroundColor = $this->backgroundColor ?? new Gray(0);
-        $eye1 = $this->eyeColors[0] ?? EyeFill::uniform(new Gray(0));
-        $eye2 = $this->eyeColors[1] ?? EyeFill::uniform(new Gray(0));
-        $eye3 = $this->eyeColors[2] ?? EyeFill::uniform(new Gray(0));
+        $foregroundColor = $this->color ?? new Rgb(0, 0, 0);
+        $backgroundColor = $this->backgroundColor ?? new Rgb(255, 255, 255);
+        $eye0 = $this->eyeColors[0] ?? EyeFill::inherit();
+        $eye1 = $this->eyeColors[1] ?? EyeFill::inherit();
+        $eye2 = $this->eyeColors[2] ?? EyeFill::inherit();
 
         if ($this->gradient) {
-            return Fill::withForegroundGradient($foregroundColor, $this->gradient, $eye1, $eye2, $eye3);
+            return Fill::withForegroundGradient($backgroundColor, $this->gradient, $eye0, $eye1, $eye2);
         }
-        
-        return Fill::withForegroundColor($foregroundColor, $backgroundColor, $eye1, $eye2, $eye3);
+
+        return Fill::withForegroundColor($backgroundColor, $foregroundColor, $eye0, $eye1, $eye2);
     }
 
     /**
@@ -518,7 +531,7 @@ class Generator
      * @param null|int $alpha
      * @return ColorInterface
      */
-    protected function createColor(int $red, int $green, int $blue, ?int $alpha = null): ColorInterface
+    public function createColor(int $red, int $green, int $blue, ?int $alpha = null): ColorInterface
     {
         if (! $alpha) {
             return new Rgb($red, $green, $blue);

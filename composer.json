@@ -13,17 +13,18 @@
     "require": {
         "php": ">=7.2",
       	"ext-gd": "*",
-        "bacon/bacon-qr-code": "~2"
+        "bacon/bacon-qr-code": "2.0.0"
     },
     "require-dev": {
         "mockery/mockery": "~1",
         "phpunit/phpunit": "~9"
     },
     "suggest": {
-        "illuminate/support": "Allows for use within Laravel"
+        "ext-imagick": "Allows the generation of PNG QrCodes.",
+        "illuminate/support": "Allows for use within Laravel."
     },
     "autoload": {
-        "psr-0": {
+        "psr-4": {
             "SimpleSoftwareIO\\QrCode\\": "src"
         }
     },

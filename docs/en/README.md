@@ -11,7 +11,7 @@ Simple QrCode
 
 
 - [Introduction](#docs-introduction)
-- [Translations](#docs-translations)
+- [Upgrade Guide](#docs-upgrade)
 - [Configuration](#docs-configuration)
 - [Simple Ideas](#docs-ideas)
 - [Usage](#docs-usage)
@@ -29,32 +29,23 @@ Upload files with a single curl command from your terminal! `curl --upload-file 
 ## Introduction
 Simple QrCode is an easy to use wrapper for the popular Laravel framework based on the great work provided by [Bacon/BaconQrCode](https://github.com/Bacon/BaconQrCode).  We created an interface that is familiar and easy to install for Laravel users.
 
-<a id="docs-translations"></a>
-## Translations
-We are looking for users who speak Arabic, Spanish, French, Korean or Japanese to help translate this document.  Please create a pull request if you are able to make a translation!
+![Example 1](../imgs/example-1.png) ![Example 2](../imgs/example-2.png)
+
+<a id="docs-upgrade"></a>
+## Upgrade Guide
+
+Upgrade from v2 by changing your `composer.json` file to `~3`
+
+You **must** install the `imagick` PHP extension if you plan on using the `png` image format.
 
 <a id="docs-configuration"></a>
 ## Configuration
 
 #### Composer
 
-First, add the Simple QrCode package to your `require` in your `composer.json` file:
+Run `composer require simplesoftwareio/simple-qrcode "~3"` to add the package. 
 
-	"require": {
-		"simplesoftwareio/simple-qrcode": "~2"
-	}
-
-Next, run the `composer update` command.
-
-#### Service Provider
-
-###### Laravel <= 5.4
-Register the `SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class` in your `config/app.php` within the `providers` array.
-
-#### Aliases
-
-###### Laravel <= 5.4
-Finally, register the `'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class` in your `config/app.php` configuration file within the `aliases` array.
+Laravel will automiatcally pick up and install the package.
 
 <a id="docs-ideas"></a>
 ## Simple Ideas
@@ -86,13 +77,13 @@ Using the QrCode Generator is very easy.  The most basic syntax is:
 
 This will make a QrCode that says "Make me into a QrCode!"
 
-#### Generate
+![Example QrCode](../imgs/make-me-into-a-qrcode.png)
+
+#### Generate `(string $data, string $filename = null)`
 
 `Generate` is used to make the QrCode.
 
 	QrCode::generate('Make me into a QrCode!');
-
->Heads up! This method must be called last if using within a chain.
 
 `Generate` by default will return a SVG image string.  You can print this directly into a modern browser within Laravel's Blade system with the following:
 
@@ -102,37 +93,87 @@ The `generate` method has a second parameter that will accept a filename and pat
 
 	QrCode::generate('Make me into a QrCode!', '../public/qrcodes/qrcode.svg');
 
-#### Format Change
+#### Format `(string $format)`
 
->QrCode Generator is setup to return a SVG image by default.
+Three formats are currently supported; `png,` `eps,` and `svg.`  To change the format use the following code:
 
->Watch out! The `format` method must be called before any other formatting options such as `size`, `color`, `backgroundColor`, and `margin`.
+	QrCode::format('png');  //Will return a png image
+	QrCode::format('eps');  //Will return a eps image
+	QrCode::format('svg');  //Will return a svg image
 
-Three formats are currently supported; PNG, EPS, and SVG.  To change the format use the following code:
+> `imagick` is required in order to generate a `png` image.
 
-	QrCode::format('png');  //Will return a PNG image
-	QrCode::format('eps');  //Will return a EPS image
-	QrCode::format('svg');  //Will return a SVG image
-
-#### Size Change
-
->QrCode Generator will by default return the smallest size possible in pixels to create the QrCode.
+#### Size `(int $size)`
 
 You can change the size of a QrCode by using the `size` method. Simply specify the size desired in pixels using the following syntax:
 
 	QrCode::size(100);
 
-#### Color Change
+![200 Pixels](../imgs/200-pixels.png) ![250 Pixels](../imgs/250-pixels.png) 
+
+#### Color `(int $red, int $green, int $blue, int $alpha = null)`
 
 >Be careful when changing the color of a QrCode.  Some readers have a very difficult time reading QrCodes in color.
 
-All colors must be expressed in RGB (Red Green Blue).  You can change the color of a QrCode by using the following:
+All colors must be expressed in RGBA (Red Green Blue Alpha).  You can change the color of a QrCode by using the following:
 
-	QrCode::color(255,0,255);
+	QrCode::color(255, 0, 0); // Red QrCode
+	QrCode::color(255, 0, 0, 25); //Red QrCode with 25% transparency 
 
-Background color changes are also supported and be expressed in the same manner.
+![Red QrCode](../imgs/red-qrcode.png) ![Red Transparent QrCode](../imgs/red-25-transparent.png)
 
-	QrCode::backgroundColor(255,255,0);
+#### Background Color `(int $red, int $green, int $blue, int $alpha = null)`
+
+You can change the background color of a QrCode by calling the `backgroundColor` method.
+
+	QrCode::backgroundColor(255, 0, 0); // Red background QrCode
+	QrCode::backgroundColor(255, 0, 0, 25); //Red background QrCode with 25% transparency 
+
+![Red Background QrCode](../imgs/red-background.png) ![Red Transparent Background QrCode](../imgs/red-25-transparent-background.png)
+
+#### Gradient `$startRed, $startGreen, $startBlue, $endRed, $endGreen, $endBlue, string $type)`
+
+You can apply a gradient to the QrCode by calling the `gradient` method.
+
+The following gradient types are supported.
+
+| Type | Example |
+| --- | --- |
+| `vertical` | ![Veritcal](../imgs/vertical.png) |
+| `horizontal` | ![Horizontal](../imgs/horizontal.png) |
+| `diagonal` | ![Diagonal](../imgs/diagonal.png) |
+| `inverse_diagonal` | ![Invrse Diagonal](../imgs/inverse_diagonal.png) |
+| `radial` | ![Radial](../imgs/radial.png) |
+
+#### EyeColor `(int $eyeNumber, int $innerRed, int $innerGreen, int $innerBlue, int $outterRed = 0, int $outterGreen = 0, int $outterBlue = 0)`
+
+You may change the eye colors by using the `eyeColor` method.
+
+| Eye Number | Example |
+| --- | --- |
+| `0` | ![Eye 0](../imgs/eye-0.png) |
+| `1` | ![Eye 1](../imgs/eye-1.png)|
+| `2` | ![Eye  2](../imgs/eye-2.png) |
+
+
+#### Style `(string $style, float $size = 0.5)`
+
+The style can be easily swapped out with `square.` `dot,` or `round.`  This will change the blocks within the QrCode.  The second parameter will affect the size of the dots or roundness.
+
+| Style | Example |
+| --- | --- |
+| `sqaure` | ![Sqaure](../imgs/200-pixels.png) |
+| `dot` | ![Dot](../imgs/dot.png)|
+| `round` | ![Round](../imgs/round.png) |
+
+#### Eye Style `(string $style)`
+
+The eye within the QrCode supports two different styles, `dot` and `circle.`
+
+| Style | Example |
+| --- | --- |
+| `sqaure` | ![Sqaure](../imgs/200-pixels.png) |
+| `circle` | ![Circle](../imgs/circle-eye.png)|
 
 #### Margin Change
 
@@ -192,8 +233,6 @@ Change the character encoding that is used to build a QrCode.  By default `ISO-8
 | GBK |
 | EUC-KR |
 
->An error of `Could not encode content to ISO-8859-1` means that the wrong character encoding type is being used.  We recommend `UTF-8` if you are unsure.
-
 #### Merge
 
 The `merge` method merges an image over a QrCode.  This is commonly used to placed logos within a QrCode.
@@ -232,7 +271,7 @@ The `mergeString` method can be used to achieve the same as the `merge` call, ex
 
 #### Advance Usage
 
-All methods support chaining.  The `generate` method must be called last and any `format` change must be called first.  For example you could run any of the following:
+All methods support chaining.  The `generate` method must be called last.  For example you could run any of the following:
 
 	QrCode::size(250)->color(150,90,10)->backgroundColor(10,14,244)->generate('Make me a QrCode!');
 	QrCode::format('png')->size(399)->color(40,40,40)->generate('Make me a QrCode!');
@@ -364,9 +403,9 @@ You can use a prefix found in the table below inside the `generate` section to c
 <a id="docs-outside-laravel"></a>
 ## Usage Outside of Laravel
 
-You may use this package outside of Laravel by instantiating a new `BaconQrCodeGenerator` class.
+You may use this package outside of Laravel by instantiating a new `Generator` class.
 
-	use SimpleSoftwareIO\QrCode\BaconQrCodeGenerator;
+	use SimpleSoftwareIO\QrCode\Generator;
 
-	$qrcode = new BaconQrCodeGenerator;
+	$qrcode = new Generator;
 	$qrcode->size(500)->generate('Make a qrcode without Laravel!');
