@@ -1,11 +1,4 @@
-Simple QrCode
-========================
-
-[![Build Status](https://travis-ci.org/SimpleSoftwareIO/simple-qrcode.svg?branch=master)](https://travis-ci.org/SimpleSoftwareIO/simple-qrcode)
-[![Latest Stable Version](https://poser.pugx.org/simplesoftwareio/simple-qrcode/v/stable.svg)](https://packagist.org/packages/simplesoftwareio/simple-qrcode)
-[![Latest Unstable Version](https://poser.pugx.org/simplesoftwareio/simple-qrcode/v/unstable.svg)](https://packagist.org/packages/simplesoftwareio/simple-qrcode)
-[![License](https://poser.pugx.org/simplesoftwareio/simple-qrcode/license.svg)](https://packagist.org/packages/simplesoftwareio/simple-qrcode)
-[![Total Downloads](https://poser.pugx.org/simplesoftwareio/simple-qrcode/downloads.svg)](https://packagist.org/packages/simplesoftwareio/simple-qrcode)
+[![Build Status](https://travis-ci.org/SimpleSoftwareIO/simple-qrcode.svg?branch=master)](https://travis-ci.org/SimpleSoftwareIO/simple-qrcode) [![Latest Stable Version](https://poser.pugx.org/simplesoftwareio/simple-qrcode/v/stable.svg)](https://packagist.org/packages/simplesoftwareio/simple-qrcode) [![Latest Unstable Version](https://poser.pugx.org/simplesoftwareio/simple-qrcode/v/unstable.svg)](https://packagist.org/packages/simplesoftwareio/simple-qrcode) [![License](https://poser.pugx.org/simplesoftwareio/simple-qrcode/license.svg)](https://packagist.org/packages/simplesoftwareio/simple-qrcode) [![Total Downloads](https://poser.pugx.org/simplesoftwareio/simple-qrcode/downloads.svg)](https://packagist.org/packages/simplesoftwareio/simple-qrcode)
 
 #### [Español](https://www.simplesoftware.io/docs/simple-qrcode/es) | [Français](https://www.simplesoftware.io/docs/simple-qrcode/fr) | [Italiano](https://www.simplesoftware.io/docs/simple-qrcode/it) | [Português](https://www.simplesoftware.io/docs/simple-qrcode/pt-br) | [Русский](https://www.simplesoftware.io/docs/simple-qrcode/ru) | [日本人](https://www.simplesoftware.io/docs/simple-qrcode/ja) | [한국어](https://www.simplesoftware.io/docs/simple-qrcode/kr) | [हिंदी](https://www.simplesoftware.io/docs/simple-qrcode/hi) | [汉语](https://www.simplesoftware.io/docs/simple-qrcode/zh)
 
