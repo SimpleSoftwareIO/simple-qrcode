@@ -2,16 +2,6 @@
 
 #### [Español](http://www.simplesoftware.io/#/docs/simple-qrcode/es) | [Français](http://www.simplesoftware.io/#/docs/simple-qrcode/fr) | [Italiano](http://www.simplesoftware.io/#/docs/simple-qrcode/it) | [Português](http://www.simplesoftware.io/#/docs/simple-qrcode/pt-br) | [Русский](http://www.simplesoftware.io/#/docs/simple-qrcode/ru) | [日本人](http://www.simplesoftware.io/#/docs/simple-qrcode/ja) | [한국어](http://www.simplesoftware.io/#/docs/simple-qrcode/kr) | [हिंदी](http://www.simplesoftware.io/#/docs/simple-qrcode/hi) | [汉语](http://www.simplesoftware.io/#/docs/simple-qrcode/zh)
 
-
-- [Introduction](#docs-introduction)
-- [Upgrade Guide](#docs-upgrade)
-- [Configuration](#docs-configuration)
-- [Simple Ideas](#docs-ideas)
-- [Usage](#docs-usage)
-- [Helpers](#docs-helpers)
-- [Common QrCode Usage](#docs-common-usage)
-- [Usage Outside of Laravel](#docs-outside-laravel)
-
 ## Try our dead simple, free file transfer service [keep.sh](https://keep.sh)
 
 ![keep.sh](https://user-images.githubusercontent.com/624784/59808382-06676800-92ca-11e9-87b7-70020b6aef5f.gif)
