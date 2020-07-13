@@ -3,7 +3,6 @@
 
 - [介绍](#docs-introduction)
 - [升级指南](#docs-upgrade)
-- [翻译](#docs-translations)
 - [配置](#docs-configuration)
 - [简例](#docs-ideas)
 - [使用说明](#docs-usage)
@@ -24,6 +23,7 @@ Simple QrCode 是基于[Bacon/BaconQrCode](https://github.com/Bacon/BaconQrCode)
 
 如果你需要使用 `png` 文件格式，那么你**必须**安装 `imagick` PHP扩展.
 
+<a id="docs-configuration"></a>
 ## 配置
 
 #### Composer安装
@@ -71,7 +71,7 @@ Laravel将会自动完成安装工作.
 
 这就能创建一个内容是:"Make me into a QrCode!" 的二维码了.
 
-#### 生成 `(string $data, string $filename = null)`
+#### 生成 `generate(string $data, string $filename = null)`
 
 `Generate` 是用来创建二维码的方法.
 
@@ -87,7 +87,7 @@ Laravel将会自动完成安装工作.
 
 	QrCode::generate('Make me into a QrCode!', '../public/qrcodes/qrcode.svg');
 
-#### 格式  `(string $format)`
+#### 格式  `format(string $format)`
 
 现支持 PNG，EPS，SVG 三种格式,设置方式如下:
 
@@ -97,7 +97,7 @@ Laravel将会自动完成安装工作.
 
 > 必须 `imagick` PHP扩展才能生成 `png` 图片.
 
-#### 尺寸 `(int $size)`
+#### 尺寸 `size(int $size)`
 
 >QrCode 的 Generator 默认返回可能最小像素单位的二维码.
 
@@ -107,7 +107,7 @@ Laravel将会自动完成安装工作.
 
 ![200 像素](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/200-pixels.png?raw=true) ![250 像素](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/250-pixels.png?raw=true)
 
-#### 颜色  `(int $red, int $green, int $blue, int $alpha = null)`
+#### 颜色  `color(int $red, int $green, int $blue, int $alpha = null)`
 
 >注意改变颜色后,可能会导致某些设备难以识别.
 
@@ -119,7 +119,7 @@ QrCode::color(255, 0, 0, 25); //红色二维码+25%透明度
 ![红色二维码](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/red-qrcode.png?raw=true) ![红色透明二维码](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/red-25-transparent.png?raw=true)
 
 
-#### 背景颜色 `(int $red, int $green, int $blue, int $alpha = null)`
+#### 背景颜色 `backgroundColor(int $red, int $green, int $blue, int $alpha = null)`
 
 你可以使用`backgroundColor` 方法来设置背景颜色.
 
@@ -128,7 +128,7 @@ QrCode::color(255, 0, 0, 25); //红色二维码+25%透明度
 
 ![红色背景二维码](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/red-background.png?raw=true) ![红色透明背景二维码](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/red-25-transparent-background.png?raw=true)
 
-#### 渐变 `$startRed, $startGreen, $startBlue, $endRed, $endGreen, $endBlue, string $type)`
+#### 渐变 `gradient($startRed, $startGreen, $startBlue, $endRed, $endGreen, $endBlue, string $type)`
 
 你可以使用 `gradient` 方法设置渐变.
 
@@ -142,7 +142,7 @@ QrCode::color(255, 0, 0, 25); //红色二维码+25%透明度
 | `inverse_diagonal`反对角 | ![反对角](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/inverse_diagonal.png?raw=true) |
 | `radial`迳向 | ![迳向](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/radial.png?raw=true) |
 
-#### 定位颜色 `(int $eyeNumber, int $innerRed, int $innerGreen, int $innerBlue, int $outterRed = 0, int $outterGreen = 0, int $outterBlue = 0)`
+#### 定位颜色 `eyeColor(int $eyeNumber, int $innerRed, int $innerGreen, int $innerBlue, int $outterRed = 0, int $outterGreen = 0, int $outterBlue = 0)`
 
 你可以使用 `eyeColor` 方法设置定位眼颜色.
 
@@ -152,7 +152,7 @@ QrCode::color(255, 0, 0, 25); //红色二维码+25%透明度
 | `1` | ![Eye 1](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/eye-1.png?raw=true)|
 | `2` | ![Eye 2](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/eye-2.png?raw=true) |
 
-#### 风格 `(string $style, float $size = 0.5)`
+#### 风格 `style(string $style, float $size = 0.5)`
 
 二维码风格可以轻易的使用 `square`, `dot` 或 `round`来调换. 这将改变二维码中的信息块风格. 第二个参数是设置dot'点'的大小和round的圆度.
 
@@ -162,7 +162,7 @@ QrCode::color(255, 0, 0, 25); //红色二维码+25%透明度
 | `dot`点 | ![点](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/dot.png)|
 | `round`圆 | ![圆](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/round.png?raw=true) |
 
-#### 定位眼风格 `(string $style)`
+#### 定位眼风格 `eyeStyle(string $style)`
 
 二维码定位眼支持2个格式, `sqaure`方 和 `circle`圆.
 
@@ -171,7 +171,7 @@ QrCode::color(255, 0, 0, 25); //红色二维码+25%透明度
 | `sqaure`方 | ![方](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/200-pixels.png?raw=true) |
 | `circle`圆 | ![圆](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/circle-eye.png?raw=true)|
 
-#### 边距 `(int $margin)`
+#### 边距 `margin(int $margin)`
 
 也支持设置边距. 设置方式如下:
 
