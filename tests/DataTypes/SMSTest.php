@@ -23,7 +23,7 @@ class SMSTest extends TestCase
     {
         $this->sms->create([null, 'foo']);
 
-        $properFormat = 'sms::foo';
+        $properFormat = 'sms:&body=foo';
 
         $this->assertEquals($properFormat, strval($this->sms));
     }
