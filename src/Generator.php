@@ -533,7 +533,7 @@ class Generator
      */
     public function createColor(int $red, int $green, int $blue, ?int $alpha = null): ColorInterface
     {
-        if (! $alpha) {
+        if (is_null($alpha)) {
             return new Rgb($red, $green, $blue);
         }
 
