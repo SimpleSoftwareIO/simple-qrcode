@@ -70,7 +70,7 @@ class EPC implements DataTypeInterface
         $string .= $this->bic."\n";
         $string .= $this->name."\n";
         $string .= $this->iban."\n";
-        $string .= "EUR" . number_format($this->amount, 2)."\n";
+        $string .= "EUR".number_format($this->amount, 2)."\n";
         $string .= "\n";
         $string .= "\n";
         $string .= $this->text."\n";
