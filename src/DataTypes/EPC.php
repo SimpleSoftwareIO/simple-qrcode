@@ -2,8 +2,6 @@
 
 namespace SimpleSoftwareIO\QrCode\DataTypes;
 
-use BaconQrCode\Exception\InvalidArgumentException;
-
 class EPC implements DataTypeInterface
 {
     /**
@@ -34,14 +32,14 @@ class EPC implements DataTypeInterface
      */
     protected $amount;
 
-        /**
+    /**
      * The Name of the Beneficiary.
      *
      * @var string
      */
     protected $name;
 
-            /**
+    /**
      * The text.
      *
      * @var string
@@ -69,13 +67,13 @@ class EPC implements DataTypeInterface
         $string .= "002\n";
         $string .= "2\n";
         $string .= "SCT\n";
-        $string .= $this->bic . "\n";
-        $string .= $this->name . "\n";
-        $string .= $this->iban . "\n";
-        $string .= "EUR" . number_format($this->amount, 2) ."\n";
+        $string .= $this->bic."\n";
+        $string .= $this->name."\n";
+        $string .= $this->iban."\n";
+        $string .= "EUR" . number_format($this->amount, 2)."\n";
         $string .= "\n";
         $string .= "\n";
-        $string .= $this->text . "\n";
+        $string .= $this->text."\n";
 
         return $string;
     }
