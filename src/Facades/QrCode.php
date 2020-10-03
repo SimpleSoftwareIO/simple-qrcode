@@ -1,10 +1,11 @@
 <?php
 
-namespace SimpleSoftwareIO\QrCode;
+namespace SimpleSoftwareIO\QrCode\Facades;
 
-use Illuminate\Support\Facades\Facade as IlluminateFacade;
+use Illuminate\Support\Facades\Facade;
+use SimpleSoftwareIO\QrCode\Generator;
 
-class Facade extends IlluminateFacade
+class QrCode extends Facade
 {
     /**
      * Get the registered name of the component.

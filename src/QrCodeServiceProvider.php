@@ -2,10 +2,9 @@
 
 namespace SimpleSoftwareIO\QrCode;
 
-use Illuminate\Contracts\Support\DeferrableProvider;
-use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
+use Illuminate\Support\ServiceProvider;
 
-class ServiceProvider extends IlluminateServiceProvider implements DeferrableProvider
+class QrCodeServiceProvider extends ServiceProvider
 {
     /**
      * Register the service provider.

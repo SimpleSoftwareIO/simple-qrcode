@@ -13,7 +13,7 @@
     "require": {
         "php": ">=7.2",
       	"ext-gd": "*",
-        "bacon/bacon-qr-code": "2.0.0"
+        "bacon/bacon-qr-code": "^2.0"
     },
     "require-dev": {
         "mockery/mockery": "~1",
@@ -34,10 +34,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "SimpleSoftwareIO\\QrCode\\ServiceProvider"
+                "SimpleSoftwareIO\\QrCode\\QrCodeServiceProvider"
             ],
             "aliases": {
-                "QrCode": "SimpleSoftwareIO\\QrCode\\Facade"
+                "QrCode": "SimpleSoftwareIO\\QrCode\\Facades\\QrCode"
             }
         }
     }
