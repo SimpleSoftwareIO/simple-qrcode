@@ -37,7 +37,7 @@
                 "SimpleSoftwareIO\\QrCode\\QrCodeServiceProvider"
             ],
             "aliases": {
-                "QrCode": "SimpleSoftwareIO\\QrCode\\QrCode"
+                "QrCode": "SimpleSoftwareIO\\QrCode\\Facades\\QrCode"
             }
         }
     }
