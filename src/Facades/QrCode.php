@@ -2,8 +2,8 @@
 
 namespace SimpleSoftwareIO\QrCode\Facades;
 
-use SimpleSoftwareIO\QrCode\Generator;
 use Illuminate\Support\Facades\Facade;
+use SimpleSoftwareIO\QrCode\Generator;
 
 class QrCode extends Facade
 {
