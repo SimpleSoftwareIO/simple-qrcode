@@ -17,16 +17,26 @@ Simple QrCode is an easy to use wrapper for the popular Laravel framework based 
 <a id="docs-upgrade"></a>
 ## Upgrade Guide
 
-Upgrade from v2 by changing your `composer.json` file to `~3`
+Upgrade from v2 or v3 by changing your `composer.json` file to `~4`
 
 You **must** install the `imagick` PHP extension if you plan on using the `png` image format.
+
+#### v4
+
+There was a Laravel facade issue within v3 that causes some loading issues.  The only way to fix this was to create a backwards breaking change so v4 has been released.  If you are coming from v2 there is no need to change any code.  The below change only effects users on v3.
+
+All references to the `QrCode` facade need to be changed to:
+
+```
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+```
 
 <a id="docs-configuration"></a>
 ## Configuration
 
 #### Composer
 
-Run `composer require simplesoftwareio/simple-qrcode "~3"` to add the package. 
+Run `composer require simplesoftwareio/simple-qrcode "~4"` to add the package. 
 
 Laravel will automiatcally pick up and install the package.
 
@@ -54,7 +64,15 @@ You may embed a qrcode inside of an e-mail to allow your users to quickly scan. 
 
 #### Basic Usage
 
+```
+// All examples below assume you are pulling in the QrCode facade with the following line of code. The Facade is auto-loaded for Laravel users.
+
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+```
+
 Using the QrCode Generator is very easy.  The most basic syntax is:
+
+	use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 	QrCode::generate('Make me into a QrCode!');
 
