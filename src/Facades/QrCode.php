@@ -2,9 +2,10 @@
 
 namespace SimpleSoftwareIO\QrCode;
 
-use Illuminate\Support\Facades\Facade as IlluminateFacade;
+use SimpleSoftwareIO\QrCode\Generator;
+use Illuminate\Support\Facades\Facade;
 
-class Facade extends IlluminateFacade
+class QrCode extends Facade
 {
     /**
      * Get the registered name of the component.

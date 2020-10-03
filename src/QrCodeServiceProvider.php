@@ -2,9 +2,9 @@
 
 namespace SimpleSoftwareIO\QrCode;
 
-use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
+use Illuminate\Support\ServiceProvider;
 
-class ServiceProvider extends IlluminateServiceProvider
+class QrCodeServiceProvider extends ServiceProvider
 {
     /**
      * Register the service provider.
