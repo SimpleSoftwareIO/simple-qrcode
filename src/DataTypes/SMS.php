@@ -16,7 +16,7 @@ class SMS implements DataTypeInterface
      *
      * @var string
      */
-    protected $separator = ':';
+    protected $separator = '&body=';
 
     /**
      * The phone number.
