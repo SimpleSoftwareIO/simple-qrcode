@@ -38,7 +38,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 Run `composer require simplesoftwareio/simple-qrcode "~4"` to add the package. 
 
-Laravel will automiatcally pick up and install the package.
+Laravel will automatically pick up and install the package.
 
 <a id="docs-ideas"></a>
 ## Simple Ideas
@@ -96,7 +96,7 @@ The `generate` method has a second parameter that will accept a filename and pat
 
 #### Format `(string $format)`
 
-Three formats are currently supported; `png,` `eps,` and `svg.`  To change the format use the following code:
+Three formats are currently supported; `png,` `eps,` and `svg`.  To change the format use the following code:
 
 	QrCode::format('png');  //Will return a png image
 	QrCode::format('eps');  //Will return a eps image
@@ -159,21 +159,21 @@ You may change the eye colors by using the `eyeColor` method.
 
 #### Style `(string $style, float $size = 0.5)`
 
-The style can be easily swapped out with `square.` `dot,` or `round.`  This will change the blocks within the QrCode.  The second parameter will affect the size of the dots or roundness.
+The style can be easily swapped out with `square`, `dot,` or `round`.  This will change the blocks within the QrCode.  The second parameter will affect the size of the dots or roundness.
 
 | Style | Example |
 | --- | --- |
-| `sqaure` | ![Sqaure](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/200-pixels.png?raw=true) |
+| `square` | ![Square](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/200-pixels.png?raw=true) |
 | `dot` | ![Dot](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/dot.png)|
 | `round` | ![Round](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/round.png?raw=true) |
 
 #### Eye Style `(string $style)`
 
-The eye within the QrCode supports two different styles, `sqaure` and `circle.`
+The eye within the QrCode supports two different styles, `square` and `circle`.
 
 | Style | Example |
 | --- | --- |
-| `sqaure` | ![Sqaure](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/200-pixels.png?raw=true) |
+| `square` | ![Square](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/200-pixels.png?raw=true) |
 | `circle` | ![Circle](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/circle-eye.png?raw=true)|
 
 #### Margin `(int $margin)`
@@ -201,7 +201,9 @@ The following are supported options for the `errorCorrection` method:
 
 #### Encoding `(string $encoding)`
 
-Change the character encoding that is used to build a QrCode.  By default `ISO-8859-1` is selected as the encoder.  Read more about [character encoding](http://en.wikipedia.org/wiki/Character_encoding) You can change this to any of the following:
+Change the character encoding that is used to build a QrCode.  By default `ISO-8859-1` is selected as the encoder.  Read more about [character encoding](http://en.wikipedia.org/wiki/Character_encoding).
+
+You can change this to any of the following:
 
 	QrCode::encoding('UTF-8')->generate('Make me a QrCode with special symbols ♠♥!!');
 
@@ -346,7 +348,7 @@ This helper makes SMS messages that can be prefilled with the send to address an
 
 #### WiFi
 
-This helpers makes scannable QrCodes that can connect a phone to a WiFI network:
+This helpers makes scannable QrCodes that can connect a phone to a WiFi network:
 
 	QrCode::wiFi([
 		'encryption' => 'WPA/WEP',
@@ -366,7 +368,7 @@ This helpers makes scannable QrCodes that can connect a phone to a WiFI network:
 		'hidden' => 'true'
 	]);
 	
-	//Connects to an secured, WiFi network.
+	//Connects to a secured WiFi network.
 	QrCode::wiFi([
 		'ssid' => 'Network Name',
 		'encryption' => 'WPA',
