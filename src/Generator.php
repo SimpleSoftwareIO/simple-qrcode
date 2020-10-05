@@ -181,7 +181,7 @@ class Generator
             return;
         }
 
-        if(class_exists(\Illuminate\Support\HtmlString::class)){
+        if (class_exists(\Illuminate\Support\HtmlString::class)) {
             return new \Illuminate\Support\HtmlString($qrCode);
         }
 
