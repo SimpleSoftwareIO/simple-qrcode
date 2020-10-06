@@ -2,6 +2,8 @@
 
 namespace SimpleSoftwareIO\QrCode;
 
+use InvalidArgumentException;
+
 class ImageMerge
 {
     /**
@@ -45,6 +47,13 @@ class ImageMerge
      * @var int
      */
     protected $mergeImageWidth;
+
+    /**
+     * Holds the radio of the merging image.
+     *
+     * @var float
+     */
+    protected $mergeRatio;
 
     /**
      * The height of the merge image after it is merged.
@@ -131,11 +140,13 @@ class ImageMerge
      * Sets the objects properties.
      *
      * @param $percentage float The percentage that the merge image should take up.
+     *
+     * @return void
      */
     protected function setProperties($percentage)
     {
         if ($percentage > 1) {
-            throw new \InvalidArgumentException('$percentage must be less than 1');
+            throw new InvalidArgumentException('$percentage must be less than 1');
         }
 
         $this->sourceImageHeight = $this->sourceImage->getHeight();
@@ -150,21 +161,26 @@ class ImageMerge
 
     /**
      * Calculates the center of the source Image using the Merge image.
+     *
+     * @return void
      */
-    private function calculateCenter()
+    protected function calculateCenter()
     {
-        $this->centerY = ($this->sourceImageHeight / 2) - ($this->postMergeImageHeight / 2);
-        $this->centerX = ($this->sourceImageWidth / 2) - ($this->postMergeImageHeight / 2);
+        $this->centerX = intval(($this->sourceImageWidth / 2) - ($this->postMergeImageWidth / 2));
+        $this->centerY = intval(($this->sourceImageHeight / 2) - ($this->postMergeImageHeight / 2));
     }
 
     /**
      * Calculates the width of the merge image being placed on the source image.
      *
      * @param float $percentage
+     *
+     * @return void
      */
-    private function calculateOverlap($percentage)
+    protected function calculateOverlap($percentage)
     {
-        $this->postMergeImageHeight = $this->sourceImageHeight * $percentage;
-        $this->postMergeImageWidth = $this->sourceImageWidth * $percentage;
+        $this->mergeRatio = round($this->mergeImageWidth / $this->mergeImageHeight, 2);
+        $this->postMergeImageWidth = intval($this->sourceImageWidth * $percentage);
+        $this->postMergeImageHeight = intval($this->postMergeImageWidth / $this->mergeRatio);
     }
 }
