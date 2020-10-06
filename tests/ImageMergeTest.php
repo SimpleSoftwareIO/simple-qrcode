@@ -28,18 +28,25 @@ class ImageMergeTest extends TestCase
     protected $testImage;
 
     /**
-     * The location of the test image to use.
+     * The location of the test image that is having an image merged over top of it.
      *
      * @var string
      */
     protected $testImagePath;
 
+    /**
+     * The location of the test image that is being merged.
+     * @var mixed
+     */
+    protected $mergeImagePath;
+
     public function setUp(): void
     {
         $this->testImagePath = file_get_contents(dirname(__FILE__).'/Images/simplesoftware-icon-grey-blue.png');
+        $this->mergeImagePath = file_get_contents(dirname(__FILE__).'/Images/200x300.png');
         $this->testImage = new ImageMerge(
             new Image($this->testImagePath),
-            new Image($this->testImagePath)
+            new Image($this->mergeImagePath)
         );
 
         $this->testImageSaveLocation = dirname(__FILE__).'/testImage.png';
@@ -54,22 +61,22 @@ class ImageMergeTest extends TestCase
 
     public function test_it_merges_two_images_together_and_centers_it()
     {
-        //We know the test image is 512x512
+        //We know the source image is 512x512 and the merge image is 200x300
         $source = imagecreatefromstring($this->testImagePath);
-        $merge = imagecreatefromstring($this->testImagePath);
+        $merge = imagecreatefromstring($this->mergeImagePath);
 
         //Create a PNG and place the image in the middle using 20% of the area.
         imagecopyresampled(
             $source,
             $merge,
-            204,
-            204,
+            205,
+            222,
             0,
             0,
             102,
-            102,
-            512,
-            512
+            67,
+            536,
+            354
         );
         imagepng($source, $this->compareTestSaveLocation);
 
