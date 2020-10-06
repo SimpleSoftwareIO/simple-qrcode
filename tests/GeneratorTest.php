@@ -205,4 +205,10 @@ class GeneratorTest extends TestCase
         $this->expectException(BadMethodCallException::class);
         (new Generator)->notReal('fooBar');
     }
+
+    public function test_generator_can_return_illuminate_support_htmlstring()
+    {
+        $this->getMockBuilder(\Illuminate\Support\HtmlString::class)->getMock();
+        $this->assertInstanceOf(\Illuminate\Support\HtmlString::class, (new Generator)->generate('fooBar'));
+    }
 }
