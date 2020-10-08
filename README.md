@@ -28,6 +28,16 @@ Documentation for Simple QrCode can be found on our [website.](http://www.simple
 
 ![Example 1](docs/imgs/example-1.png) ![Example 2](docs/imgs/example-2.png)
 
+## Use Cases
+<p align="center">
+  <a href="https://www.rsvpify.com">
+  	<img width="300" src="https://rsvpify.com/wp-content/uploads/2017/03/rsvpify-logo-header-rsvp.png">
+  </a>
+</p>
+<p align="center">
+  <a href="https://rsvpify.com/sell-tickets">Platform to sell tickets online</a>
+</p>
+
 ## Contributing
 
 Please submit all issues and pull requests to the [simplesoftwareio/simple-qrcode](https://github.com/simplesoftwareio/simple-qrcode) repository on the develop branch!

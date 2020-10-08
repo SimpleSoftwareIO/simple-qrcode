@@ -8,6 +8,16 @@
 
 Upload files with a single curl command from your terminal! `curl --upload-file file.txt https://keep.sh`
 
+## Use Cases
+<p align="center">
+  <a href="https://www.rsvpify.com">
+  	<img width="300" src="https://rsvpify.com/wp-content/uploads/2017/03/rsvpify-logo-header-rsvp.png">
+  </a>
+</p>
+<p align="center">
+  <a href="https://rsvpify.com/sell-tickets">Platform to sell tickets online</a>
+</p>
+
 <a id="docs-introduction"></a>
 ## Introduction
 Simple QrCode is an easy to use wrapper for the popular Laravel framework based on the great work provided by [Bacon/BaconQrCode](https://github.com/Bacon/BaconQrCode).  We created an interface that is familiar and easy to install for Laravel users.
