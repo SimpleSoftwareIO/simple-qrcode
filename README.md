@@ -42,6 +42,6 @@ This software is released under the [MIT license.](https://opensource.org/licens
 
 ### Try our dead simple, free file transfer service [keep.sh](https://keep.sh)
 
-![keep.sh](https://user-images.githubusercontent.com/624784/59808382-06676800-92ca-11e9-87b7-70020b6aef5f.gif)
+![keep.sh](https://user-images.githubusercontent.com/624784/95805291-1121e980-0cd3-11eb-9048-0264bd9f2fd7.gif)
 
 Upload files with a single curl command from your terminal! `curl --upload-file your-local-file.txt https://keep.sh`
