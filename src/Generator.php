@@ -181,9 +181,9 @@ class Generator
             return;
         }
 
-        if (class_exists(\Illuminate\Support\HtmlString::class)) {
-            return new \Illuminate\Support\HtmlString($qrCode);
-        }
+//        if (class_exists(\Illuminate\Support\HtmlString::class)) {
+//            return new \Illuminate\Support\HtmlString($qrCode);
+//        }
 
         return $qrCode;
     }
