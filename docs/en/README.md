@@ -33,6 +33,8 @@ You **must** install the `imagick` PHP extension if you plan on using the `png` 
 
 #### v4
 
+> There was a mistake when creating 4.1.0 and allowing a backwards breaking change into the master branch.  The `generate` method will now return an instance of `Illuminate\Support\HtmlString` if you are running Laravel.  See https://github.com/SimpleSoftwareIO/simple-qrcode/issues/205 for more information.
+
 There was a Laravel facade issue within v3 that causes some loading issues.  The only way to fix this was to create a backwards breaking change so v4 has been released.  If you are coming from v2 there is no need to change any code.  The below change only effects users on v3.
 
 All references to the `QrCode` facade need to be changed to:
@@ -160,6 +162,8 @@ The following gradient types are supported:
 
 You may change the eye colors by using the `eyeColor` method.
 
+	QrCode::eyeColor(0, 255, 255, 255, 0, 0, 0); // Changes the eye color of eye `0`
+
 | Eye Number | Example |
 | --- | --- |
 | `0` | ![Eye 0](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/eye-0.png?raw=true) |
@@ -171,6 +175,8 @@ You may change the eye colors by using the `eyeColor` method.
 
 The style can be easily swapped out with `square`, `dot,` or `round`.  This will change the blocks within the QrCode.  The second parameter will affect the size of the dots or roundness.
 
+	QrCode::style('dot'); // Uses the `dot` style.
+
 | Style | Example |
 | --- | --- |
 | `square` | ![Square](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/200-pixels.png?raw=true) |
@@ -180,6 +186,8 @@ The style can be easily swapped out with `square`, `dot,` or `round`.  This will
 #### Eye Style `(string $style)`
 
 The eye within the QrCode supports two different styles, `square` and `circle`.
+
+	QrCode::eye('circle'); // Uses the `circle` style eye.
 
 | Style | Example |
 | --- | --- |
