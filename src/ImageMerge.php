@@ -107,8 +107,24 @@ class ImageMerge
     {
         $this->setProperties($percentage);
 
-        imagecopyresampled(
+        $img = imagecreatetruecolor($this->sourceImage->getWidth(), $this->sourceImage->getHeight());
+        imagealphablending($img, true);
+        $transparent = imagecolorallocatealpha($img, 0, 0, 0, 127);
+        imagefill($img, 0, 0, $transparent);
+
+        imagecopy(
+            $img,
             $this->sourceImage->getImageResource(),
+            0,
+            0,
+            0,
+            0,
+            $this->sourceImage->getWidth(),
+            $this->sourceImage->getHeight()
+        );
+
+        imagecopyresampled(
+            $img,
             $this->mergeImage->getImageResource(),
             $this->centerX,
             $this->centerY,
@@ -119,6 +135,8 @@ class ImageMerge
             $this->mergeImageWidth,
             $this->mergeImageHeight
         );
+
+        $this->sourceImage->setImageResource($img);
 
         return $this->createImage();
     }

@@ -50,4 +50,14 @@ class Image
     {
         return $this->image;
     }
+
+    /**
+     * Sets the image string.
+     *
+     * @param resource $image
+     */
+    public function setImageResource($image)
+    {
+        $this->image = $image;
+    }
 }
