@@ -42,6 +42,9 @@ Documentation for Simple QrCode can be found on our [website.](http://www.simple
 
 Please submit all issues and pull requests to the [simplesoftwareio/simple-qrcode](https://github.com/simplesoftwareio/simple-qrcode) repository on the develop branch!
 
+## :film_strip: Video Tutorial 
+Video for Simple QrCode can be found [here](https://youtu.be/y_OHy5qNJlQ)
+
 ## License
 
 This software is released under the [MIT license.](https://opensource.org/licenses/MIT)
