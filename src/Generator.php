@@ -162,7 +162,7 @@ class Generator
      *
      * @param string $text
      * @param string|null $filename
-     * @return void|Illuminate\Support\HtmlString|string
+     * @return void|\Illuminate\Support\HtmlString|string
      * @throws WriterException
      * @throws InvalidArgumentException
      */
