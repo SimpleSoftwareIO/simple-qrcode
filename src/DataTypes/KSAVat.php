@@ -75,7 +75,7 @@ class KSAVat implements DataTypeInterface
             $this->seller_name = $arguments['seller'];
         }
         if (isset($arguments['vat'])) {
-            $this->vat_nr= $arguments['vat'];
+            $this->vat_nr = $arguments['vat'];
         }
         if (isset($arguments['date'])) {
             $this->invoice_date = $arguments['date'];
@@ -95,11 +95,11 @@ class KSAVat implements DataTypeInterface
      */
     public function __toString()
     {
-        $result = chr(1) . chr(strlen($this->seller_name)) . $this->seller_name;
-        $result.= chr(2) . chr(strlen($this->vat_nr)) . $this->vat_nr;
-        $result.= chr(3) . chr(strlen($this->invoice_date)) . $this->invoice_date;
-        $result.= chr(4) . chr(strlen($this->total)) . $this->total;
-        $result.= chr(5) . chr(strlen($this->tax)) . $this->tax;
+        $result = chr(1).chr(strlen($this->seller_name)).$this->seller_name;
+        $result.= chr(2).chr(strlen($this->vat_nr)).$this->vat_nr;
+        $result.= chr(3).chr(strlen($this->invoice_date)).$this->invoice_date;
+        $result.= chr(4).chr(strlen($this->total)).$this->total;
+        $result.= chr(5).chr(strlen($this->tax)).$this->tax;
         return base64_encode($result);
     }
 }
