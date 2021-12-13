@@ -160,11 +160,13 @@ class Generator
     /**
      * Generates the QrCode.
      *
-     * @param string $text
+     * @param string      $text
      * @param string|null $filename
-     * @return void|\Illuminate\Support\HtmlString|string
+     *
      * @throws WriterException
      * @throws InvalidArgumentException
+     *
+     * @return void|\Illuminate\Support\HtmlString|string
      */
     public function generate(string $text, string $filename = null)
     {
@@ -191,14 +193,15 @@ class Generator
     /**
      * Merges an image over the QrCode.
      *
-     * @param string $filepath
-     * @param float $percentage
+     * @param string                               $filepath
+     * @param float                                $percentage
      * @param SimpleSoftwareIO\QrCode\boolean|bool $absolute
+     *
      * @return Generator
      */
     public function merge(string $filepath, float $percentage = .2, bool $absolute = false): self
     {
-        if (function_exists('base_path') && ! $absolute) {
+        if (function_exists('base_path') && !$absolute) {
             $filepath = base_path().$filepath;
         }
 
@@ -211,8 +214,9 @@ class Generator
     /**
      * Merges an image string with the center of the QrCode.
      *
-     * @param string  $content
-     * @param float $percentage
+     * @param string $content
+     * @param float  $percentage
+     *
      * @return Generator
      */
     public function mergeString(string $content, float $percentage = .2): self
@@ -227,6 +231,7 @@ class Generator
      * Sets the size of the QrCode.
      *
      * @param int $pixels
+     *
      * @return Generator
      */
     public function size(int $pixels): self
@@ -240,12 +245,14 @@ class Generator
      * Sets the format of the QrCode.
      *
      * @param string $format
-     * @return Generator
+     *
      * @throws InvalidArgumentException
+     *
+     * @return Generator
      */
     public function format(string $format): self
     {
-        if (! in_array($format, ['svg', 'eps', 'png'])) {
+        if (!in_array($format, ['svg', 'eps', 'png'])) {
             throw new InvalidArgumentException("\$format must be svg, eps, or png. {$format} is not a valid.");
         }
 
@@ -257,10 +264,11 @@ class Generator
     /**
      * Sets the foreground color of the QrCode.
      *
-     * @param int $red
-     * @param int $green
-     * @param int $blue
+     * @param int      $red
+     * @param int      $green
+     * @param int      $blue
      * @param null|int $alpha
+     *
      * @return Generator
      */
     public function color(int $red, int $green, int $blue, ?int $alpha = null): self
@@ -273,10 +281,11 @@ class Generator
     /**
      * Sets the background color of the QrCode.
      *
-     * @param int $red
-     * @param int $green
-     * @param int $blue
+     * @param int      $red
+     * @param int      $green
+     * @param int      $blue
      * @param null|int $alpha
+     *
      * @return Generator
      */
     public function backgroundColor(int $red, int $green, int $blue, ?int $alpha = null): self
@@ -296,8 +305,10 @@ class Generator
      * @param int $outterRed
      * @param int $outterGreen
      * @param int $outterBlue
-     * @return Generator
+     *
      * @throws InvalidArgumentException
+     *
+     * @return Generator
      */
     public function eyeColor(int $eyeNumber, int $innerRed, int $innerGreen, int $innerBlue, int $outterRed = 0, int $outterGreen = 0, int $outterBlue = 0): self
     {
@@ -329,12 +340,14 @@ class Generator
      * Sets the eye style.
      *
      * @param string $style
-     * @return Generator
+     *
      * @throws InvalidArgumentException
+     *
+     * @return Generator
      */
     public function eye(string $style): self
     {
-        if (! in_array($style, ['square', 'circle'])) {
+        if (!in_array($style, ['square', 'circle'])) {
             throw new InvalidArgumentException("\$style must be square or circle. {$style} is not a valid eye style.");
         }
 
@@ -347,13 +360,15 @@ class Generator
      * Sets the style of the blocks for the QrCode.
      *
      * @param string $style
-     * @param float $size
-     * @return Generator
+     * @param float  $size
+     *
      * @throws InvalidArgumentException
+     *
+     * @return Generator
      */
     public function style(string $style, float $size = 0.5): self
     {
-        if (! in_array($style, ['square', 'dot', 'round'])) {
+        if (!in_array($style, ['square', 'dot', 'round'])) {
             throw new InvalidArgumentException("\$style must be square, dot, or round. {$style} is not a valid.");
         }
 
@@ -377,6 +392,7 @@ class Generator
      * UTF-16BE, UTF-8, ASCII, GBK, EUC-KR.
      *
      * @param string $encoding
+     *
      * @return Generator
      */
     public function encoding(string $encoding): self
@@ -394,6 +410,7 @@ class Generator
      * H: 30% loss.
      *
      * @param string $errorCorrection
+     *
      * @return Generator
      */
     public function errorCorrection(string $errorCorrection): self
@@ -408,6 +425,7 @@ class Generator
      * Sets the margin of the QrCode.
      *
      * @param int $margin
+     *
      * @return Generator
      */
     public function margin(int $margin): self
@@ -421,6 +439,7 @@ class Generator
      * Fetches the Writer.
      *
      * @param ImageRenderer $renderer
+     *
      * @return Writer
      */
     public function getWriter(ImageRenderer $renderer): Writer
@@ -465,10 +484,10 @@ class Generator
         }
 
         if ($this->format === 'eps') {
-            return new EpsImageBackEnd;
+            return new EpsImageBackEnd();
         }
 
-        return new SvgImageBackEnd;
+        return new SvgImageBackEnd();
     }
 
     /**
@@ -529,10 +548,12 @@ class Generator
 
     /**
      * Creates a RGB or Alpha channel color.
-     * @param int $red
-     * @param int $green
-     * @param int $blue
+     *
+     * @param int      $red
+     * @param int      $green
+     * @param int      $blue
      * @param null|int $alpha
+     *
      * @return ColorInterface
      */
     public function createColor(int $red, int $green, int $blue, ?int $alpha = null): ColorInterface
@@ -548,13 +569,14 @@ class Generator
      * Creates a new DataType class dynamically.
      *
      * @param string $method
+     *
      * @return DataTypeInterface
      */
     protected function createClass(string $method): DataTypeInterface
     {
         $class = $this->formatClass($method);
 
-        if (! class_exists($class)) {
+        if (!class_exists($class)) {
             throw new BadMethodCallException();
         }
 
@@ -565,6 +587,7 @@ class Generator
      * Formats the method name correctly.
      *
      * @param $method
+     *
      * @return string
      */
     protected function formatClass(string $method): string
