@@ -63,7 +63,7 @@ class KSAVat implements DataTypeInterface
         $this->setProperties($arguments);
     }
 
-        /**
+    /**
      * Sets the KSAVat properties.
      *
      * @param $arguments
