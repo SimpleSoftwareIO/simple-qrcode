@@ -36,6 +36,7 @@ class ImageMergeTest extends TestCase
 
     /**
      * The location of the test image that is being merged.
+     *
      * @var mixed
      */
     protected $mergeImagePath;
