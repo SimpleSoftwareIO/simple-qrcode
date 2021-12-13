@@ -101,7 +101,6 @@ class KSAVat implements DataTypeInterface
         $result .= chr(4).chr(strlen($this->total)).$this->total;
         $result .= chr(5).chr(strlen($this->tax)).$this->tax;
         
-        
         return base64_encode($result);
     }
 }
