@@ -111,6 +111,8 @@ class ImageMerge
         imagealphablending($img, true);
         $transparent = imagecolorallocatealpha($img, 0, 0, 0, 127);
         imagefill($img, 0, 0, $transparent);
+        imagealphablending( $img, false );
+        imagesavealpha( $img, true );
 
         imagecopy(
             $img,
