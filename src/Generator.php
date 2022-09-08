@@ -334,7 +334,8 @@ class Generator
      */
     public function eye(string $style): self
     {
-        if (! in_array($style, ['square', 'circle'])) {
+        $isSubclass = is_subclass_of($style, EyeInterface::class) && is_subclass_of($style, Singleton::class);
+        if (!in_array($style, ['square', 'circle']) && !$isSubclass) {
             throw new InvalidArgumentException("\$style must be square or circle. {$style} is not a valid eye style.");
         }
 
@@ -353,7 +354,7 @@ class Generator
      */
     public function style(string $style, float $size = 0.5): self
     {
-        if (! in_array($style, ['square', 'dot', 'round'])) {
+        if (!in_array($style, ['square', 'dot', 'round']) && !is_subclass_of($style, ModuleInterface::class)) {
             throw new InvalidArgumentException("\$style must be square, dot, or round. {$style} is not a valid.");
         }
 
@@ -478,6 +479,11 @@ class Generator
      */
     public function getModule(): ModuleInterface
     {
+        if (is_subclass_of($this->style, ModuleInterface::class)) {
+            $style = $this->style;
+            return new $style($this->styleSize);
+        }
+
         if ($this->style === 'dot') {
             return new DotsModule($this->styleSize);
         }
@@ -496,6 +502,14 @@ class Generator
      */
     public function getEye(): EyeInterface
     {
+        $isSubclass = is_subclass_of($this->eyeStyle, EyeInterface::class) && is_subclass_of($this->eyeStyle, Singleton::class);
+        if ($isSubclass) {
+            /** @var Singleton $style */
+            $style = $this->eyeStyle;
+
+            return $style::instance();
+        }
+
         if ($this->eyeStyle === 'square') {
             return SquareEye::instance();
         }
