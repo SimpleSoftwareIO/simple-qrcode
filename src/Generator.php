@@ -486,6 +486,7 @@ class Generator
     {
         if (is_subclass_of($this->style, ModuleInterface::class)) {
             $style = $this->style;
+
             return new $style($this->styleSize);
         }
 
