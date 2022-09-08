@@ -163,6 +163,7 @@ class Generator
      * @param  string  $text
      * @param  string|null$filename
      * @return void|\Illuminate\Support\HtmlString|string
+     *
      * @throws WriterException
      * @throws InvalidArgumentException
      */
@@ -241,6 +242,7 @@ class Generator
      *
      * @param  string  $format
      * @return Generator
+     *
      * @throws InvalidArgumentException
      */
     public function format(string $format): self
@@ -276,7 +278,7 @@ class Generator
      * @param  int  $red
      * @param  int  $green
      * @param  int  $blue
-     * @param null|int $alpha
+     * @param  null|int  $alpha
      * @return Generator
      */
     public function backgroundColor(int $red, int $green, int $blue, ?int $alpha = null): self
@@ -297,6 +299,7 @@ class Generator
      * @param  int  $outterGreen
      * @param  int  $outterBlue
      * @return Generator
+     *
      * @throws InvalidArgumentException
      */
     public function eyeColor(int $eyeNumber, int $innerRed, int $innerGreen, int $innerBlue, int $outterRed = 0, int $outterGreen = 0, int $outterBlue = 0): self
@@ -330,13 +333,13 @@ class Generator
      *
      * @param  string  $style
      * @return Generator
-     * 
+     *
      * @throws InvalidArgumentException
      */
     public function eye(string $style): self
     {
         $isSubclass = is_subclass_of($style, EyeInterface::class) && is_subclass_of($style, Singleton::class);
-        if (!in_array($style, ['square', 'circle']) && !$isSubclass) {
+        if (! in_array($style, ['square', 'circle']) && ! $isSubclass) {
             throw new InvalidArgumentException("\$style must be square or circle. {$style} is not a valid eye style.");
         }
 
@@ -351,7 +354,7 @@ class Generator
      * @param  string  $style
      * @param  float  $size
      * @return Generator
-     * 
+     *
      * @throws InvalidArgumentException
      */
     public function style(string $style, float $size = 0.5): self
