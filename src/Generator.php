@@ -548,6 +548,7 @@ class Generator
 
     /**
      * Creates a RGB or Alpha channel color.
+     *
      * @param  int  $red
      * @param  int  $green
      * @param  int  $blue
