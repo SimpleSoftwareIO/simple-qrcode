@@ -11,6 +11,12 @@
 - [Häufig verwendete QrCodes](#docs-common-usage)
 - [Verwendung außerhalb von Laravel](#docs-outside-laravel)
 
+### Testen Sie unseren kinderleichten, kostenlosen Dateiübertragungs-Service [keep.sh](https://keep.sh)
+
+[![keep.sh](https://user-images.githubusercontent.com/624784/95805291-1121e980-0cd3-11eb-9048-0264bd9f2fd7.gif)](https://keep.sh)
+
+Einfaches und schnelles Teilen von Dateien direkt aus der Kommandokonsole über einen einzigen curl Aufruf! `curl --upload-file deine-lokale-datei.txt https://keep.sh`
+
 <a id="docs-introduction"></a>
 ## Einführung
 Simple QrCode stellt eine komfortable Schnittstelle zum Generieren von QrCodes für das beliebte Laravel Framework dar und basiert auf der großartigen Arbeit von [Bacon/BaconQrCode](https://github.com/Bacon/BaconQrCode). Das Paket ist einfach zu installieren und bietet ein Laravel-Nutzern vertrautes Nutzererlebnis.   
@@ -31,6 +37,10 @@ Ein abschließender Aufruf von `composer update simplesoftwareio/simple-qrcode` 
 >Um das `png` Bildformat zu verwenden, **muss zwingend** die `imagick` PHP Extension installiert werden. 
 
 #### v4
+
+> In Version 4.1.0 hat sich ein Breaking Change eingeschlichen, der die Abwärtskompatibilität beeinträchtigt. Die `generate` Methode liefert in Laravel statt eines Strings nun eine `Illuminate\Support\HtmlString` Instanz zurück. Weitere Informationen dazu unter https://github.com/SimpleSoftwareIO/simple-qrcode/issues/205.
+
+There was a mistake when creating 4.1.0 and allowing a backwards breaking change into the master branch.  The `generate` method will now return an instance of `Illuminate\Support\HtmlString` if you are running Laravel.  See https://github.com/SimpleSoftwareIO/simple-qrcode/issues/205 for more information.
 
 Es gab einen Fehler im Bereich der Laravel Facades von v3, der einige Probleme beim Laden verursachte.  Da die Problembehebung eine nicht abwärtskompatible Änderung nötig gemacht hat, wurde v4 veröffentlicht.  Bei einem Upgrade von v2 muss kein Code angepasst werden; die nachfolgende Änderung betrifft nur Nutzer der v3.     
 
@@ -157,6 +167,8 @@ Die folgenden Typen von Gradienten werden unterstützt:
 
 Die Farben der Positionsmarker können über die `eyeColor` Methode angepasst werden.
 
+    QrCode::eyeColor(0, 255, 255, 255, 0, 0, 0); // Ändert die Farbe des Positionsmarkers `0`
+
 | Auge Nr. | Beispiel |
 | --- | --- |
 | `0` | ![Eye 0](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/eye-0.png?raw=true) |
@@ -168,6 +180,8 @@ Die Farben der Positionsmarker können über die `eyeColor` Methode angepasst we
 
 Über `square` (quadratisch), `dot` (punktförmig), oder `round` (rund) kann der Stil einfach ausgetauscht werden.  Dies ändert die Datenblöcke innerhalb des QrCodes.  Der zweite Parameter bestimmt die Größe der einzelnen Punkte oder deren Abrundung. 
 
+    QrCode::style('dot'); // Ändert den Stil auf `dot`.
+
 | Stil | Beispiel |
 | --- | --- |
 | `square` | ![Square](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/200-pixels.png?raw=true) |
@@ -177,6 +191,8 @@ Die Farben der Positionsmarker können über die `eyeColor` Methode angepasst we
 #### Eye Style `(string $style)`
 
 Es werden zwei verschiedene Stile von Positionsmarkern unterstützt: `square` (quadratisch) und `circle` (rund).
+
+    QrCode::eye('circle'); // Verwendet den runden `circle` Stil.
 
 | Style | Example |
 | --- | --- |
