@@ -109,6 +109,7 @@ class ImageMerge
 
         $img = imagecreatetruecolor($this->sourceImage->getWidth(), $this->sourceImage->getHeight());
         imagealphablending($img, true);
+        imagesavealpha($img, true);
         $transparent = imagecolorallocatealpha($img, 0, 0, 0, 127);
         imagefill($img, 0, 0, $transparent);
 
