@@ -30,6 +30,7 @@ class HexToRgbTest extends TestCase
         $this->assertEquals(50, $generator->getFill()->getForegroundColor()->toRgb()->getRed());
         $this->assertEquals(75, $generator->getFill()->getForegroundColor()->toRgb()->getGreen());
         $this->assertEquals(100, $generator->getFill()->getForegroundColor()->toRgb()->getBlue());
+        $this->markTestIncomplete('This test has not been tested yet.');
     }
 
     public function test_background_color_is_set()
@@ -44,6 +45,7 @@ class HexToRgbTest extends TestCase
         $this->assertEquals(50, $generator->getFill()->getBackgroundColor()->toRgb()->getRed());
         $this->assertEquals(75, $generator->getFill()->getBackgroundColor()->toRgb()->getGreen());
         $this->assertEquals(100, $generator->getFill()->getBackgroundColor()->toRgb()->getBlue());
+        $this->markTestIncomplete('Alpha is not yet tested.');
     }
 
     public function test_eye_color_is_set()
