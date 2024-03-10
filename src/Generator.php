@@ -257,15 +257,25 @@ class Generator
     /**
      * Sets the foreground color of the QrCode.
      *
-     * @param int $red
-     * @param int $green
-     * @param int $blue
+     * @param int|string $redOrHex
+     * @param null|int $green
+     * @param null|int $blue
      * @param null|int $alpha
+     *
      * @return Generator
      */
-    public function color(int $red, int $green, int $blue, ?int $alpha = null): self
+    public function color(int|string $redOrHex, ?int $green = null, ?int $blue = null, ?int $alpha = null): self
     {
-        $this->color = $this->createColor($red, $green, $blue, $alpha);
+        if (is_string($redOrHex)) {
+            $hexToRgb = $this->hexToRgb($redOrHex);
+
+            return $this->color(...$hexToRgb);
+        } else {
+            if (is_null($green) || is_null($blue)) {
+                throw new InvalidArgumentException('You must provide a green and blue value.');
+            }
+        }
+        $this->color = $this->createColor($redOrHex, $green, $blue, $alpha);
 
         return $this;
     }
@@ -273,15 +283,25 @@ class Generator
     /**
      * Sets the background color of the QrCode.
      *
-     * @param int $red
-     * @param int $green
-     * @param int $blue
+     * @param int|string $redOrHex
+     * @param null|int $green
+     * @param null|int $blue
      * @param null|int $alpha
+     *
      * @return Generator
      */
-    public function backgroundColor(int $red, int $green, int $blue, ?int $alpha = null): self
+    public function backgroundColor(int|string $redOrHex, ?int $green = null, ?int $blue = null, ?int $alpha = null): self
     {
-        $this->backgroundColor = $this->createColor($red, $green, $blue, $alpha);
+        if (is_string($redOrHex)) {
+            $hexToRgb = $this->hexToRgb($redOrHex);
+
+            return $this->backgroundColor(...$hexToRgb);
+        } else {
+            if (is_null($green) || is_null($blue)) {
+                throw new InvalidArgumentException('You must provide a green and blue value.');
+            }
+        }
+        $this->backgroundColor = $this->createColor($redOrHex, $green, $blue, $alpha);
 
         return $this;
     }
@@ -311,6 +331,35 @@ class Generator
         );
 
         return $this;
+    }
+
+    /**
+     * Sets the eye color for the provided eye index by providing hex codes.
+     * @param  int  $eyeNumber
+     * @param  string  $innerHex
+     * @param  string  $outterHex
+     *
+     * @return Generator
+     */
+    public function eyeColorFromHex(int $eyeNumber, string $innerHex, string $outterHex = '#000000'): self
+    {
+        if (!in_array($eyeNumber, [0, 1, 2])) {
+            throw new InvalidArgumentException("\$eyeNumber must be 0, 1, or 2.  {$eyeNumber} is not valid.");
+        }
+
+        return $this->eyeColor($eyeNumber, ...$this->hexToRgb($innerHex), ...$this->hexToRgb($outterHex));
+    }
+
+    /**
+     * Converts a hex color to an array of rgb values.
+     *
+     * @param  string  $hex
+     *
+     * @return array
+     */
+    private function hexToRgb(string $hex): array
+    {
+        return (new HexToRgb($hex))->toRGBArray();
     }
 
     public function gradient($startRed, $startGreen, $startBlue, $endRed, $endGreen, $endBlue, string $type): self
