@@ -144,6 +144,13 @@ class Generator
     protected $imagePercentage = .2;
 
     /**
+     * The compression quality for PNG image
+     *
+     * @var int
+     */
+    protected $compressionQuality = 100;
+
+    /**
      * Creates a new datatype object and then generates a QrCode.
      *
      * @param $method
@@ -461,7 +468,7 @@ class Generator
     public function getFormatter(): ImageBackEndInterface
     {
         if ($this->format === 'png') {
-            return new ImagickImageBackEnd('png');
+            return new ImagickImageBackEnd('png', $this->compressionQuality);
         }
 
         if ($this->format === 'eps') {
@@ -542,6 +549,24 @@ class Generator
         }
 
         return new Alpha($alpha, new Rgb($red, $green, $blue));
+    }
+
+    /**
+     * Sets the compression quality
+     *
+     * @param   int  $quality
+     *
+     * @return Generator
+     */
+    public function setPngCompression(int $quality)
+    {
+        if ($quality < 1 || $quality > 100) {
+            throw new InvalidArgumentException("\$quality must be between 1 and 100. {$quality} is not valid.");
+        }
+
+        $this->compressionQuality = $quality;
+
+        return $this;
     }
 
     /**
