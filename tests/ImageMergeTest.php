@@ -78,6 +78,8 @@ class ImageMergeTest extends TestCase
             536,
             354
         );
+        imagealphablending( $source, false );
+        imagesavealpha( $source, true );
         imagepng($source, $this->compareTestSaveLocation);
 
         $testImage = $this->testImage->merge(.2);
