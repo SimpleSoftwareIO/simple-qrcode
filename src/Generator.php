@@ -357,7 +357,7 @@ class Generator
             throw new InvalidArgumentException("\$style must be square, dot, or round. {$style} is not a valid.");
         }
 
-        if ($size < 0 || $size >= 1) {
+        if ($size <= 0 || $size > 1) {
             throw new InvalidArgumentException("\$size must be between 0 and 1.  {$size} is not valid.");
         }
 
