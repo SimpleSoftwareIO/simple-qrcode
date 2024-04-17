@@ -12,11 +12,12 @@ use BaconQrCode\Renderer\Eye\EyeInterface;
 use BaconQrCode\Renderer\Eye\ModuleEye;
 use BaconQrCode\Renderer\Eye\SimpleCircleEye;
 use BaconQrCode\Renderer\Eye\SquareEye;
+use BaconQrCode\Renderer\GDLibRenderer;
+use BaconQrCode\Renderer\ImageRenderer;
 use BaconQrCode\Renderer\Image\EpsImageBackEnd;
 use BaconQrCode\Renderer\Image\ImageBackEndInterface;
 use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
 use BaconQrCode\Renderer\Image\SvgImageBackEnd;
-use BaconQrCode\Renderer\ImageRenderer;
 use BaconQrCode\Renderer\Module\DotsModule;
 use BaconQrCode\Renderer\Module\ModuleInterface;
 use BaconQrCode\Renderer\Module\RoundnessModule;
@@ -423,7 +424,7 @@ class Generator
      * @param ImageRenderer $renderer
      * @return Writer
      */
-    public function getWriter(ImageRenderer $renderer): Writer
+    public function getWriter(ImageRenderer | GDLibRenderer $renderer): Writer
     {
         return new Writer($renderer);
     }
@@ -433,14 +434,27 @@ class Generator
      *
      * @return ImageRenderer
      */
-    public function getRenderer(): ImageRenderer
+    public function getRenderer(): ImageRenderer | GDLibRenderer
     {
-        $renderer = new ImageRenderer(
-            $this->getRendererStyle(),
-            $this->getFormatter()
-        );
+        if (extension_loaded('imagick')) {
+            $renderer = new ImageRenderer(
+                $this->getRendererStyle(),
+                $this->getFormatter()
+            );
 
-        return $renderer;
+            return $renderer;
+        } elseif (extension_loaded('gd')) {
+            $renderer = new GDLibRenderer(
+                size: $this->pixels,
+                margin: $this->margin,
+                imageFormat: $this->format,
+                fill: $this->getFill()
+            );
+
+            return $renderer;
+        }
+
+        throw new InvalidArgumentException("You need to install either Imagick or GD extension.");
     }
 
     /**
