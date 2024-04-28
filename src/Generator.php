@@ -1,6 +1,6 @@
 <?php
 
-namespace SimpleSoftwareIO\QrCode;
+namespace BeaconsBay\QrCode;
 
 use BaconQrCode\Common\ErrorCorrectionLevel;
 use BaconQrCode\Encoder\Encoder;
@@ -174,6 +174,12 @@ class Generator
             $merger = new ImageMerge(new Image($qrCode), new Image($this->imageMerge));
             $qrCode = $merger->merge($this->imagePercentage);
         }
+
+        if ($this->imageMerge !== null && $this->format === 'svg') {
+            $merge = new ImageMergeSvg(new SVGString($qrCode), new SVGString($this->imageMerge));
+            $qrCode = $merge->merge($this->imagePercentage);
+        }
+
 
         if ($filename) {
             file_put_contents($filename, $qrCode);

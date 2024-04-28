@@ -1,56 +1,28 @@
-[![Build Status](https://travis-ci.org/SimpleSoftwareIO/simple-qrcode.svg?branch=master)](https://travis-ci.org/SimpleSoftwareIO/simple-qrcode) [![Latest Stable Version](https://poser.pugx.org/simplesoftwareio/simple-qrcode/v/stable.svg)](https://packagist.org/packages/simplesoftwareio/simple-qrcode) [![Latest Unstable Version](https://poser.pugx.org/simplesoftwareio/simple-qrcode/v/unstable.svg)](https://packagist.org/packages/simplesoftwareio/simple-qrcode) [![License](https://poser.pugx.org/simplesoftwareio/simple-qrcode/license.svg)](https://packagist.org/packages/simplesoftwareio/simple-qrcode) [![Total Downloads](https://poser.pugx.org/simplesoftwareio/simple-qrcode/downloads.svg)](https://packagist.org/packages/simplesoftwareio/simple-qrcode)
-
-#### [Deutsch](http://www.simplesoftware.io/#/docs/simple-qrcode/de) | [Español](http://www.simplesoftware.io/#/docs/simple-qrcode/es) | [Français](http://www.simplesoftware.io/#/docs/simple-qrcode/fr) | [Italiano](http://www.simplesoftware.io/#/docs/simple-qrcode/it) | [Português](http://www.simplesoftware.io/#/docs/simple-qrcode/pt-br) | [Русский](http://www.simplesoftware.io/#/docs/simple-qrcode/ru) | [日本語](http://www.simplesoftware.io/#/docs/simple-qrcode/ja) | [한국어](http://www.simplesoftware.io/#/docs/simple-qrcode/kr) | [हिंदी](http://www.simplesoftware.io/#/docs/simple-qrcode/hi) | [简体中文](http://www.simplesoftware.io/#/docs/simple-qrcode/zh-cn)
-
-## Try our dead simple, free file transfer service [keep.sh](https://keep.sh)
-
-[![keep.sh](https://user-images.githubusercontent.com/624784/95805291-1121e980-0cd3-11eb-9048-0264bd9f2fd7.gif)](https://keep.sh)
-
-Upload files with a single curl command from your terminal! `curl --upload-file file.txt https://keep.sh`
-
-## Use Cases
-<p align="center">
-  <a href="https://www.rsvpify.com">
-  	<img width="300" src="https://rsvpify.com/wp-content/uploads/2017/03/rsvpify-logo-header-rsvp.png">
-  </a>
-</p>
-<p align="center">
-  <a href="https://rsvpify.com/sell-tickets">Platform to sell tickets online</a>
-</p>
-
 <a id="docs-introduction"></a>
 ## Introduction
-Simple QrCode is an easy to use wrapper for the popular Laravel framework based on the great work provided by [Bacon/BaconQrCode](https://github.com/Bacon/BaconQrCode).  We created an interface that is familiar and easy to install for Laravel users.
+Easy QrCode is an easy to use wrapper for the popular Laravel framework based on the great work provided by [Bacon/BaconQrCode](https://github.com/Bacon/BaconQrCode).  We created an interface that is familiar and easy to install for Laravel users.
 
 ![Example 1](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/example-1.png?raw=true) ![Example 2](https://raw.githubusercontent.com/SimpleSoftwareIO/simple-qrcode/master/docs/imgs/example-2.png?raw=true)
 
 <a id="docs-upgrade"></a>
-## Upgrade Guide
-
-Upgrade from v2 or v3 by changing your `composer.json` file to `~4`
+## Requirements
 
 You **must** install the `imagick` PHP extension if you plan on using the `png` image format.
 
 #### v4
 
-> There was a mistake when creating 4.1.0 and allowing a backwards breaking change into the master branch.  The `generate` method will now return an instance of `Illuminate\Support\HtmlString` if you are running Laravel.  See https://github.com/SimpleSoftwareIO/simple-qrcode/issues/205 for more information.
-
-There was a Laravel facade issue within v3 that causes some loading issues.  The only way to fix this was to create a backwards breaking change so v4 has been released.  If you are coming from v2 there is no need to change any code.  The below change only effects users on v3.
-
 All references to the `QrCode` facade need to be changed to:
 
 ```
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use BeaconsBay\QrCode\Facades\QrCode;
 ```
 
 <a id="docs-configuration"></a>
 ## Configuration
 
-#### Composer
+#### Install via Composer
 
-Run `composer require simplesoftwareio/simple-qrcode "~4"` to add the package. 
-
-Laravel will automatically pick up and install the package.
+Run `composer require billyljren/easy-qrcode`
 
 <a id="docs-ideas"></a>
 ## Simple Ideas
@@ -72,6 +44,7 @@ You may embed a qrcode inside of an e-mail to allow your users to quickly scan. 
 	<img src="{!!$message->embedData(QrCode::format('png')->generate('Embed me into an e-mail!'), 'QrCode.png', 'image/png')!!}">
 
 <a id="docs-usage"></a>
+
 ## Usage
 
 #### Basic Usage
@@ -79,12 +52,12 @@ You may embed a qrcode inside of an e-mail to allow your users to quickly scan. 
 ```
 // All examples below assume you are pulling in the QrCode facade with the following line of code. The Facade is auto-loaded for Laravel users.
 
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use BeaconsBay\QrCode\Facades\QrCode;
 ```
 
 Using the QrCode Generator is very easy.  The most basic syntax is:
 
-	use SimpleSoftwareIO\QrCode\Facades\QrCode;
+	use BeaconsBay\QrCode\Facades\QrCode;
 
 	QrCode::generate('Make me into a QrCode!');
 
@@ -400,20 +373,20 @@ This helpers makes scannable QrCodes that can connect a phone to a WiFi network:
 
 You can use a prefix found in the table below inside the `generate` section to create a QrCode to store more advanced information:
 
-	QrCode::generate('http://www.simplesoftware.io');
+	QrCode::generate('http://www.beaconx.com.my');
 
 
 | Usage | Prefix | Example |
 | --- | --- | --- |
-| Website URL | http:// | http://www.simplesoftware.io |
-| Secured URL | https:// | https://www.simplesoftware.io |
-| E-mail Address | mailto: | mailto:support@simplesoftware.io |
+| Website URL | http:// | http://www.beaconx..com.my |
+| Secured URL | https:// | https://www.beaconx.com.my |
+| E-mail Address | mailto: | mailto:support@beaconsbay.com |
 | Phone Number | tel: | tel:555-555-5555 |
 | Text (SMS) | sms: | sms:555-555-5555 |
 | Text (SMS) With Pretyped Message | sms: | sms::I am a pretyped message |
 | Text (SMS) With Pretyped Message and Number | sms: | sms:555-555-5555:I am a pretyped message |
 | Geo Address | geo: | geo:-78.400364,-85.916993 |
-| MeCard | mecard: | MECARD:Simple, Software;Some Address, Somewhere, 20430;TEL:555-555-5555;EMAIL:support@simplesoftware.io; |
+| MeCard | mecard: | MECARD:Beacon, Software;Some Address, Somewhere, 20430;TEL:555-555-5555;EMAIL:support@beaconsbay.com; |
 | VCard | BEGIN:VCARD | [See Examples](https://en.wikipedia.org/wiki/VCard) |
 | Wifi | wifi: | wifi:WEP/WPA;SSID;PSK;Hidden(True/False) |
 
@@ -422,7 +395,7 @@ You can use a prefix found in the table below inside the `generate` section to c
 
 You may use this package outside of Laravel by instantiating a new `Generator` class.
 
-	use SimpleSoftwareIO\QrCode\Generator;
+	use BeaconsBay\QrCode\Generator;
 
 	$qrcode = new Generator;
 	$qrcode->size(500)->generate('Make a qrcode without Laravel!');

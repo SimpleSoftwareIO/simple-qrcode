@@ -1,6 +1,6 @@
 <?php
 
-namespace SimpleSoftwareIO\QrCode\DataTypes;
+namespace BeaconsBay\QrCode\DataTypes;
 
 interface DataTypeInterface
 {

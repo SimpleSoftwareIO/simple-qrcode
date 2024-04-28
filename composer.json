@@ -1,19 +1,20 @@
 {
-    "name": "simplesoftwareio/simple-qrcode",
-    "description": "Simple QrCode is a QR code generator made for Laravel.",
-    "keywords": ["qrcode", "laravel", "simple", "generator", "wrapper"],
-    "homepage": "https://www.simplesoftware.io/#/docs/simple-qrcode",
+    "name": "billyljren/easy-qrcode",
+    "description": "Easy QRCode is a QR code generator made for Laravel.",
+    "keywords": ["qrcode", "laravel", "easy", "svg", "png", "simple", "bacon", "generator", "wrapper"],
+    "homepage": "https://github.com/billyljren/easy-qrcode",
     "license" : "MIT",
     "authors": [
         {
-            "name": "Simple Software LLC",
-            "email": "support@simplesoftware.io"
+            "name": "Beacon Systems Sdn Bhd",
+            "email": "info@beaconsbay.com"
         }
     ],
     "require": {
         "php": ">=7.2|^8.0",
       	"ext-gd": "*",
-        "bacon/bacon-qr-code": "^2.0"
+        "bacon/bacon-qr-code": "^2.0",
+        "meyfa/php-svg": "^0.15.0"
     },
     "require-dev": {
         "mockery/mockery": "~1",
@@ -25,7 +26,7 @@
     },
     "autoload": {
         "psr-4": {
-            "SimpleSoftwareIO\\QrCode\\": "src"
+            "BeaconsBay\\QrCode\\": "src"
         }
     },
     "scripts": {
@@ -34,10 +35,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "SimpleSoftwareIO\\QrCode\\QrCodeServiceProvider"
+                "BeaconsBay\\QrCode\\QrCodeServiceProvider"
             ],
             "aliases": {
-                "QrCode": "SimpleSoftwareIO\\QrCode\\Facades\\QrCode"
+                "QrCode": "BeaconsBay\\QrCode\\Facades\\QrCode"
             }
         }
     }

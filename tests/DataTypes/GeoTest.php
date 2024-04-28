@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use SimpleSoftwareIO\QrCode\DataTypes\Geo;
+use BeaconsBay\QrCode\DataTypes\Geo;
 
 class GeoTest extends TestCase
 {

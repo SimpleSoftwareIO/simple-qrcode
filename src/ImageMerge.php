@@ -1,6 +1,6 @@
 <?php
 
-namespace SimpleSoftwareIO\QrCode;
+namespace BeaconsBay\QrCode;
 
 use InvalidArgumentException;
 

@@ -4,11 +4,8 @@
 
 | Version | Supported          |
 | ------- | ------------------ |
-| >= 2.x   | :white_check_mark: |
-| <= 1.x   | :x:                |
+| >= 1.x   | :white_check_mark: |
 
 ## Reporting a Vulnerability
 
-Please report security vulnerabilities responsibility by emailing `security@simplesoftware.io.`
-
-We will fix the vulnerability privately, push a new release, and then go public with the notification.  
+Please raise an any issues within GitHub
