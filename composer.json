@@ -11,9 +11,9 @@
         }
     ],
     "require": {
-        "php": ">=7.2|^8.0",
+        "php": "^8.3",
       	"ext-gd": "*",
-        "bacon/bacon-qr-code": "^2.0"
+        "bacon/bacon-qr-code": "*"
     },
     "require-dev": {
         "mockery/mockery": "~1",
