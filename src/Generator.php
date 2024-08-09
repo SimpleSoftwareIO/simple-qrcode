@@ -8,8 +8,10 @@ use BaconQrCode\Exception\WriterException;
 use BaconQrCode\Renderer\Color\Alpha;
 use BaconQrCode\Renderer\Color\ColorInterface;
 use BaconQrCode\Renderer\Color\Rgb;
+use BaconQrCode\Renderer\Eye\CompositeEye;
 use BaconQrCode\Renderer\Eye\EyeInterface;
 use BaconQrCode\Renderer\Eye\ModuleEye;
+use BaconQrCode\Renderer\Eye\PointyEye;
 use BaconQrCode\Renderer\Eye\SimpleCircleEye;
 use BaconQrCode\Renderer\Eye\SquareEye;
 use BaconQrCode\Renderer\Image\EpsImageBackEnd;
@@ -29,6 +31,7 @@ use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use BaconQrCode\Writer;
 use BadMethodCallException;
 use InvalidArgumentException;
+use SimpleSoftwareIO\QrCode\CustomEyes\RoundedSquareEye;
 use SimpleSoftwareIO\QrCode\DataTypes\DataTypeInterface;
 
 class Generator
@@ -94,12 +97,20 @@ class Generator
     protected $styleSize = null;
 
     /**
-     * The style to apply to the eye.
-     * Possible values are circle and square.
+     * The style to apply to the internal eye.
+     * Possible values are circle, square and rounded.
      *
      * @var string|null
      */
     protected $eyeStyle = null;
+
+    /**
+     * The style to apply to the external eye.
+     * Possible values are circle, square, pointy and rounded.
+     *
+     * @var string|null
+     */
+    protected $externalEyeStyle = null;
 
     /**
      * The foreground color of the QrCode.
@@ -334,11 +345,29 @@ class Generator
      */
     public function eye(string $style): self
     {
-        if (! in_array($style, ['square', 'circle'])) {
-            throw new InvalidArgumentException("\$style must be square or circle. {$style} is not a valid eye style.");
+        if (! in_array($style, ['square', 'circle', 'rounded'])) {
+            throw new InvalidArgumentException("\$style must be square, rounded or circle. {$style} is not a valid eye style.");
         }
 
         $this->eyeStyle = $style;
+
+        return $this;
+    }
+
+    /**
+     * Sets the external eye style.
+     *
+     * @param string $style
+     * @return Generator
+     * @throws InvalidArgumentException
+     */
+    public function externalEye(string $style): self
+    {
+        if (! in_array($style, ['square', 'circle', 'pointy', 'rounded'])) {
+            throw new InvalidArgumentException("\$style must be square, rounded, pointy or circle. {$style} is not a valid eye style.");
+        }
+
+        $this->externalEyeStyle = $style;
 
         return $this;
     }
@@ -496,15 +525,41 @@ class Generator
      */
     public function getEye(): EyeInterface
     {
+        // defaults
+        $internalEye = new ModuleEye($this->getModule());
+        $externalEye = new ModuleEye($this->getModule());
+
+        // external eye
+        if ($this->externalEyeStyle === 'square') {
+            $externalEye = SquareEye::instance();
+        }
+
+        if ($this->externalEyeStyle === 'circle') {
+            $externalEye = SimpleCircleEye::instance();
+        }
+
+        if ($this->externalEyeStyle === 'pointy') {
+            $externalEye = PointyEye::instance();
+        }
+
+        if ($this->externalEyeStyle === 'rounded') {
+            $externalEye = RoundedSquareEye::instance();
+        }
+
+        // internal eye
         if ($this->eyeStyle === 'square') {
-            return SquareEye::instance();
+            $internalEye = SquareEye::instance();
         }
 
         if ($this->eyeStyle === 'circle') {
-            return SimpleCircleEye::instance();
+            $internalEye = SimpleCircleEye::instance();
         }
 
-        return new ModuleEye($this->getModule());
+        if ($this->eyeStyle === 'rounded') {
+            $internalEye = RoundedSquareEye::instance();
+        }
+
+        return new CompositeEye($externalEye, $internalEye);
     }
 
     /**
