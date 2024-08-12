@@ -16,7 +16,7 @@ Simple QrCode is an easy to use wrapper for the popular Laravel framework based 
 
 ## Official Documentation
 
-Documentation for Simple QrCode can be found on our [website.](http://www.simplesoftware.io/#/docs/simple-qrcode)
+Documentation for Simple QrCode can be found [here](https://github.com/SimpleSoftwareIO/simple-qrcode/tree/develop/docs/en)
 
 ## Examples
 
