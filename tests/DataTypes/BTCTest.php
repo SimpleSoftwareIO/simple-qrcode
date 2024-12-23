@@ -5,6 +5,8 @@ use SimpleSoftwareIO\QrCode\DataTypes\BTC;
 
 class BTCTest extends TestCase
 {
+    private BTC $btc;
+
     public function setUp(): void
     {
         $this->btc = new BTC();
@@ -34,8 +36,8 @@ class BTCTest extends TestCase
             'btcaddress',
             0.0034,
             [
-                'label'         => 'label',
-                'message'       => 'message',
+                'label' => 'label',
+                'message' => 'message',
                 'returnAddress' => 'https://www.returnaddress.com',
             ],
         ]);

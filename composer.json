@@ -11,13 +11,13 @@
         }
     ],
     "require": {
-        "php": ">=7.2|^8.0",
+        "php": "^8.0",
       	"ext-gd": "*",
-        "bacon/bacon-qr-code": "^2.0"
+        "bacon/bacon-qr-code": "^3.0"
     },
     "require-dev": {
         "mockery/mockery": "~1",
-        "phpunit/phpunit": "~9"
+        "phpunit/phpunit": "~11.5"
     },
     "suggest": {
         "ext-imagick": "Allows the generation of PNG QrCodes.",
