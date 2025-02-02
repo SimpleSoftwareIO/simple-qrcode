@@ -166,7 +166,7 @@ class Generator
      * @throws WriterException
      * @throws InvalidArgumentException
      */
-    public function generate(string $text, string $filename = null)
+    public function generate(string $text, ?string $filename = null)
     {
         $qrCode = $this->getWriter($this->getRenderer())->writeString($text, $this->encoding, $this->errorCorrection);
 
