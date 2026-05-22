@@ -49,7 +49,7 @@ class EPC implements DataTypeInterface
     /**
      * Generates the DataType Object and sets all of its properties.
      *
-     * @param $arguments
+     * @param  $arguments
      */
     public function create(array $arguments)
     {
@@ -81,7 +81,7 @@ class EPC implements DataTypeInterface
     /**
      * Sets the properties.
      *
-     * @param $arguments
+     * @param  $arguments
      */
     protected function setProperties(array $arguments)
     {
