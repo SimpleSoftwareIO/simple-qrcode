@@ -25,7 +25,7 @@ class EPCTest extends TestCase
         $expected .= $arguments['bic']."\n";
         $expected .= $arguments['name']."\n";
         $expected .= $arguments['iban']."\n";
-        $expected .= 'EUR'.number_format($arguments['amount'], 2)."\n";
+        $expected .= "EUR1000.50\n";
         $expected .= "\n";
         $expected .= "\n";
         $expected .= $arguments['text']."\n";
